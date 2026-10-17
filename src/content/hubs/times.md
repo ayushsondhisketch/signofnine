@@ -1,7 +1,7 @@
 ---
 slug: "times"
 title: "Clock Time Meanings: 11:11, 3:33, 22:22 and More"
-h1: "Clock times: what 11:11, 3:33 and the other mirror hours mean"
+h1: "Clock times: what 11:11, 3:33 and the mirror hours mean"
 description: "What it means to keep seeing the same time: 11:11, 1:11 to 5:55, the 24-hour times 21:21 to 23:23, and why waking at the same hour happens."
 lead: "Seeing a time on the clock is the most common way people meet a repeating number. The reading is the number's. The extra question is why you were looking."
 published: "2026-10-17"

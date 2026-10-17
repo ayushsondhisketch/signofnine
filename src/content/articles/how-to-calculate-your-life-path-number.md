@@ -1,7 +1,7 @@
 ---
 slug: "how-to-calculate-your-life-path-number"
 title: "How to Calculate Your Life Path Number (Both Methods)"
-h1: "How to calculate your life path number, step by step, with the two methods compared"
+h1: "How to calculate your life path number, with both methods"
 description: "How to work out your life path number by hand: reduce day, month and year, add, keep master numbers. Six worked dates, two methods."
 lead: "The life path number is the most searched figure in numerology and the one calculators disagree about most. Here is the arithmetic, done by hand on six dates, with the second method beside it so you can see where other answers come from."
 published: "2026-10-17"

@@ -5,7 +5,7 @@ import Article from '../../layouts/Article.astro';
 import InShort from '../../components/InShort.astro';
 import NumbersInside from '../../components/NumbersInside.astro';
 import Related from '../../components/Related.astro';
-import { fourDigit, times, wordCount, readMinutes, allAngelNumbers } from '../../lib/content.mjs';
+import { fourDigit, times, wordCount, readMinutes, allAngelNumbers, crumbLabel } from '../../lib/content.mjs';
 import { working, core, forms, mastersInside } from '../../lib/numerology.mjs';
 import { composeFourDigit } from '../../lib/compose.mjs';
 import digits from '../../data/digits.json';
@@ -43,7 +43,7 @@ const c = isNumber ? core(n) : null;
 const w = isNumber ? working(n) : '';
 const crumbs = isNumber
   ? [{ label: 'Angel numbers', href: '/angel-numbers/' }, { label: n, href: `/angel-numbers/${n}/` }]
-  : [{ label: 'Angel numbers', href: '/angel-numbers/' }, { label: data.h1, href: `/angel-numbers/${data.slug}/` }];
+  : [{ label: 'Angel numbers', href: '/angel-numbers/' }, { label: crumbLabel(data.h1), href: `/angel-numbers/${data.slug}/` }];
 
 const related = [];
 if (isNumber) {

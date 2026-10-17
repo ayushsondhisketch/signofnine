@@ -1,7 +1,7 @@
 ---
 slug: "warning"
 title: "Angel Number Warnings: Which Numbers Are Bad Signs?"
-h1: "Angel number warnings: which numbers are read as bad signs, and which only sound like it"
+h1: "Angel number warnings: which numbers are read as bad signs"
 description: "Are any angel numbers warnings? What the tradition reads into 666, 444, 999 and 555, where the fear comes from, and why none is bad luck."
 lead: "People search for warning numbers more than the tradition supplies them. This guide goes through every number that sounds like a bad sign and gives the actual reading."
 published: "2026-10-17"

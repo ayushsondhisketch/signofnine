@@ -1,7 +1,7 @@
 ---
 slug: "pythagorean-vs-chaldean"
 title: "Pythagorean vs Chaldean Numerology: The Difference"
-h1: "Pythagorean and Chaldean numerology: what the two systems disagree about"
+h1: "Pythagorean and Chaldean numerology: where they disagree"
 description: "The two numerology systems compared: how each values the letters, which name each uses, why Chaldean has no 9, and where both come from."
 lead: "Two systems give two different numbers for the same name. One is used by almost every modern book and website. The other claims the older pedigree. Here is what they disagree about and why it matters."
 published: "2026-10-17"

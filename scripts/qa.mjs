@@ -159,6 +159,7 @@ for (const p of pages) {
   if (p.title.length > 60) H(`title ${p.title.length} chars`);
   if (!p.desc) H('missing meta description'); else if (p.desc.length > 140) H(`description ${p.desc.length} chars`);
   if (p.h1s.length !== 1) H(`${p.h1s.length} h1 elements`);
+  if (p.h1s[0] && text(p.h1s[0]).length > 60) H(`h1 ${text(p.h1s[0]).length} chars (limit 60, so it holds two lines beside the ring)`);
   if (/[A-Z][a-z]+ [A-Z][a-z]+ [A-Z][a-z]+ [A-Z]/.test(text(p.h1s[0]) || '') && !/^[0-9]/.test(text(p.h1s[0]))) S('h1 looks title-cased');
   for (const h of p.h2s) if (/^(Conclusion|Final thoughts|Key takeaways|Summary)/i.test(h)) H(`forbidden section "${h}"`);
 

@@ -1,7 +1,7 @@
 ---
 slug: "love"
 title: "Angel Numbers for Love: Every Number Explained"
-h1: "Angel numbers for love: what each number means for your relationship"
+h1: "Angel numbers for love: what each one means for romance"
 description: "What every angel number means in love, from 111 to 1212: new love, a relationship's next stage, breakups and exes, with each reading."
 lead: "Love is the question people bring to angel numbers more than any other. This guide gives the reading for every number in one place, and says plainly what no number can tell you."
 published: "2026-10-17"

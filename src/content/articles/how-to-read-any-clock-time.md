@@ -1,7 +1,7 @@
 ---
 slug: "how-to-read-any-clock-time"
 title: "How to Read Any Clock Time in Numerology"
-h1: "How to read any clock time in numerology, including the ones nobody has written a page about"
+h1: "How to read any clock time in numerology, 10:47 included"
 description: "A method for reading any clock time, 10:47 included: add the digits, read the core number, then the hour, the minute and the pattern."
 lead: "There are pages for 11:11 and 4:44. There is no page for 10:47, and you saw 10:47. Here is how the tradition would read it, how to do the same for any time, and why the time you keep seeing is usually about your routine."
 published: "2026-10-17"

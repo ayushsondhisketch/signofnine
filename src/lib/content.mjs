@@ -27,6 +27,14 @@ export function allTimes() {
   return times.map((t) => ({ n: t.label, href: `/angel-numbers/times/${t.slug}/`, line: t.tile }));
 }
 
+// Breadcrumb label from an H1: the part before the colon or question mark, or before the first comma when there is neither.
+export function crumbLabel(h1) {
+  const m = h1.match(/^(.*?)(\?|:)(\s|$)/);
+  if (m) return m[1] + (m[2] === '?' ? '?' : '');
+  const c = h1.indexOf(', ');
+  return c > 0 ? h1.slice(0, c) : h1;
+}
+
 export function fmtDate(d) {
   if (!d) return '';
   const [y, m, dd] = d.split('-').map(Number);

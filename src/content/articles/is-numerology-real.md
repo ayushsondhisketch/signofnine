@@ -1,7 +1,7 @@
 ---
 slug: "is-numerology-real"
 title: "Is Numerology Real? What the Evidence Says"
-h1: "Is numerology real? What the evidence says, and why people use it anyway"
+h1: "Is numerology real? What the evidence says, and why it lasts"
 description: "A plain answer on whether numerology works: what has been tested, why readings feel accurate, where it comes from and what it is good for."
 lead: "Nobody has shown that a birth date predicts a personality or that a number on a clock carries a message. That is the short answer. The longer one is more interesting, and it explains why a site that says so still bothers to explain the numbers."
 published: "2026-10-17"

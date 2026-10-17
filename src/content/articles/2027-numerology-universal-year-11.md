@@ -1,7 +1,7 @@
 ---
 slug: "2027-numerology-universal-year-11"
 title: "2027 in Numerology: An 11 Universal Year"
-h1: "2027 in numerology: what an 11 universal year means, and how to find your own year inside it"
+h1: "2027 in numerology: what an 11 universal year means for you"
 description: "2027 adds up to 11, a master number. What the tradition reads into an 11 universal year, and how to work out your personal year for 2027."
 lead: "Add the digits of 2027 and you get 11, one of the three master numbers. The tradition reads the year accordingly, as a 2 year with the volume turned up, and the arithmetic has a side effect for the personal years that nobody gets in most years."
 published: "2026-10-17"

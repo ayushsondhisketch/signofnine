@@ -13,7 +13,7 @@ Numerology, angel numbers and life path meanings, explained in plain English wit
 
 ## Where things live
 
-- `src/content/` is the editorial content, one Markdown file per page, validated by `src/content.config.ts` (titles 60 characters or under, descriptions 140 or under).
+- `src/content/` is the editorial content, one Markdown file per page, validated by `src/content.config.ts` (titles and H1s 60 characters or under so an H1 holds two lines beside the ring, descriptions 140 or under).
 - `src/data/fourdigit.json`, `times.json` and `birthdays.json` hold the computed pages, assembled by `src/lib/compose.mjs`. `digits.json` holds the nine digit meanings every page draws on.
 - `src/lib/numerology.mjs` is the one arithmetic engine, shared by the build and the browser calculators.
 - `src/site.mjs` holds the site constants. `ads: false` keeps the reserved ad slots collapsed; set it to `true` after the ad network approves the site.

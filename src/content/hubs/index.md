@@ -1,7 +1,7 @@
 ---
 slug: "index"
 title: "Angel Numbers: Meanings of Every Number and Time"
-h1: "Angel numbers: what they are, what each one means, and why you keep seeing yours"
+h1: "Angel numbers: what each one means and why you see yours"
 description: "Every angel number explained, 111 to 999, 1111 and more, with the arithmetic shown and the plain reason a number seems to follow you."
 lead: "A repeating number on a clock, a receipt or a plate. This is the full list, each with its meaning, plus the one explanation the other lists leave out."
 published: "2026-10-17"

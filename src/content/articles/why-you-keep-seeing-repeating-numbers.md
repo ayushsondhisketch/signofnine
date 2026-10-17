@@ -1,7 +1,7 @@
 ---
 slug: "why-you-keep-seeing-repeating-numbers"
 title: "Why You Keep Seeing Repeating Numbers (Both Answers)"
-h1: "Why you keep seeing repeating numbers: the ordinary answer and the traditional one"
+h1: "Why you keep seeing repeating numbers: the two answers"
 description: "Why 11:11, 444 and 222 seem to follow you around: the frequency illusion and clock habits, then what the tradition reads into it."
 lead: "You saw 444 on a receipt, then on the clock, then on a number plate, and now it is everywhere. Two explanations are on offer. One is well documented, one is a tradition, and they are less opposed than they look."
 published: "2026-10-17"

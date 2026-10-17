@@ -1,7 +1,7 @@
 ---
 slug: "manifestation"
 title: "Angel Numbers for Manifestation: 1111, 333, 555, 888"
-h1: "Angel numbers for manifestation: what each number is read to mean, and where the idea comes from"
+h1: "Angel numbers for manifestation: what each is read to mean"
 description: "The manifestation angel numbers, 111 to 888, what each is read to mean, the 11:11 wish and the 369 method, and what the tradition claims."
 lead: "Manifestation writers read angel numbers as signals about what you are attracting. This guide gives every number's reading, traces the ideas to their sources, and keeps the useful part."
 published: "2026-10-17"

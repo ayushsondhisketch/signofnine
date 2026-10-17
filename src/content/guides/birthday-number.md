@@ -1,7 +1,7 @@
 ---
 slug: "birthday-number"
 title: "Birthday Number: Meaning and Calculator"
-h1: "Birthday number: what the day of the month you were born adds"
+h1: "Birthday number: what the day you were born adds"
 description: "The birthday number: how to work it out from the day of the month you were born, what each result means and how it differs from life path."
 lead: "The birthday number is the simplest of the core numbers: the day of the month you were born, reduced to a single digit or a master number. The tradition reads it as a particular talent you brought with you."
 published: "2026-10-17"

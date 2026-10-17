@@ -1,7 +1,7 @@
 ---
 slug: "what-are-angel-numbers"
 title: "What Are Angel Numbers? Origin, Meaning, How to Read"
-h1: "What are angel numbers? Where the idea comes from and how to read one"
+h1: "What are angel numbers? The origin, and how to read one"
 description: "What angel numbers are, where the tradition started in 2005, how a sequence gets its meaning from numerology, and how to read any number."
 lead: "The term is twenty years old, the number meanings behind it are much older, and the feeling that a number is following you is older still. This is the whole story in one page."
 published: "2026-10-17"

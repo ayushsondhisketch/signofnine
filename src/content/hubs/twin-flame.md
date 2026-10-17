@@ -1,7 +1,7 @@
 ---
 slug: "twin-flame"
 title: "Twin Flame Angel Numbers: Separation, Reunion, Meaning"
-h1: "Twin flame angel numbers: what each means in separation and reunion"
+h1: "Twin flame angel numbers: what each one is read to mean"
 description: "The twin flame numbers explained: 1111, 222, 555, 777 and the rest, what each means in separation and reunion, and where the idea began."
 lead: "Twin flame readings are a tradition of their own, laid on top of numerology in the last fifteen years. This guide gives every number's reading and is clear about what the tradition is."
 published: "2026-10-17"
