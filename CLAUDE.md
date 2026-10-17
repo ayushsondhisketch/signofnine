@@ -59,4 +59,4 @@ Written the way one careful person would answer a friend who texted "I keep seei
 - Repair mode. If the Status line in `seo/queue.md` says PAUSED, publish nothing and say so.
 - WebSearch results do not match Google's. They are good for seeing who ranks and what format wins; they never justify deleting, merging, noindexing or rewriting a page. Only Search Console data does that.
 - Log what you did in `seo/notes.md` (one dated line per action) and commit it with the work. A commit that changes only files under `seo/` or this file gets `[CF-Pages-Skip]` in its message, so Cloudflare does not rebuild the site for a note.
-- Report to Ayush only what needs him. If everything passed and nothing needed a decision, the whole final message is one line.
+- Report to Ayush only what needs him. If everything passed and nothing needed a decision, the whole final message is one line. Two reports are longer by design: the Sunday health digest (two lines when all is well: the three numbers, and what shipped) and the monthly review (five lines at most).
