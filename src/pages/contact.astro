@@ -1,0 +1,30 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../site.mjs';
+const crumbs = [{ label: 'Contact', href: '/contact/' }];
+---
+<Page title="Contact Sign of Nine" description="How to reach the writer of Sign of Nine with a correction, a question about a page, or an advertising enquiry." h1="Contact" lead="Corrections are the most useful thing you can send. Questions about a number are welcome too." crumbs={crumbs} eyebrow="Contact" updated="2026-10-17">
+  <section aria-labelledby="email">
+    <h2 id="email">Email</h2>
+    <p>Write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>. Replies usually take two or three days. Please include the page address if you are writing about a specific page.</p>
+  </section>
+  <section aria-labelledby="form">
+    <h2 id="form">Send a message</h2>
+    <form class="form-block" action={`mailto:${SITE.email}`} method="post" enctype="text/plain">
+      <div class="f"><label for="c-name">Your name</label><input id="c-name" name="name" type="text" autocomplete="name" /></div>
+      <div class="f"><label for="c-email">Your email</label><input id="c-email" name="email" type="email" autocomplete="email" /></div>
+      <div class="f"><label for="c-msg">Message</label><textarea id="c-msg" name="message" rows="6" style="padding:12px 14px;border:1px solid var(--line-strong);border-radius:var(--radius-sm);font:inherit;font-size:17px;color:var(--ink);background:var(--paper);width:100%"></textarea></div>
+      <div><button class="btn" type="submit">Send</button></div>
+      <p class="form-note">The form opens your email app with the message filled in. Nothing is stored on this site.</p>
+    </form>
+  </section>
+  <section aria-labelledby="what">
+    <h2 id="what">What to write about</h2>
+    <dl class="defs">
+      <div><dt>A correction</dt><dd>Wrong arithmetic, a misattributed reading, a verse quoted wrongly. These are fixed on the page and the updated date changes.</dd></div>
+      <div><dt>A number the site does not cover</dt><dd>The lookup box computes any number on the spot; if you think it deserves a full page, say why.</dd></div>
+      <div><dt>Advertising</dt><dd>The site carries advertising through a network. It does not sell sponsored posts or links.</dd></div>
+      </dl>
+    <p>The site cannot give personal readings or advice, and does not answer questions about health, money or legal matters. For those, please speak to someone qualified.</p>
+  </section>
+</Page>

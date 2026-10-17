@@ -1,0 +1,8 @@
+---
+import { SITE } from '../site.mjs';
+const { note = '' } = Astro.props;
+---
+<div class="author">
+  <div class="avatar" aria-hidden="true">A</div>
+  <p><strong>Written by {SITE.author}</strong>{note || `Every number on this site is reduced by the same published method, and every reading names the tradition it comes from. Numerology is a tradition, not a science. The pages here explain it, they do not predict.`} <a href="/editorial-approach/">How the pages are written</a>.</p>
+</div>

@@ -1,0 +1,121 @@
+---
+// The four core-number guides, each with its calculator: expression, soul urge, personality (from a name) and birthday (from a date).
+import { getCollection, render } from 'astro:content';
+import Article from '../layouts/Article.astro';
+import InShort from '../components/InShort.astro';
+import birthdays from '../data/birthdays.json';
+import { wordCount, readMinutes } from '../lib/content.mjs';
+import { ord } from '../lib/compose.mjs';
+import { PYTHAGOREAN } from '../lib/numerology.mjs';
+import digits from '../data/digits.json';
+
+export async function getStaticPaths() {
+  const guides = await getCollection('guides');
+  return guides.map((entry) => ({ params: { guide: entry.data.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const slug = d.slug;
+const labels = { 'expression-number': 'Expression number', 'soul-urge-number': 'Soul urge number', 'personality-number': 'Personality number', 'birthday-number': 'Birthday number' };
+const label = labels[slug] || d.h1;
+const crumbs = [{ label: 'Number meanings', href: '/numbers/' }, { label, href: `/${slug}/` }];
+const isName = slug !== 'birthday-number';
+const inShort = [['What it is', d.inShort.meaning], ['Where it comes from', d.inShort.from], ['Best response', d.inShort.response]];
+const words = wordCount(entry.body) + 200;
+const calcHeading = isName ? `${label} calculator` : 'Birthday number calculator';
+const allHeadings = [{ depth: 2, slug: 'calc', text: calcHeading }, ...headings, ...(slug === 'birthday-number' ? [{ depth: 2, slug: 'days', text: 'Every birthday number, 1 to 31' }] : [{ depth: 2, slug: 'chart', text: 'The Pythagorean letter chart' }]), ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+const chart = Object.entries({ 1: 'A J S', 2: 'B K T', 3: 'C L U', 4: 'D M V', 5: 'E N W', 6: 'F O X', 7: 'G P Y', 8: 'H Q Z', 9: 'I R' });
+const lines = Object.fromEntries(Object.entries(digits).map(([k, v]) => [k, v.line]));
+---
+<Article title={d.title} description={d.description} h1={d.h1} lead={d.lead} crumbs={crumbs} eyebrow={label} published={d.published} updated={d.updated} readMinutes={readMinutes(words)} faq={d.faq} headings={allHeadings} ogImage={`/og/guide-${slug}.png`} current="numbers">
+  <InShort slot="top" items={inShort} />
+  <section aria-labelledby="calc">
+    <div class="form-block">
+      <h2 id="calc">{calcHeading}</h2>
+      {isName ? (
+        <form id="name-form" novalidate style="display:flex;flex-direction:column;gap:12px">
+          <div class="f"><label for="full-name">Full name at birth, as on the birth certificate</label><input id="full-name" type="text" autocomplete="off" placeholder="e.g. Mary Louise Carter" /></div>
+          <div><button class="btn" type="submit">Calculate</button></div>
+        </form>
+      ) : (
+        <form id="bday-form" class="fields" novalidate>
+          <div class="f"><label for="bday-d">Day of the month you were born</label><input id="bday-d" type="text" inputmode="numeric" placeholder="1 to 31" /></div>
+          <div class="f--wide"><button class="btn" type="submit">Find my birthday number</button></div>
+        </form>
+      )}
+      <p class="form-note">Nothing you type leaves your browser.</p>
+      <p class="form-note hidden" id="calc-error">{isName ? 'Enter at least one name using the letters A to Z.' : 'Enter a day from 1 to 31.'}</p>
+    </div>
+  </section>
+  <section id="calc-result" class="hidden" aria-live="polite">
+    <div class="result">
+      <div class="ring ring--md" id="res-ring" aria-hidden="true">1</div>
+      <div class="result__text">
+        <div class="eyebrow" id="res-eyebrow">{label}</div>
+        <h2 id="res-headline"></h2>
+        <p id="res-line"></p>
+        <p><a id="res-link" href="/numbers/1/">Read the full meaning →</a></p>
+      </div>
+    </div>
+    <div class="steps" id="res-steps"></div>
+  </section>
+  <Content />
+  <Fragment slot="after">
+    <div class="prose" style="margin-top:36px">
+      {slug === 'birthday-number' ? (
+        <section aria-labelledby="days">
+          <h2 id="days">Every birthday number, 1 to 31</h2>
+          <p>One page per day of the month, with the number it reduces to and what the tradition reads into it.</p>
+          <div class="grid grid--small">{birthdays.map((b) => <a class="small-card" href={`/birthday-number/${b.day}/`}><span class="small-card__num">{b.day}</span><span class="small-card__line">{b.tile}</span></a>)}</div>
+        </section>
+      ) : (
+        <section aria-labelledby="chart">
+          <h2 id="chart">The Pythagorean letter chart</h2>
+          <p>Every letter has a value from 1 to 9, assigned in alphabetical order and repeating. The same chart is used for the expression, soul urge and personality numbers; only the letters counted change.</p>
+          <div class="letters">{chart.map(([n, ls]) => <div><div class="n">{n}</div><div class="l">{ls}</div></div>)}</div>
+        </section>
+      )}
+    </div>
+  </Fragment>
+</Article>
+<script define:vars={{ slug, lines, label }}>window.__GUIDE = { slug, lines, label };</script>
+<script>
+  import { expressionNumber, soulUrgeNumber, personalityNumber, birthdayNumber, reduce } from '../lib/numerology.mjs';
+  const g = window.__GUIDE;
+  const $ = (id) => document.getElementById(id);
+  const show = (n, work, extra) => {
+    $('res-ring').textContent = String(n);
+    $('res-headline').textContent = `${g.label} ${n}`;
+    $('res-line').textContent = g.lines[n] || '';
+    $('res-link').setAttribute('href', n <= 9 || n === 11 || n === 22 || n === 33 ? `/numbers/${n}/` : `/numbers/${reduce(n, false)}/`);
+    $('res-steps').innerHTML = work.map(([l, c]) => `<div class="step"><span class="label">${l}</span><span class="chain">${c}</span></div>`).join('') + (extra ? `<p class="meta" style="padding-top:12px">${extra}</p>` : '');
+    $('calc-result').classList.remove('hidden');
+    $('calc-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+  const nameForm = $('name-form');
+  nameForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = $('full-name').value;
+    const fn = g.slug === 'expression-number' ? expressionNumber : g.slug === 'soul-urge-number' ? soulUrgeNumber : personalityNumber;
+    const r = fn(name);
+    const ok = r.letters.length > 0;
+    $('calc-error').classList.toggle('hidden', ok);
+    if (!ok) { $('calc-result').classList.add('hidden'); return; }
+    const lettersLine = r.letters.map((l) => `${l.ch.toUpperCase()}=${l.value}`).join(' ');
+    show(r.result, [['Letters counted', lettersLine], ['Added up', r.work]], g.slug === 'expression-number' ? 'Every letter counts. A Y is read as a vowel when no other vowel sits beside it.' : g.slug === 'soul-urge-number' ? 'Only the vowels count: A, E, I, O, U, and Y when it does the work of a vowel.' : 'Only the consonants count; Y is a consonant when a vowel sits beside it.');
+  });
+  const bForm = $('bday-form');
+  bForm?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = parseInt($('bday-d').value, 10);
+    const ok = d >= 1 && d <= 31;
+    $('calc-error').classList.toggle('hidden', ok);
+    if (!ok) { $('calc-result').classList.add('hidden'); return; }
+    const n = birthdayNumber(d);
+    $('res-link').setAttribute('href', `/birthday-number/${d}/`);
+    show(n, [['Day', d > 9 ? `${String(d).split('').join(' + ')} = ${n > 9 ? n : String(d).split('').reduce((a, c) => a + Number(c), 0)}${n <= 9 && String(d).split('').reduce((a, c) => a + Number(c), 0) !== n ? ` → ${n}` : ''}` : String(d)]], 'Days 11, 22 and 29 keep their master numbers 11, 22 and 11.');
+    $('res-link').setAttribute('href', `/birthday-number/${d}/`);
+    $('res-link').textContent = `Read the page for the ${d}${['th','st','nd','rd'][((d % 100) - 20) % 10] || ['th','st','nd','rd'][d % 100] || 'th'} →`;
+  });
+</script>

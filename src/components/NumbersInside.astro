@@ -1,0 +1,27 @@
+---
+// "The numbers inside it": one row per distinct digit, then the core number, with the working shown.
+import { insideRows } from '../lib/content.mjs';
+import { working, core, root, mastersInside, digits as dg } from '../lib/numerology.mjs';
+import digits from '../data/digits.json';
+const { number } = Astro.props;
+const rows = insideRows(number);
+const c = core(number);
+const r = root(number);
+const w = working(number);
+const masters = mastersInside(number).filter((m) => String(number).replace(/\D/g, '').length > 2);
+const label = String(number);
+---
+<section aria-labelledby="inside">
+  <h2 id="inside">The numbers inside {label}</h2>
+  <p>Every repeating number is built from smaller ones, and the tradition reads the whole from the parts. These are the parts of {label}, with the sum worked out rather than asserted.</p>
+  <div class="scroll">
+    <table class="table">
+      <thead><tr><th scope="col">Number</th><th scope="col">Where it appears</th><th scope="col">What it adds</th></tr></thead>
+      <tbody>
+        {rows.map((row) => <tr><td class="num"><a href={`/numbers/${row.n}/`} style="text-decoration:none">{row.n}</a></td><td>{row.where}</td><td>{row.adds}</td></tr>)}
+        {masters.map((m) => <tr><td class="num"><a href={`/numbers/${m}/`} style="text-decoration:none">{m}</a></td><td>Inside the sequence</td><td>{digits[String(m)].line}, a master number</td></tr>)}
+        {w && <tr><td class="num"><a href={`/numbers/${c}/`} style="text-decoration:none">{c}</a></td><td>The sum of the digits: {w}</td><td>{digits[String(c)].line}{c !== r ? `; reads as ${r} when the master is reduced` : ''}</td></tr>}
+      </tbody>
+    </table>
+  </div>
+</section>

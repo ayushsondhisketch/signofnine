@@ -1,0 +1,30 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import digits from '../../data/digits.json';
+
+const numbers = (await getCollection('numbers')).sort((a, b) => a.data.number - b.data.number);
+const crumbs = [{ label: 'Number meanings', href: '/numbers/' }];
+const faq = [
+  { q: 'Why does numerology only use 1 to 9?', a: 'Pythagorean numerology reduces every number to a single digit by adding its digits together, so the whole system rests on nine meanings. Three two-digit numbers, 11, 22 and 33, are kept unreduced because the tradition treats them as stronger versions of 2, 4 and 6.' },
+  { q: 'Is 0 a number in numerology?', a: 'Not in the Pythagorean system, where counting starts at 1. Most readers treat 0 as an amplifier of the digit beside it, which is how the site reads it in numbers such as 1010 and 00:00.' },
+  { q: 'What is the difference between a number meaning and a life path?', a: 'The number meaning is the digit itself, wherever it turns up. The life path is that digit as the pattern of a whole life, worked out from your full date of birth. The life path 7 page and the number 7 page describe the same number at two different scales.' },
+];
+const headings = [{ depth: 2, slug: 'single', text: 'The single digits' }, { depth: 2, slug: 'masters', text: 'The master numbers' }, { depth: 2, slug: 'faq', text: 'Questions people ask' }];
+---
+<Article title="Number Meanings in Numerology: 0 to 9, 11, 22, 33" description="What each number means in numerology, with its keywords, tarot card and planet, and the angel numbers and life paths built from it." h1="Number meanings: what each number stands for" lead="Every angel number, life path and personal year is built from the nine single digits and three master numbers. These pages give each one its own plain-English meaning, so the rest of the site has somewhere to point." crumbs={crumbs} eyebrow="Number meanings" published="2026-10-17" updated="2026-10-17" readMinutes={3} faq={faq} headings={headings} ogImage="/og/hub-numbers.png" current="numbers">
+  <section aria-labelledby="single">
+    <h2 id="single">The single digits</h2>
+    <p>Pythagorean numerology gives each digit from 1 to 9 a character, and reads every larger number by adding its digits until one of these is left. The tradition's keywords are below; each page explains where they come from and what the number means in love, at work and as an angel number.</p>
+    <div class="grid" style="--tile-min:200px">
+      {numbers.filter((e) => e.data.number <= 9).map((e) => <a class="tile" href={`/numbers/${e.data.number}/`}><span class="eyebrow">{digits[String(e.data.number)].name}</span><span class="tile__num">{e.data.number}</span><span class="tile__line">{e.data.tile}</span><span class="tile__more">Read the meaning →</span></a>)}
+    </div>
+  </section>
+  <section aria-labelledby="masters">
+    <h2 id="masters">The master numbers</h2>
+    <p>Three numbers are not reduced: 11, 22 and 33. The tradition reads each as its base number, 2, 4 or 6, with more asked of it. They are rare as life paths and common as sightings, which is why 11:11 has a page of its own.</p>
+    <div class="grid" style="--tile-min:200px">
+      {numbers.filter((e) => e.data.number > 9).map((e) => <a class="tile" href={`/numbers/${e.data.number}/`}><span class="eyebrow">{digits[String(e.data.number)].name}</span><span class="tile__num">{e.data.number}</span><span class="tile__line">{e.data.tile}</span><span class="tile__more">Read the meaning →</span></a>)}
+    </div>
+  </section>
+</Article>

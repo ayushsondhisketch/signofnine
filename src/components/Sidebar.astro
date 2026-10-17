@@ -1,0 +1,46 @@
+---
+// The sidebar every inner page stacks on the right. Order: On this page (when there are headings), Search, Popular angel numbers,
+// Your life path number, the ad space, Categories. The calculator pages drop the life path widget.
+import Ad from './Ad.astro';
+import { NAV, POPULAR } from '../site.mjs';
+const { headings = [], lifepath = true, popular = [] } = Astro.props;
+const pop = popular.length ? popular : POPULAR.map((n) => ({ n, href: `/angel-numbers/${n}/`, short: '' }));
+const h2s = headings.filter((h) => h.depth === 2 && h.slug !== 'in-short');
+---
+<aside class="sidebar">
+  {h2s.length > 2 && (
+    <div class="widget toc">
+      <h2>On this page</h2><span class="rule"></span>
+      <ol>{h2s.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+    </div>
+  )}
+  <div class="widget">
+    <h2>Search</h2><span class="rule"></span>
+    <form class="field field--md" action="/search/" method="get" role="search">
+      <label class="visually-hidden" for="sidebar-search">Search the site</label>
+      <input id="sidebar-search" name="q" type="search" placeholder="Search numbers and guides" autocomplete="off" />
+      <button type="submit">Go</button>
+    </form>
+  </div>
+  <div class="widget">
+    <h2>Popular angel numbers</h2><span class="rule"></span>
+    <ul>{pop.map((p) => <li><a href={p.href}><span class="num">{p.n}</span>{p.short && <span class="short">{p.short}</span>}</a></li>)}</ul>
+  </div>
+  {lifepath && (
+    <div class="widget">
+      <h2>Your life path number</h2><span class="rule"></span>
+      <p>Enter your date of birth and the calculator shows your number and the working behind it.</p>
+      <form class="fields" action="/life-path/calculator/" method="get" style="margin-top:4px">
+        <div class="f"><label for="sb-d">Day</label><input id="sb-d" name="d" type="text" inputmode="numeric" placeholder="DD" /></div>
+        <div class="f"><label for="sb-m">Month</label><input id="sb-m" name="m" type="text" inputmode="numeric" placeholder="MM" /></div>
+        <div class="f"><label for="sb-y">Year</label><input id="sb-y" name="y" type="text" inputmode="numeric" placeholder="YYYY" /></div>
+        <div class="f--wide" style="margin-top:4px"><button class="btn btn--md" type="submit" style="width:100%">Calculate my life path</button></div>
+      </form>
+    </div>
+  )}
+  <Ad kind="rect" />
+  <div class="widget">
+    <h2>Categories</h2><span class="rule"></span>
+    <div class="links">{NAV.filter((n) => n.key !== 'home').map((n) => <a href={n.href}>{n.label}</a>)}</div>
+  </div>
+</aside>

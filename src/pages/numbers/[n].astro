@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import InShort from '../../components/InShort.astro';
+import Related from '../../components/Related.astro';
+import { wordCount, readMinutes, allAngelNumbers } from '../../lib/content.mjs';
+import { core, LIFE_PATHS } from '../../lib/numerology.mjs';
+import digits from '../../data/digits.json';
+
+export async function getStaticPaths() {
+  const numbers = await getCollection('numbers');
+  return numbers.map((entry) => ({ params: { n: String(entry.data.number) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const n = d.number;
+const all = await allAngelNumbers();
+const crumbs = [{ label: 'Number meanings', href: '/numbers/' }, { label: String(n), href: `/numbers/${n}/` }];
+// Related: the repeating angel numbers that reduce to this digit, the life path with the same number, neighbors.
+const related = all.filter((a) => core(a.n) === n).slice(0, 4).map((a) => ({ n: a.n, href: a.href, line: a.line }));
+if (LIFE_PATHS.includes(n)) related.push({ n: `LP ${n}`, href: `/life-path/${n}/`, line: `Life path ${n}: the same number as a whole life` });
+const rep = n >= 1 && n <= 9 ? `${n}${n}${n}` : null;
+if (rep && all.find((a) => a.n === rep) && !related.find((r) => r.n === rep)) related.unshift({ n: rep, href: `/angel-numbers/${rep}/`, line: `${rep}, the repeated form` });
+// Neighbors in the sequence, the personal year and the birthday number with the same digit, and the compatibility page.
+const order = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33];
+const idx = order.indexOf(n);
+for (const j of [idx - 1, idx + 1]) if (order[j] !== undefined) related.push({ n: order[j], href: `/numbers/${order[j]}/`, line: `The number ${order[j]}` });
+if (n >= 1 && n <= 9 || n === 11 || n === 22) related.push({ n: `PY ${n}`, href: `/personal-year/${n}/`, line: `Personal year ${n}: the same number as a year` });
+if (n >= 1 && n <= 9) related.push({ n: `${n}${n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th'}`, href: `/birthday-number/${n}/`, line: `Born on the ${n}${n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th'}: the birthday number ${n}` });
+if (LIFE_PATHS.includes(n)) related.push({ n: `${n} +`, href: `/compatibility/${n}/`, line: `Life path ${n} compatibility` });
+const inShort = [['Meaning', d.inShort.meaning], ['Keywords', d.inShort.keywords], ['Tarot and planet', d.inShort.tarot], ['Best response', d.inShort.response]];
+const words = wordCount(entry.body) + 120;
+const allHeadings = [...headings, ...(related.length ? [{ depth: 2, slug: 'related', text: 'Related numbers' }] : []), ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+---
+<Article title={d.title} description={d.description} h1={d.h1} lead={d.lead} crumbs={crumbs} emblem={String(n)} eyebrow="Number meaning"
+  published={d.published} updated={d.updated} readMinutes={readMinutes(words)} faq={d.faq} headings={allHeadings} ogImage={`/og/number-${n}.png`} current="numbers">
+  <InShort slot="top" items={inShort} />
+  <Content />
+  <Fragment slot="after"><div class="prose" style="margin-top:36px"><Related items={related} /></div></Fragment>
+</Article>

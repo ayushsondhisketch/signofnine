@@ -1,0 +1,46 @@
+---
+import Article from '../../../layouts/Article.astro';
+import InShort from '../../../components/InShort.astro';
+import NumbersInside from '../../../components/NumbersInside.astro';
+import Related from '../../../components/Related.astro';
+import { times, allAngelNumbers, wordCount, readMinutes } from '../../../lib/content.mjs';
+import { composeTime } from '../../../lib/compose.mjs';
+import { working, core } from '../../../lib/numerology.mjs';
+import digits from '../../../data/digits.json';
+
+export function getStaticPaths() {
+  return times.map((t) => ({ params: { slug: t.slug }, props: { item: t } }));
+}
+const { item } = Astro.props;
+const all = await allAngelNumbers();
+const published = new Set(all.map((a) => a.n));
+const lineFor = (n) => all.find((a) => a.n === n)?.line || '';
+const { data, html, headings, time } = composeTime(item);
+const n = data.number;
+const c = core(n);
+const w = working(n);
+const crumbs = [{ label: 'Angel numbers', href: '/angel-numbers/' }, { label: 'Clock times', href: '/angel-numbers/times/' }, { label: item.label, href: `/angel-numbers/times/${item.slug}/` }];
+const related = [];
+if (published.has(n)) related.push({ n, href: `/angel-numbers/${n}/`, line: `${lineFor(n)}; the number off the clock` });
+for (const p of item.pairs || []) {
+  if (p.n.includes(':')) { const s = p.n.replace(':', '-'); if (times.find((t) => t.slug === s)) related.push({ n: p.n, href: `/angel-numbers/times/${s}/`, line: p.line }); }
+  else if (published.has(p.n)) related.push({ n: p.n, href: `/angel-numbers/${p.n}/`, line: p.line });
+}
+{ const i = times.findIndex((t) => t.slug === item.slug); for (const j of [i - 1, i + 1]) { const t = times[(j + times.length) % times.length]; if (t && t.slug !== item.slug && !related.some((r) => r.href === `/angel-numbers/times/${t.slug}/`)) related.push({ n: t.label, href: `/angel-numbers/times/${t.slug}/`, line: t.tile }); } }
+related.push({ n: c, href: `/numbers/${c}/`, line: `${digits[String(c)].line}; the core number` });
+related.push({ n: 'Any', href: '/articles/how-to-read-any-clock-time/', line: 'How to read any clock time, including the ones without a page' });
+const inShort = [['Meaning', item.inShort.meaning], ['Core number', `${item.label} adds to ${c} (${w})`], ['On the clock', item.inShort.clock], ['Best response', item.inShort.response]];
+const words = wordCount(html) + 160;
+const allHeadings = [...headings, { depth: 2, slug: 'inside', text: `The numbers inside ${item.label}` }, { depth: 2, slug: 'related', text: 'Related numbers' }, ...(data.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+---
+<Article title={item.title} description={item.description} h1={item.h1} lead={item.lead} crumbs={crumbs} emblem={item.label} eyebrow="Clock time"
+  published={item.published} updated={item.updated} readMinutes={readMinutes(words)} faq={data.faq} headings={allHeadings} ogImage={`/og/time-${item.slug}.png`} current="angel">
+  <InShort slot="top" items={inShort} />
+  <Fragment set:html={html} />
+  <Fragment slot="after">
+    <div class="prose" style="margin-top:36px">
+      <NumbersInside number={n} />
+      <Related items={related} />
+    </div>
+  </Fragment>
+</Article>

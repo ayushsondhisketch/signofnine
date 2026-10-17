@@ -1,0 +1,83 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../site.mjs';
+import { publishedNumberSlugs } from '../lib/content.mjs';
+
+const {
+  title,
+  description = SITE.description,
+  canonical = Astro.url.pathname,
+  ogImage = '/og/default.png',
+  type = 'website',
+  noindex = false,
+  schema = [],
+  published,
+  modified,
+  current = '',
+  titleSuffix = true,
+} = Astro.props;
+
+const canonicalUrl = new URL(canonical, SITE.url).href;
+const ogUrl = new URL(ogImage, SITE.url).href;
+const fullTitle = titleSuffix && title && title.length <= 45 ? `${title} | ${SITE.name}` : title || SITE.name;
+const slugs = await publishedNumberSlugs();
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{fullTitle}</title>
+  <meta name="description" content={description} />
+  <link rel="canonical" href={canonicalUrl} />
+  <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
+  <meta property="og:site_name" content={SITE.name} />
+  <meta property="og:type" content={type} />
+  <meta property="og:title" content={title || SITE.name} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:image" content={ogUrl} />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:locale" content={SITE.locale} />
+  <meta name="twitter:card" content="summary_large_image" />
+  {published && <meta property="article:published_time" content={published} />}
+  {modified && <meta property="article:modified_time" content={modified} />}
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+  <link rel="sitemap" href="/sitemap-index.xml" />
+  <link rel="preload" href="/fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="/fonts/source-sans-3-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  {schema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
+</head>
+<body class={SITE.ads ? undefined : 'ads-off'}>
+  <a class="visually-hidden" href="#main">Skip to content</a>
+  <Header current={current} />
+  <main id="main" data-pagefind-ignore={noindex ? "all" : undefined}>
+    <slot />
+  </main>
+  <Footer />
+  <script define:vars={{ slugs }}>
+    // The lookup: a published number opens its page; anything else is computed on the lookup page without a URL of its own.
+    const known = new Set(slugs);
+    document.querySelectorAll('form.js-lookup').forEach((form) => {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const raw = (form.querySelector('input')?.value || '').trim();
+        if (!raw) return;
+        const time = raw.match(/^(\d{1,2}):(\d{2})$/);
+        if (time) {
+          const slug = `times/${Number(time[1])}-${time[2]}`;
+          location.href = known.has(slug) ? `/angel-numbers/${slug}/` : `/lookup/?q=${encodeURIComponent(raw)}`;
+          return;
+        }
+        const digits = raw.replace(/\D/g, '');
+        if (!digits) { location.href = `/search/?q=${encodeURIComponent(raw)}`; return; }
+        location.href = known.has(digits) ? `/angel-numbers/${digits}/` : `/lookup/?q=${encodeURIComponent(digits)}`;
+      });
+    });
+  </script>
+</body>
+</html>

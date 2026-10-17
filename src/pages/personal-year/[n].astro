@@ -1,0 +1,34 @@
+---
+import { getCollection, render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import InShort from '../../components/InShort.astro';
+import Related from '../../components/Related.astro';
+import { wordCount, readMinutes } from '../../lib/content.mjs';
+
+export async function getStaticPaths() {
+  const y = await getCollection('years');
+  return y.map((entry) => ({ params: { n: String(entry.data.number) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const n = d.number;
+const years = (await getCollection('years')).sort((a, b) => a.data.number - b.data.number);
+const crumbs = [{ label: 'Personal year', href: '/personal-year/' }, { label: `Personal year ${n}`, href: `/personal-year/${n}/` }];
+const next = years.find((e) => e.data.number === (n === 9 ? 1 : n + 1));
+const prev = years.find((e) => e.data.number === (n === 1 ? 9 : n - 1));
+const related = [
+  ...(prev ? [{ n: prev.data.number, href: `/personal-year/${prev.data.number}/`, line: `The year before: ${prev.data.name.toLowerCase()}` }] : []),
+  ...(next ? [{ n: next.data.number, href: `/personal-year/${next.data.number}/`, line: `The year after: ${next.data.name.toLowerCase()}` }] : []),
+  { n, href: `/numbers/${n}/`, line: `The number ${n} on its own` },
+];
+const inShort = [['Meaning', d.inShort.meaning], ['Theme of the year', d.inShort.theme], ['How it is worked out', `Reduced day + reduced month + 2 (for 2027), reduced again. <a href="/personal-year/">The calculator</a> does it, and the <a href="/articles/2027-numerology-universal-year-11/">2027 article</a> explains the universal year.`], ['Best response', d.inShort.response]];
+const words = wordCount(entry.body) + 120;
+const allHeadings = [...headings, { depth: 2, slug: 'related', text: 'Related numbers' }, ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+---
+<Article title={d.title} description={d.description} h1={d.h1} lead={d.lead} crumbs={crumbs} emblem={String(n)} eyebrow="Personal year"
+  published={d.published} updated={d.updated} readMinutes={readMinutes(words)} faq={d.faq} headings={allHeadings} ogImage={`/og/year-${n}.png`} current="numbers">
+  <InShort slot="top" items={inShort} />
+  <Content />
+  <Fragment slot="after"><div class="prose" style="margin-top:36px"><Related items={related} /></div></Fragment>
+</Article>

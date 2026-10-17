@@ -1,0 +1,23 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../site.mjs';
+const crumbs = [{ label: 'Disclaimer', href: '/disclaimer/' }];
+---
+<Page title="Disclaimer" description="Sign of Nine explains numerology as a tradition for reflection and entertainment. It is not advice, and nothing here predicts the future." h1="Disclaimer" lead={SITE.legalLine} crumbs={crumbs} eyebrow="Legal" updated="2026-10-17">
+  <section aria-labelledby="nature">
+    <h2 id="nature">What this site is</h2>
+    <p>Sign of Nine explains numerology and the angel-number tradition. Numerology is a tradition, not a science: no study has shown that birth dates, names or repeating numbers predict events or describe a person's character, and this site does not claim that they do. Readings on the site are presented as what the tradition says, for reflection and entertainment.</p>
+  </section>
+  <section aria-labelledby="advice">
+    <h2 id="advice">Not advice</h2>
+    <p>Nothing on this site is medical, psychological, financial, legal or relationship advice. Where a page discusses health, pregnancy, money or relationships, it describes a traditional reading and nothing more. Decisions in those areas should be made with a qualified professional. If you are in distress, contact a doctor or a local helpline.</p>
+  </section>
+  <section aria-labelledby="accuracy">
+    <h2 id="accuracy">Accuracy</h2>
+    <p>The arithmetic on the site is checked, the sources are named, and errors are corrected when found. Even so, the site is provided as it is, without warranty, and the publisher accepts no liability for decisions made on the basis of its content.</p>
+  </section>
+  <section aria-labelledby="links">
+    <h2 id="links">Links and advertising</h2>
+    <p>The site carries advertising and may link to other websites. It is not responsible for the content of those sites or for the products advertised. See the <a href="/advertising-disclosure/">advertising disclosure</a> and the <a href="/privacy-policy/">privacy policy</a>.</p>
+  </section>
+</Page>

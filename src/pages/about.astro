@@ -1,0 +1,33 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../site.mjs';
+import { personSchema } from '../lib/content.mjs';
+const crumbs = [{ label: 'About', href: '/about/' }];
+---
+<Page title="About Sign of Nine" description="Who writes Sign of Nine, what the site is for, and the two rules every page follows: show the working and name the tradition." h1="About Sign of Nine" lead="A numerology reference written by one person, for people who keep seeing a number and want a plain answer." crumbs={crumbs} eyebrow="About" updated="2026-10-17" extraSchema={[personSchema()]}>
+  <section aria-labelledby="who">
+    <h2 id="who">Who writes it</h2>
+    <p>Sign of Nine is written and maintained by {SITE.author}, a writer and independent publisher based in Punjab, India. He also runs two other reference sites: one on car diagnostics and one on film franchises. The common thread is the same in all three: take a subject full of confident, unsourced claims and write it up properly, with the method shown.</p>
+    <p>He is not a numerologist, a psychic or a counselor, and the site does not present him as one. The site's own view of the evidence is set out in the article on <a href="/articles/is-numerology-real/">whether numerology is real</a>. The job here is to explain a tradition accurately, in plain English, and to be clear about which parts are arithmetic, which parts are sourced, and which parts are a reading.</p>
+  </section>
+  <section aria-labelledby="what">
+    <h2 id="what">What the site is for</h2>
+    <p>Most people arrive here because a number keeps turning up: 11:11 on the clock, 444 on a receipt, 555 on a number plate. They want to know what it means and what to do about it. The site answers both, in that order, and it also explains the ordinary reason a number seems to follow you, because that explanation is true and almost nobody gives it.</p>
+    <p>Beyond angel numbers, the site covers the core numbers of Pythagorean numerology: life path, expression, soul urge, personality and birthday. It also covers compatibility between life paths, the personal year cycle, and the meaning of each number from 0 to 9 and the master numbers 11, 22 and 33. Every calculator shows its working so the result can be checked by hand.</p>
+  </section>
+  <section aria-labelledby="rules">
+    <h2 id="rules">The two rules</h2>
+    <h3>Show the working</h3>
+    <p>Whenever a number is reduced, the arithmetic is on the page: 5 + 5 + 5 = 15 → 6. The method is published once, on the <a href="/editorial-approach/">editorial approach</a> page, and used everywhere, so the same date or number gives the same answer on every page.</p>
+    <h3>Name the tradition</h3>
+    <p>Numerology is a tradition, not a science. Readings are presented as readings ("the tradition reads 555 as change"), sources are named where they exist, and no page tells you what will happen to you. The footer of every page says the same thing in one line, and it is meant.</p>
+  </section>
+  <section aria-labelledby="money">
+    <h2 id="money">How the site is funded</h2>
+    <p>Sign of Nine is funded by advertising, and may in future carry a small number of affiliate links to books on numerology, marked as such. Advertising never influences what a page says, and no page is written to sell anything. The <a href="/advertising-disclosure/">advertising disclosure</a> has the detail.</p>
+  </section>
+  <section aria-labelledby="contact">
+    <h2 id="contact">Corrections and contact</h2>
+    <p>If a page gets the arithmetic wrong, misstates a source or reads badly, write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a> or use the <a href="/contact/">contact page</a>. Corrections are made on the page and the updated date changes.</p>
+  </section>
+</Page>

@@ -1,0 +1,42 @@
+---
+import Star from './Star.astro';
+import { SITE } from '../site.mjs';
+const year = new Date().getFullYear();
+const explore = [
+  ['Angel numbers', '/angel-numbers/'],
+  ['Life path calculator', '/life-path/calculator/'],
+  ['Number meanings 0 to 9', '/numbers/'],
+  ['Master numbers', '/articles/master-numbers/'],
+  ['Compatibility', '/compatibility/'],
+  ['Articles', '/articles/'],
+];
+const popular = [
+  ['Angel number 111', '/angel-numbers/111/'],
+  ['Angel number 222', '/angel-numbers/222/'],
+  ['Angel number 333', '/angel-numbers/333/'],
+  ['Angel number 444', '/angel-numbers/444/'],
+  ['Angel number 777', '/angel-numbers/777/'],
+  ['Angel number 1111', '/angel-numbers/1111/'],
+];
+const site = [
+  ['About', '/about/'],
+  ['Editorial approach', '/editorial-approach/'],
+  ['Contact', '/contact/'],
+  ['Privacy policy', '/privacy-policy/'],
+  ['Terms of use', '/terms-of-use/'],
+  ['Disclaimer', '/disclaimer/'],
+  ['Advertising disclosure', '/advertising-disclosure/'],
+];
+---
+<footer class="footer">
+  <div class="wrap">
+    <div class="col">
+      <a class="brand" href="/"><Star size={26} /><span class="brand__word">{SITE.name}</span></a>
+      <p>Clear numerology meanings, angel numbers and calculators, written in plain English, with the working shown and the tradition named.</p>
+    </div>
+    <div class="col"><h2>Explore</h2><span class="rule"></span>{explore.map(([t, h]) => <a href={h}>{t}</a>)}</div>
+    <div class="col"><h2>Popular numbers</h2><span class="rule"></span>{popular.map(([t, h]) => <a href={h}>{t}</a>)}</div>
+    <div class="col"><h2>{SITE.name}</h2><span class="rule"></span>{site.map(([t, h]) => <a href={h}>{t}</a>)}</div>
+  </div>
+  <div class="legal"><div class="wrap"><span>© {year} {SITE.name}</span><span>{SITE.legalLine}</span></div></div>
+</footer>

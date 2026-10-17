@@ -1,0 +1,40 @@
+---
+// Inner-page layout: title band, then a content panel beside the sidebar.
+import Base from './Base.astro';
+import Band from '../components/Band.astro';
+import Sidebar from '../components/Sidebar.astro';
+import Author from '../components/Author.astro';
+import Faq from '../components/Faq.astro';
+import { articleSchema, breadcrumbSchema, faqSchema } from '../lib/content.mjs';
+
+const {
+  title, description, h1, lead, crumbs = [], emblem = null, eyebrow = '', published, updated, readMinutes = 0,
+  faq = [], headings = [], ogImage = '/og/default.png', current = '', lifepathWidget = true, numerals = false,
+  extraSchema = [], authorNote = '', showAuthor = true, canonical,
+} = Astro.props;
+const path = Astro.url.pathname;
+const schema = [
+  articleSchema({ url: path, headline: h1 || title, description, published, modified: updated, image: ogImage }),
+  breadcrumbSchema(crumbs),
+  faqSchema(faq),
+  ...extraSchema,
+].filter(Boolean);
+---
+<Base title={title} description={description} ogImage={ogImage} type="article" published={published} modified={updated} current={current} schema={schema} canonical={canonical}>
+  <Band crumbs={crumbs} emblem={emblem} eyebrow={eyebrow} title={h1 || title} lead={lead} updated={updated} readMinutes={readMinutes} numerals={numerals} />
+  <div class="layout">
+    <div class="wrap">
+      <article class="panel" data-pagefind-body>
+        <slot name="top" />
+        <div class="prose">
+          <slot />
+        </div>
+        <slot name="after" />
+        <Faq items={faq} />
+        <slot name="bottom" />
+        {showAuthor && <Author note={authorNote} />}
+      </article>
+      <Sidebar headings={headings} lifepath={lifepathWidget} />
+    </div>
+  </div>
+</Base>

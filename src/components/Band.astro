@@ -1,0 +1,38 @@
+---
+// The dark title band that opens every inner page: breadcrumb, optional ring emblem, eyebrow, H1, standfirst, meta row.
+import { SITE } from '../site.mjs';
+const { crumbs = [], emblem = null, eyebrow = '', title, lead = '', updated = '', readMinutes = 0, numerals = false, system = true } = Astro.props;
+const fmt = (d) => { if (!d) return ''; const [y, m, dd] = d.split('-').map(Number); return `${dd} ${['January','February','March','April','May','June','July','August','September','October','November','December'][m - 1]} ${y}`; };
+const ringClass = emblem ? (String(emblem).length > 5 ? 'ring ring--long' : String(emblem).includes(':') || String(emblem).length > 3 ? 'ring ring--time' : 'ring') : '';
+---
+<div class="band stars">
+  <div class="wrap">
+    {crumbs.length > 0 && (
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/">Home</a>
+        {crumbs.map((c, i) => (
+          <>
+            <span aria-hidden="true">›</span>
+            {i < crumbs.length - 1 ? <a href={c.href}>{c.label}</a> : <span class="here">{c.label}</span>}
+          </>
+        ))}
+      </nav>
+    )}
+    <div class="band__row" data-pagefind-body>
+      {emblem && <div class={ringClass} aria-hidden="true" data-pagefind-weight="10">{emblem}</div>}
+      <div class="band__text">
+        {eyebrow && <div class="eyebrow eyebrow--gold">{eyebrow}</div>}
+        <h1>{title}</h1>
+        {lead && <p class="lead">{lead}</p>}
+        {numerals && <div class="numeral-row" aria-hidden="true" data-pagefind-ignore>1 2 3 4 5 6 7 8 9</div>}
+        {(updated || readMinutes > 0) && (
+          <div class="band__meta" data-pagefind-ignore>
+            {updated && <span>Updated {fmt(updated)}</span>}
+            {readMinutes > 0 && <><span aria-hidden="true">·</span><span>{readMinutes} min read</span></>}
+            {system && <><span aria-hidden="true">·</span><span>{SITE.system}</span></>}
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</div>

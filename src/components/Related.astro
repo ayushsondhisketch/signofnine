@@ -1,0 +1,17 @@
+---
+// Related numbers as small cards: the pairs people ask about plus the clock form, the sibling and the core number.
+const { items = [], title = 'Related numbers', id = 'related' } = Astro.props;
+---
+{items.length > 0 && (
+  <section aria-labelledby={id} data-pagefind-ignore>
+    <h2 id={id}>{title}</h2>
+    <div class="grid grid--small">
+      {items.map((it) => (
+        <a class="small-card" href={it.href}>
+          <span class={`small-card__num${String(it.n).length > 4 ? ' small-card__num--long' : ''}`}>{it.n}</span>
+          <span class="small-card__line">{it.line}</span>
+        </a>
+      ))}
+    </div>
+  </section>
+)}

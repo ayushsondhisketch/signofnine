@@ -1,0 +1,46 @@
+---
+import Page from '../layouts/Page.astro';
+const crumbs = [{ label: 'Editorial approach', href: '/editorial-approach/' }];
+---
+<Page title="Editorial Approach: How the Pages Are Written" description="The method behind every page on Sign of Nine: the Pythagorean system, the calculation rules, the kinds of claim, the sources and updates." h1="Editorial approach: how every page is written" lead="One method, published once and used everywhere. This page is the rulebook, so you can check any number on the site by hand." crumbs={crumbs} eyebrow="Method" updated="2026-10-17">
+  <section aria-labelledby="system">
+    <h2 id="system">The system</h2>
+    <p>Sign of Nine uses Pythagorean numerology throughout, and treats angel numbers as a modern practice built on it (the <a href="/articles/angel-numbers-vs-numerology/">angel numbers and numerology article</a> explains the join). It is the system behind almost every modern English-language book and website on the subject, set out in its current form by L. Dow Balliett in the early 1900s and by Juno Jordan in <em>Numerology: The Romance in Your Name</em> (1965). The Chaldean system, which assigns different values to letters, is explained in <a href="/articles/pythagorean-vs-chaldean/">its own article</a> but is not used for any calculation here.</p>
+  </section>
+  <section aria-labelledby="rules">
+    <h2 id="rules">The calculation rules</h2>
+    <dl class="defs">
+      <div><dt>Reduction</dt><dd>A number is reduced by adding its digits until a single digit remains: 1992 → 1 + 9 + 9 + 2 = 21 → 3. The arrow is the site's symbol for reduction.</dd></div>
+      <div><dt>Master numbers</dt><dd>11, 22 and 33 are not reduced when they appear as a result. A day of 11 or 22, a month of 11 (November), or a sum of 11, 22 or 33 stays as it is.</dd></div>
+      <div><dt>Life path</dt><dd>Reduce the day, the month and the year separately, add the three results, reduce again (method 1). Method 2, adding every digit of the date in one row, is shown beside it on the calculator because other sites use it and the two sometimes differ.</dd></div>
+      <div><dt>Birthday number</dt><dd>The day of the month, reduced, with 11 and 22 kept.</dd></div>
+      <div><dt>Name numbers</dt><dd>Letters take the values A J S = 1, B K T = 2, C L U = 3, D M V = 4, E N W = 5, F O X = 6, G P Y = 7, H Q Z = 8, I R = 9. The expression number counts every letter of the full birth name, the soul urge counts vowels, the personality counts consonants. Y is a vowel when no other vowel sits beside it.</dd></div>
+      <div><dt>Personal year</dt><dd>Reduced day + reduced month + reduced calendar year, reduced again. The year turns over on 1 January.</dd></div>
+      <div><dt>Angel numbers</dt><dd>The number is read from its digits and from its sum. 555 is three 5s and a 6 (5 + 5 + 5 = 15 → 6). A clock time is read as the number it shows, with the time of day as context.</dd></div>
+      <div><dt>Compatibility</dt><dd>Two life paths are compared on the tradition's table of temperaments, published in full on the <a href="/compatibility/">compatibility guide</a>. Master numbers are read on their base.</dd></div>
+      </dl>
+  </section>
+  <section aria-labelledby="claims">
+    <h2 id="claims">Three kinds of claim</h2>
+    <p>Every sentence on the site is one of three things, and the writing is meant to make clear which.</p>
+    <dl class="defs">
+      <div><dt>Computed</dt><dd>The arithmetic, which is always exact and always shown.</dd></div>
+      <div><dt>Sourced</dt><dd>A named book, verse or study, cited on the page.</dd></div>
+      <div><dt>Tradition</dt><dd>What numerologists or the angel-number tradition read into a number, always written as a reading ("the tradition reads", "numerologists publish") and never as a fact about the world.</dd></div>
+    </dl>
+    <p>Where the tradition's readings come from is stated too. The modern angel-number tradition begins with Doreen Virtue's <em>Angel Numbers</em> (2005) and <em>Angel Numbers 101</em> (2008). Earlier number meanings come from the Pythagorean tradition as transmitted by Balliett and Jordan. When a page says a number is linked to a Bible verse, the verse is named, and the page says whether the Bible itself mentions the number or only the digit.</p>
+  </section>
+  <section aria-labelledby="honest">
+    <h2 id="honest">The honest paragraph</h2>
+    <p>Every angel-number page explains, before any reading, why a number seems to follow you: once a number has your attention, you notice every sighting and forget the thousands of numbers that were not it. Psychologists call this the frequency illusion. It is not a debunking and it is not a disclaimer. It is the most useful thing on the page for a reader who is unsettled, and the site would be dishonest without it.</p>
+  </section>
+  <section aria-labelledby="writing">
+    <h2 id="writing">How a page gets written</h2>
+    <p>Each page starts from the questions people actually ask about that number, drawn from search data, and answers them in the order people ask them. The first hundred words answer the main question outright. Every section opens with its answer. Readings are attributed, arithmetic is shown, and a section exists only when people ask that question about that number: 666 gets a long section on whether it is evil, 444 does not need one.</p>
+    <p>Pages are reviewed before publication against a fixed checklist that covers accuracy of the arithmetic, attribution of every reading, plain language, and a ban on padding. Health, pregnancy, money and legal topics are described as readings and end by pointing the reader to someone qualified.</p>
+  </section>
+  <section aria-labelledby="updates">
+    <h2 id="updates">Updates and corrections</h2>
+    <p>The "updated" date on a page changes only when its text changes. Pages are revisited when a reader points out a problem, when a source changes, or when the questions people ask about a number shift. Corrections go to <a href="/contact/">the contact page</a>.</p>
+  </section>
+</Page>

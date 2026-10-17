@@ -1,0 +1,43 @@
+---
+import { getCollection, render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import InShort from '../../components/InShort.astro';
+import Related from '../../components/Related.astro';
+import { wordCount, readMinutes } from '../../lib/content.mjs';
+import { compatibility, LIFE_PATHS } from '../../lib/numerology.mjs';
+
+export async function getStaticPaths() {
+  const lp = await getCollection('lifepath');
+  return lp.map((entry) => ({ params: { n: String(entry.data.number) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const n = d.number;
+const lp = await getCollection('lifepath');
+const nameOf = (k) => lp.find((e) => e.data.number === k)?.data.name || '';
+const crumbs = [{ label: 'Life path', href: '/life-path/' }, { label: `Life path ${n}`, href: `/life-path/${n}/` }];
+const matches = LIFE_PATHS.filter((k) => k !== n).map((k) => ({ k, c: compatibility(n, k) })).filter((x) => x.c.rating === 3).slice(0, 3);
+const related = [
+  { n: `${n} ♥`, href: `/compatibility/${n}/`, line: `Life path ${n} compatibility with every other number` },
+  ...matches.map((x) => ({ n: x.k, href: `/life-path/${x.k}/`, line: `Life path ${x.k}, ${nameOf(x.k).toLowerCase()}: a natural match` })),
+  { n: n <= 9 ? n : n, href: `/numbers/${n}/`, line: `The number ${n} on its own` },
+];
+const inShort = [['Meaning', d.inShort.meaning], ['Strengths', d.inShort.strengths], ['Watch for', d.inShort.watch], ['Best response', d.inShort.response]];
+const words = wordCount(entry.body) + 120;
+const allHeadings = [...headings, { depth: 2, slug: 'related', text: 'Related numbers' }, ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+---
+<Article title={d.title} description={d.description} h1={d.h1} lead={d.lead} crumbs={crumbs} emblem={String(n)} eyebrow="Life path number"
+  published={d.published} updated={d.updated} readMinutes={readMinutes(words)} faq={d.faq} headings={allHeadings} ogImage={`/og/lifepath-${n}.png`} current="lifepath">
+  <InShort slot="top" items={inShort} />
+  <Content />
+  <Fragment slot="after">
+    <div class="prose" style="margin-top:36px">
+      <section aria-labelledby="check">
+        <h2 id="check">Not sure this is your number?</h2>
+        <p>Life path numbers are worked out from the full date of birth, and two common methods disagree for about one date in nine. <a href={`/life-path/calculator/`}>The calculator</a> shows both methods and the working, so you can see which one gave you {n}.</p>
+      </section>
+      <Related items={related} />
+    </div>
+  </Fragment>
+</Article>

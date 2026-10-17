@@ -1,0 +1,47 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../site.mjs';
+const crumbs = [{ label: 'Privacy policy', href: '/privacy-policy/' }];
+---
+<Page title="Privacy Policy" description="What Sign of Nine collects and does not, how ad and analytics cookies work, the consent choice for UK and EEA visitors, and contact." h1="Privacy policy" lead="The short version: the site stores nothing you type, uses analytics and advertising services that set cookies with your consent where the law requires it, and never sells personal data." crumbs={crumbs} eyebrow="Legal" updated="2026-10-17">
+  <section aria-labelledby="who">
+    <h2 id="who">Who runs the site</h2>
+    <p>Sign of Nine ({SITE.url}) is published by {SITE.author}, Punjab, India. For anything in this policy, write to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+  </section>
+  <section aria-labelledby="calc">
+    <h2 id="calc">The calculators and the lookup</h2>
+    <p>Dates, names and numbers you type into the calculators and the lookup box are processed in your browser and are not sent to or stored by the site. If you share a result link, the date is in the link and visible to anyone you share it with.</p>
+  </section>
+  <section aria-labelledby="analytics">
+    <h2 id="analytics">Analytics</h2>
+    <p>The site uses Google Analytics 4 to count visits and understand which pages are read, with IP anonymisation and Google's consent mode, so that analytics cookies are set only where you have consented. It also uses Cloudflare Web Analytics, which sets no cookies and collects no personal data. Analytics data is used to improve the site and for nothing else.</p>
+  </section>
+  <section aria-labelledby="ads">
+    <h2 id="ads">Advertising cookies</h2>
+    <p>The site shows advertisements through Google AdSense. Google and its partners use cookies, including the DoubleClick cookie, to show ads based on your visits to this and other sites, and to measure them. You can opt out of personalized advertising at <a href="https://www.google.com/settings/ads" rel="noopener">Google's ads settings</a> and learn how Google uses data from sites that use its services at <a href="https://policies.google.com/technologies/partner-sites" rel="noopener">policies.google.com/technologies/partner-sites</a>. Other networks that may serve ads in future will be listed here when they do.</p>
+  </section>
+  <section aria-labelledby="consent">
+    <h2 id="consent">Your consent choice (UK and EEA)</h2>
+    <p>Visitors in the United Kingdom and the European Economic Area see a consent message before any advertising or analytics cookie is set. You can accept, refuse, or choose by purpose, and you can change your choice at any time through the "Privacy and cookie settings" link in the footer once the message has been shown. Refusing does not limit access to the site; ads may still appear but will not be personalized.</p>
+  </section>
+  <section aria-labelledby="logs">
+    <h2 id="logs">Server logs and security</h2>
+    <p>The site is served by Cloudflare, which keeps short-lived technical logs (IP address, user agent, pages requested) to deliver the site and protect it from abuse. Cloudflare's handling of that data is described in its own privacy policy.</p>
+  </section>
+  <section aria-labelledby="email">
+    <h2 id="email">If you email us</h2>
+    <p>Messages sent to the contact address are kept for as long as needed to reply and deal with the matter, then deleted. Your address is not added to any list.</p>
+  </section>
+  <section aria-labelledby="rights">
+    <h2 id="rights">Your rights</h2>
+    <p>Depending on where you live, you may have the right to access, correct or delete personal data about you, to object to or restrict its processing, and to complain to a data protection authority. Because the site stores almost nothing, most requests are answered by explaining that; for anything held by Google or Cloudflare, their own tools apply. Requests go to the email address above.</p>
+  </section>
+  <section aria-labelledby="children">
+    <h2 id="children">Children</h2>
+    <p>The site is not directed at children under 16 and does not knowingly collect data from them.</p>
+  </section>
+  <section aria-labelledby="changes">
+    <h2 id="changes">Changes</h2>
+    <p>This policy changes when the services the site uses change. The date at the top is the date of the last change.</p>
+  </section>
+</Page>

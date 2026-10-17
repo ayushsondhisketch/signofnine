@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
+import { NAV } from '../site.mjs';
+---
+<Base title="Page not found" description="That page does not exist on Sign of Nine. Look up a number or start from one of the sections." noindex={true}>
+  <Band title="That page is not here" lead="The address may have been typed wrong, or the page may have moved. Look up a number below, or start from a section." eyebrow="404" system={false} />
+  <div class="layout"><div class="wrap">
+    <article class="panel" style="flex:1 1 100%">
+      <div class="prose">
+        <section>
+          <h2>Look up a number</h2>
+          <form class="js-lookup field" action="/lookup/" method="get" style="max-width:480px">
+            <label class="visually-hidden" for="nf-q">Angel number or clock time</label>
+            <input id="nf-q" name="q" type="text" inputmode="numeric" placeholder="e.g. 1111 or 11:11" />
+            <button type="submit">Look up</button>
+          </form>
+        </section>
+        <section>
+          <h2>Start from a section</h2>
+          <ul>{NAV.filter((n) => n.key !== 'home').map((n) => <li><a href={n.href}>{n.label}</a></li>)}</ul>
+        </section>
+      </div>
+    </article>
+  </div></div>
+</Base>

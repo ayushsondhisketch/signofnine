@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import { compatibility, LIFE_PATHS } from '../../lib/numerology.mjs';
+
+const lp = (await getCollection('lifepath')).sort((a, b) => a.data.number - b.data.number);
+const nameOf = (k) => lp.find((e) => e.data.number === k)?.data.name || '';
+const crumbs = [{ label: 'Compatibility', href: '/compatibility/' }];
+const faq = [
+  { q: 'Which life path numbers are most compatible?', a: 'In the Pythagorean tradition the easiest pairs are 1 and 3, 1 and 5, 2 and 4, 2 and 6, 2 and 8, 3 and 5, 3 and 6, 3 and 9, 4 and 6, 4 and 7, 4 and 8, 5 and 7, 5 and 9, 6 and 8, 6 and 9, and 7 with 7. Each pair page explains why, and the calculator works out two dates at once.' },
+  { q: 'Which life path numbers should avoid each other?', a: 'The tradition calls 1 and 4, 1 and 8, 2 and 5, 3 and 4, 3 and 8, 4 and 5, 4 and 9, 5 and 6, 6 and 7, 7 and 8, and 8 and 9 demanding. Demanding means the temperaments pull in different directions, not that the relationship fails; the pair pages say where the work is.' },
+  { q: 'Is numerology compatibility accurate?', a: 'It is a tradition, not a measurement. Nobody has shown that birth dates predict how two people get on, and this site does not claim they do. What the pages offer is a structured way to talk about two temperaments, which couples often find useful whatever they think of the numbers.' },
+];
+const headings = [{ depth: 2, slug: 'how', text: 'How numerology compatibility works' }, { depth: 2, slug: 'table', text: 'The full compatibility table' }, { depth: 2, slug: 'pages', text: 'Compatibility by life path' }, { depth: 2, slug: 'faq', text: 'Questions people ask' }];
+const grid = LIFE_PATHS.filter((k) => k <= 9);
+---
+<Article title="Numerology Compatibility: Life Path Pairs Explained" description="How life path compatibility works in numerology, the full table of every pair including the master numbers, and a two-date calculator." h1="Numerology compatibility: every life path pair, with the reasoning" lead="The tradition pairs life path numbers by temperament. This guide gives the full table, explains how it is read, and links to a page for each number with every partner worked through." crumbs={crumbs} eyebrow="Compatibility" published="2026-10-17" updated="2026-10-17" readMinutes={4} faq={faq} headings={headings} ogImage="/og/hub-compat.png" current="compat" lifepathWidget={false}>
+  <section aria-labelledby="how">
+    <h2 id="how">How numerology compatibility works</h2>
+    <p>Numerologists compare two people by their life path numbers, the number each full date of birth reduces to. Numbers that share a rhythm are read as natural matches: the talkers (3, 5) with each other, the builders (4, 8) with each other, the carers (2, 6) with each other. Numbers that want different things are read as demanding: a 1 who leads and an 8 who also leads, a 4 who plans and a 5 who leaves. Everything else is workable, which is most pairs.</p>
+    <p>Master numbers are read on their base for this purpose (11 as 2, 22 as 4, 33 as 6), with the note that the master-number partner tends to feel the relationship more intensely. <a href="/compatibility/calculator/">The calculator</a> works both numbers out from two dates and sends you to the right pair.</p>
+  </section>
+  <section aria-labelledby="table">
+    <h2 id="table">The full compatibility table</h2>
+    <p>N is a natural match, W is workable, D is demanding. Read across from your number to your partner's. The master numbers follow their base row.</p>
+    <div class="scroll">
+      <table class="table" style="font-size:16px">
+        <thead><tr><th scope="col"></th>{grid.map((k) => <th scope="col">{k}</th>)}</tr></thead>
+        <tbody>
+          {grid.map((a) => <tr><td class="num"><a href={`/compatibility/${a}/`} style="text-decoration:none">{a}</a></td>{grid.map((b) => { const c = compatibility(a, b); return <td style={`font-weight:600;color:${c.rating === 3 ? 'var(--night)' : c.rating === 1 ? 'var(--gold-deep)' : 'var(--ink-muted)'}`}><a href={`/compatibility/${a}/#with-${b}`} style="text-decoration:none;color:inherit">{c.rating === 3 ? 'N' : c.rating === 2 ? 'W' : 'D'}</a></td>; })}</tr>)}
+        </tbody>
+      </table>
+    </div>
+  </section>
+  <section aria-labelledby="pages">
+    <h2 id="pages">Compatibility by life path</h2>
+    <div class="grid" style="--tile-min:200px">
+      {LIFE_PATHS.map((k) => <a class="tile" href={`/compatibility/${k}/`}><span class="eyebrow">{nameOf(k)}</span><span class="tile__num">{k}</span><span class="tile__line">Life path {k} with every other number</span><span class="tile__more">Read the pairs →</span></a>)}
+    </div>
+  </section>
+</Article>

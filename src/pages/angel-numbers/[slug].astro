@@ -1,0 +1,92 @@
+---
+// One route, three kinds of page: an editorial angel number, a computed four-digit number, or a hub (love, money, twin flame...).
+import { getCollection, render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import InShort from '../../components/InShort.astro';
+import NumbersInside from '../../components/NumbersInside.astro';
+import Related from '../../components/Related.astro';
+import { fourDigit, times, wordCount, readMinutes, allAngelNumbers } from '../../lib/content.mjs';
+import { working, core, forms, mastersInside } from '../../lib/numerology.mjs';
+import { composeFourDigit } from '../../lib/compose.mjs';
+import digits from '../../data/digits.json';
+
+export async function getStaticPaths() {
+  const angel = await getCollection('angel');
+  const hubs = await getCollection('hubs');
+  const paths = angel.map((entry) => ({ params: { slug: entry.data.number }, props: { kind: 'angel', entry } }));
+  for (const f of fourDigit) paths.push({ params: { slug: f.number }, props: { kind: 'computed', computed: f } });
+  for (const h of hubs) if (h.data.slug !== 'index' && h.data.slug !== 'times') paths.push({ params: { slug: h.data.slug }, props: { kind: 'hub', entry: h } });
+  return paths;
+}
+
+const { kind, entry, computed } = Astro.props;
+const angel = await getCollection('angel');
+const all = await allAngelNumbers();
+const lineFor = (n) => all.find((a) => a.n === n)?.line || digits[n]?.line || '';
+const published = new Set(all.map((a) => a.n));
+const timeSlugs = new Set(times.map((t) => t.slug));
+
+let data, Content, headings = [], bodyHtml = '';
+if (kind === 'computed') {
+  const c = composeFourDigit(computed, { lineFor });
+  data = c.data; headings = c.headings; bodyHtml = c.html;
+} else {
+  data = entry.data;
+  const r = await render(entry);
+  Content = r.Content; headings = r.headings;
+}
+
+const isNumber = kind !== 'hub';
+const n = isNumber ? data.number : null;
+const f = isNumber ? forms(n) : null;
+const c = isNumber ? core(n) : null;
+const w = isNumber ? working(n) : '';
+const crumbs = isNumber
+  ? [{ label: 'Angel numbers', href: '/angel-numbers/' }, { label: n, href: `/angel-numbers/${n}/` }]
+  : [{ label: 'Angel numbers', href: '/angel-numbers/' }, { label: data.h1, href: `/angel-numbers/${data.slug}/` }];
+
+const related = [];
+if (isNumber) {
+  for (const p of data.pairs || []) if (published.has(p.n)) related.push({ n: p.n, href: `/angel-numbers/${p.n}/`, line: p.line });
+  if (f.clock) { const slug = f.clock.replace(':', '-'); if (timeSlugs.has(slug)) related.push({ n: f.clock, href: `/angel-numbers/times/${slug}/`, line: 'The same number on the clock' }); }
+  if (f.sibling && published.has(f.sibling)) related.push({ n: f.sibling, href: `/angel-numbers/${f.sibling}/`, line: lineFor(f.sibling) });
+  if (f.triple && published.has(f.triple)) related.push({ n: f.triple, href: `/angel-numbers/${f.triple}/`, line: lineFor(f.triple) });
+  if (kind === 'computed') {
+    const i = fourDigit.findIndex((x) => x.number === n);
+    for (const j of [i - 1, i + 1, i + 2]) { const s = fourDigit[(j + fourDigit.length) % fourDigit.length]; if (s && s.number !== n && !related.some((r) => r.href === `/angel-numbers/${s.number}/`)) related.push({ n: s.number, href: `/angel-numbers/${s.number}/`, line: s.tile }); }
+  }
+  related.push({ n: c, href: `/numbers/${c}/`, line: `${digits[String(c)].line}; the core number` });
+}
+
+let inShort = [];
+if (isNumber) {
+  inShort = [['Meaning', data.inShort.meaning], ['Core number', data.inShort.core || `${n} reduces to ${c} (${w})${c !== Number(n) ? `, ${digits[String(c)].line.toLowerCase()}` : ''}`]];
+  const inside = mastersInside(n);
+  if (data.inShort.contains) inShort.push(['Also contains', data.inShort.contains]);
+  else if (inside.length && String(n).length > 2) inShort.push(['Also contains', `${inside.join(' and ')}, ${inside.length > 1 ? 'master numbers' : 'a master number'} linked to ${digits[String(inside[0])].keywords[0]}`]);
+  inShort.push(['Best response', data.inShort.response]);
+}
+
+// Hub members: the numbers it lists, as small cards, resolved against what exists.
+const members = kind === 'hub' ? (data.members || []).filter((m) => published.has(m.n) || timeSlugs.has(m.n.replace(':', '-'))).map((m) => ({ n: m.n, href: m.n.includes(':') ? `/angel-numbers/times/${m.n.replace(':', '-')}/` : `/angel-numbers/${m.n}/`, line: m.line })) : [];
+
+const words = wordCount(kind === 'computed' ? bodyHtml : entry.body) + 160;
+const extraHeads = isNumber
+  ? [{ depth: 2, slug: 'inside', text: `The numbers inside ${n}` }, { depth: 2, slug: 'related', text: 'Related numbers' }]
+  : members.length ? [{ depth: 2, slug: 'members', text: 'The numbers in this guide' }] : [];
+const allHeadings = [...headings, ...extraHeads, ...(data.faq?.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+const og = isNumber ? `/og/angel-${n}.png` : `/og/hub-${data.slug}.png`;
+---
+<Article
+  title={data.title} description={data.description} h1={data.h1} lead={data.lead} crumbs={crumbs} emblem={isNumber ? n : null} eyebrow={isNumber ? 'Angel number' : 'Angel numbers'}
+  published={data.published} updated={data.updated} readMinutes={readMinutes(words)} faq={data.faq} headings={allHeadings} ogImage={og} current="angel">
+  {isNumber && <InShort slot="top" items={inShort} />}
+  {kind === 'computed' ? <Fragment set:html={bodyHtml} /> : <Content />}
+  <Fragment slot="after">
+    <div class="prose" style="margin-top:36px">
+      {isNumber && <NumbersInside number={n} />}
+      {isNumber && <Related items={related} />}
+      {!isNumber && <Related items={members} title="The numbers in this guide" id="members" />}
+    </div>
+  </Fragment>
+</Article>

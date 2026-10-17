@@ -1,0 +1,18 @@
+User-agent: *
+Allow: /
+Disallow: /search/
+Disallow: /lookup/
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+Sitemap: https://signofnine.com/sitemap-index.xml

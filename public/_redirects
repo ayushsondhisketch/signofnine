@@ -1,0 +1,2 @@
+# Redirects for the kill rule and renamed pages go here, one per line: /old-path/  /new-path/  301
+https://www.signofnine.com/*  https://signofnine.com/:splat  301

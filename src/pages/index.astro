@@ -1,0 +1,106 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Star from '../components/Star.astro';
+import { SITE, POPULAR } from '../site.mjs';
+import { allAngelNumbers, siteSchema, fmtDate, wordCount, readMinutes } from '../lib/content.mjs';
+
+const all = await allAngelNumbers();
+const popular = POPULAR.map((n) => all.find((a) => a.n === n)).filter(Boolean);
+const articles = (await getCollection('articles')).sort((a, b) => (a.data.published < b.data.published ? 1 : -1)).slice(0, 3);
+const core = [
+  { title: 'Life path', line: 'From your date of birth. The main themes and direction of your life.', href: '/life-path/', cta: 'Calculate yours →' },
+  { title: 'Expression', line: 'From your full name at birth. Your natural talents and how you use them.', href: '/expression-number/', cta: 'Read the guide →' },
+  { title: 'Soul urge', line: 'From the vowels in your name. What motivates you underneath.', href: '/soul-urge-number/', cta: 'Read the guide →' },
+  { title: 'Personality', line: 'From the consonants in your name. How others see you at first.', href: '/personality-number/', cta: 'Read the guide →' },
+  { title: 'Birthday', line: 'From the day you were born. A specific gift you bring with you.', href: '/birthday-number/', cta: 'Read the guide →' },
+];
+---
+<Base title={`${SITE.name}: Angel Numbers, Life Path and Numerology`} titleSuffix={false} description={SITE.description} current="home" schema={siteSchema()}>
+  <section class="hero stars band" data-pagefind-body>
+    <div class="wrap">
+      <div class="hero__text">
+        <div class="eyebrow eyebrow--gold" style="display:flex;align-items:center;gap:10px"><Star size={14} /><span>{SITE.shortTagline}</span></div>
+        <h1>What are your numbers trying to tell you?</h1>
+        <p class="lead">Look up any angel number, work out your life path and read clear, plain-English meanings, with the arithmetic shown and the tradition named. Nothing to sign up for.</p>
+        <div class="hero__actions">
+          <a class="btn btn--gold" href="/life-path/calculator/">Calculate your life path</a>
+          <a class="btn btn--outline" href="#popular">Browse angel numbers</a>
+        </div>
+      </div>
+      <div class="lookup-card">
+        <h2>Look up a number</h2>
+        <p class="meta">Type the number you keep seeing to open its meaning. Any number or clock time works.</p>
+        <form class="js-lookup" action="/lookup/" method="get">
+          <label for="lookup">Angel number or clock time</label>
+          <div class="field" style="margin-top:6px">
+            <input id="lookup" name="q" type="text" inputmode="numeric" placeholder="e.g. 1111 or 11:11" autocomplete="off" />
+            <button type="submit">Look up</button>
+          </div>
+        </form>
+        <p class="meta">Popular: {POPULAR.map((n, i) => <><a href={`/angel-numbers/${n}/`}>{n}</a>{i < POPULAR.length - 1 ? ', ' : ''}</>)}</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="popular">
+    <div class="wrap">
+      <div class="section__head">
+        <div><div class="eyebrow">Angel numbers</div><h2>Popular angel numbers</h2><p class="measure">Keep seeing the same number? Start with the meanings people look up most.</p></div>
+        <a class="more" href="/angel-numbers/">See all angel numbers →</a>
+      </div>
+      <div class="grid">
+        {popular.map((a) => <a class="tile" href={a.href}><span class="eyebrow">Angel number</span><span class={`tile__num${a.n.length > 3 ? ' tile__num--long' : ''}`}>{a.n}</span><span class="tile__line">{a.line}</span><span class="tile__more">Read the meaning →</span></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--tint">
+    <div class="wrap" style="flex-direction:row;flex-wrap:wrap;gap:48px;align-items:center">
+      <div style="flex:999 1 420px;min-width:0;display:flex;flex-direction:column;gap:12px">
+        <div class="eyebrow">Life path number</div>
+        <h2 style="font-size:40px;line-height:1.12">Find your life path number in seconds</h2>
+        <p class="measure">Your life path is the most important number in numerology. It comes from your full date of birth and describes the themes that run through your whole life.</p>
+        <p class="meta">Master numbers 11, 22 and 33 are kept, not reduced. The calculator shows every step.</p>
+      </div>
+      <div class="form-block" style="flex:1 1 320px;max-width:440px;background:var(--paper);border:1px solid var(--line)">
+        <h3>Your date of birth</h3>
+        <form class="fields" action="/life-path/calculator/" method="get">
+          <div class="f"><label for="hp-d">Day</label><input id="hp-d" name="d" type="text" inputmode="numeric" placeholder="DD" /></div>
+          <div class="f"><label for="hp-m">Month</label><input id="hp-m" name="m" type="text" inputmode="numeric" placeholder="MM" /></div>
+          <div class="f"><label for="hp-y">Year</label><input id="hp-y" name="y" type="text" inputmode="numeric" placeholder="YYYY" /></div>
+          <div class="f--wide"><button class="btn" type="submit" style="width:100%">Calculate my life path</button></div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section__head"><div><div class="eyebrow">Number meanings</div><h2>The five core numbers</h2><p class="measure">Numerology reads a person through five numbers. Each one comes from your date of birth or your name.</p></div></div>
+      <div class="grid grid--cards">
+        {core.map((c) => <a class="card" href={c.href} style="text-decoration:none"><Star size={16} /><h3>{c.title}</h3><p>{c.line}</p><span class="cta">{c.cta}</span></a>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--last">
+    <div class="wrap">
+      <div class="section__head">
+        <div><div class="eyebrow">Articles</div><h2>Latest from {SITE.name}</h2></div>
+        <a class="more" href="/articles/">View all articles →</a>
+      </div>
+      <div class="grid grid--articles">
+        {articles.map((a) => (
+          <article class="card">
+            <div class={`badge${a.data.badge.length > 3 ? ' badge--long' : ''}`} aria-hidden="true">{a.data.badge}</div>
+            <span class="eyebrow eyebrow--muted">{a.data.category}</span>
+            <h3><a href={`/articles/${a.data.slug}/`}>{a.data.h1}</a></h3>
+            <p>{a.data.excerpt}</p>
+            <span class="meta">{fmtDate(a.data.published)} · {readMinutes(wordCount(a.body))} min read</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,73 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+
+const years = (await getCollection('years')).sort((a, b) => a.data.number - b.data.number);
+const crumbs = [{ label: 'Personal year', href: '/personal-year/' }];
+const faq = [
+  { q: 'What is a personal year number?', a: 'The personal year is the number numerologists read as the theme of your current year. It comes from your day and month of birth added to the universal year (the calendar year reduced), and it moves forward by one each year through a nine-year cycle.' },
+  { q: 'When does the personal year change: on 1 January or on my birthday?', a: 'Numerologists disagree. The older school, following Juno Jordan, changes it on 1 January; a newer school changes it on the birthday. This site uses 1 January, which is what the calculator assumes, and says so on every personal year page.' },
+  { q: 'What kind of year is 2027?', a: '2027 adds to 2 + 0 + 2 + 7 = 11, a master number, so it is read as an 11/2 universal year: a year of partnership and heightened feeling for everyone, with each person’s own number layered on top.' },
+];
+const headings = [{ depth: 2, slug: 'calc', text: 'Your personal year for 2027' }, { depth: 2, slug: 'how', text: 'How the personal year is worked out' }, { depth: 2, slug: 'all', text: 'The personal years, 1 to 9' }, { depth: 2, slug: 'faq', text: 'Questions people ask' }];
+const nameMap = Object.fromEntries(years.map((e) => [e.data.number, e.data.name]));
+---
+<Article title="Personal Year Calculator and Meanings for 2027" description="Work out your personal year for 2027 from your date of birth, see the working, and read what each year from 1 to 9 means in the cycle." h1="Personal year calculator: what 2027 holds for your number" lead="2027 is an 11/2 universal year. Enter your day and month of birth to find your personal year, with the working shown, then read the page for that year." crumbs={crumbs} eyebrow="Personal year" published="2026-10-17" updated="2026-10-17" readMinutes={4} faq={faq} headings={headings} ogImage="/og/hub-year.png" current="numbers" lifepathWidget={false}>
+  <section aria-labelledby="calc">
+    <div class="form-block">
+      <h2 id="calc">Your personal year for 2027</h2>
+      <form id="py-form" class="fields" novalidate>
+        <div class="f"><label for="pd">Day</label><input id="pd" type="text" inputmode="numeric" placeholder="DD" /></div>
+        <div class="f"><label for="pm">Month</label><input id="pm" type="text" inputmode="numeric" placeholder="MM" /></div>
+        <div class="f"><label for="pyr">Year to read</label><input id="pyr" type="text" inputmode="numeric" value="2027" /></div>
+        <div class="f--wide"><button class="btn" type="submit">Find my personal year</button></div>
+      </form>
+      <p class="form-note">Only the day and month of birth are used; the year of birth does not change the personal year.</p>
+      <p class="form-note hidden" id="py-error">Enter a real day and month, and a four-digit year to read.</p>
+    </div>
+  </section>
+  <section id="py-result" class="hidden" aria-live="polite">
+    <div class="result">
+      <div class="ring ring--md" id="py-ring" aria-hidden="true">5</div>
+      <div class="result__text">
+        <div class="eyebrow" id="py-eyebrow">Your personal year</div>
+        <h2 id="py-headline">Personal year 5</h2>
+        <p id="py-work"></p>
+        <p><a id="py-link" href="/personal-year/5/">Read what this year holds →</a></p>
+      </div>
+    </div>
+  </section>
+  <section aria-labelledby="how">
+    <h2 id="how">How the personal year is worked out</h2>
+    <p>Reduce your day of birth and your month of birth to single digits. Reduce the calendar year to a single digit (2027 → 2 + 0 + 2 + 7 = 11 → 2). Add the three and reduce again. Someone born on 14 July reads 2027 as 5 + 7 + 2 = 14 → 5, a personal year 5. The cycle runs from 1 to 9 and starts again, so the year after a 9 is a 1.</p>
+    <p>Two conventions exist for when the year turns over; this site uses 1 January, as the calculator does. The nine-year cycle is one of the oldest ideas in Western numerology and the one with the clearest practical use, because it tells you what kind of year to plan for rather than what will happen.</p>
+  </section>
+  <section aria-labelledby="all">
+    <h2 id="all">The personal years, 1 to 9</h2>
+    <div class="grid" style="--tile-min:200px">
+      {years.map((e) => <a class="tile" href={`/personal-year/${e.data.number}/`}><span class="eyebrow">{e.data.name}</span><span class="tile__num">{e.data.number}</span><span class="tile__line">{e.data.tile}</span><span class="tile__more">Read the year →</span></a>)}
+    </div>
+  </section>
+</Article>
+<script define:vars={{ nameMap }}>window.__PY_NAMES = nameMap;</script>
+<script>
+  import { personalYear } from '../../lib/numerology.mjs';
+  const $ = (id) => document.getElementById(id);
+  const form = $('py-form');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const d = parseInt($('pd').value, 10), m = parseInt($('pm').value, 10), y = parseInt($('pyr').value, 10);
+    const ok = d >= 1 && d <= 31 && m >= 1 && m <= 12 && y >= 1900 && y <= 2100;
+    $('py-error').classList.toggle('hidden', ok);
+    if (!ok) { $('py-result').classList.add('hidden'); return; }
+    const r = personalYear(d, m, y);
+    const names = window.__PY_NAMES || {};
+    $('py-ring').textContent = String(r.result);
+    $('py-eyebrow').textContent = `Your personal year for ${y}`;
+    $('py-headline').textContent = `Personal year ${r.result}${names[r.result] ? `: ${names[r.result].toLowerCase()}` : ''}`;
+    $('py-work').textContent = `Day ${r.rd} + month ${r.rm} + universal year ${r.uy} (${y}) = ${r.total}${r.total !== r.result ? ` → ${r.result}` : ''}.`;
+    $('py-link').setAttribute('href', `/personal-year/${r.result}/`);
+    $('py-result').classList.remove('hidden');
+    $('py-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

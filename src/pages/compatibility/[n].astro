@@ -1,0 +1,52 @@
+---
+import { getCollection, render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import InShort from '../../components/InShort.astro';
+import Related from '../../components/Related.astro';
+import { wordCount, readMinutes } from '../../lib/content.mjs';
+import { compatibility, LIFE_PATHS } from '../../lib/numerology.mjs';
+
+export async function getStaticPaths() {
+  const c = await getCollection('compat');
+  return c.map((entry) => ({ params: { n: String(entry.data.number) }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const n = d.number;
+const lp = await getCollection('lifepath');
+const nameOf = (k) => lp.find((e) => e.data.number === k)?.data.name || `life path ${k}`;
+const crumbs = [{ label: 'Compatibility', href: '/compatibility/' }, { label: `Life path ${n}`, href: `/compatibility/${n}/` }];
+const partners = LIFE_PATHS.map((k) => ({ k, c: compatibility(n, k), text: d.partners[String(k)] || '' }));
+const inShort = [['Best matches', d.best], ['Hardest matches', d.hardest], ['How to read this', `Ratings come from the Pythagorean tradition's pairings; the paragraphs say why. A demanding pair is work, not a verdict.`], ['Best response', `Work out both numbers with the <a href="/compatibility/calculator/">compatibility calculator</a>, then read the pair below.`]];
+const related = [{ n, href: `/life-path/${n}/`, line: `Life path ${n}: ${nameOf(n).toLowerCase()}` }, ...partners.filter((p) => p.c.rating === 3 && p.k !== n).slice(0, 3).map((p) => ({ n: p.k, href: `/compatibility/${p.k}/`, line: `Life path ${p.k} compatibility` }))];
+const words = wordCount(entry.body) + partners.reduce((s, p) => s + wordCount(p.text), 0) + 120;
+const allHeadings = [...headings, { depth: 2, slug: 'pairs', text: `Life path ${n} with each number` }, { depth: 2, slug: 'related', text: 'Related numbers' }, ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+---
+<Article title={d.title} description={d.description} h1={d.h1} lead={d.lead} crumbs={crumbs} emblem={String(n)} eyebrow="Compatibility"
+  published={d.published} updated={d.updated} readMinutes={readMinutes(words)} faq={d.faq} headings={allHeadings} ogImage={`/og/compat-${n}.png`} current="compat">
+  <InShort slot="top" items={inShort} />
+  <Content />
+  <Fragment slot="after">
+    <div class="prose" style="margin-top:36px">
+      <section aria-labelledby="pairs">
+        <h2 id="pairs">Life path {n} with each number</h2>
+        <p>Every pairing, in number order. Jump to a partner: {LIFE_PATHS.map((k, i) => <><a href={`#with-${k}`}>{k}</a>{i < LIFE_PATHS.length - 1 ? ', ' : ''}</>)}.</p>
+        <div class="scroll">
+          <table class="table">
+            <thead><tr><th scope="col">Partner</th><th scope="col">Rating</th><th scope="col">In one line</th></tr></thead>
+            <tbody>{partners.map((p) => <tr><td class="num"><a href={`#with-${p.k}`} style="text-decoration:none">{p.k}</a></td><td>{p.c.label}</td><td>{nameOf(p.k)}</td></tr>)}</tbody>
+          </table>
+        </div>
+      </section>
+      {partners.map((p) => (
+        <section aria-labelledby={`with-${p.k}`} id={`with-${p.k}`}>
+          <h3 style="font-size:26px">Life path {n} and life path {p.k}: {p.c.label.toLowerCase()}</h3>
+          <Fragment set:html={p.text} />
+          <p class="meta"><a href={`/compatibility/${p.k}/#with-${n}`}>Read the same pair from the {p.k} side</a> · <a href={`/life-path/${p.k}/`}>Life path {p.k}</a></p>
+        </section>
+      ))}
+      <Related items={related} />
+    </div>
+  </Fragment>
+</Article>

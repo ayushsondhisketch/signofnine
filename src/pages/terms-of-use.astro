@@ -1,0 +1,27 @@
+---
+import Page from '../layouts/Page.astro';
+import { SITE } from '../site.mjs';
+const crumbs = [{ label: 'Terms of use', href: '/terms-of-use/' }];
+---
+<Page title="Terms of Use" description="The terms on which Sign of Nine is provided: personal use, no warranty, copyright in the text, and how the site may be quoted." h1="Terms of use" lead="Plain terms for a reference site. Read it, quote it with a link, and do not rely on it for decisions that matter." crumbs={crumbs} eyebrow="Legal" updated="2026-10-17">
+  <section aria-labelledby="use">
+    <h2 id="use">Using the site</h2>
+    <p>Sign of Nine is free to read for personal, non-commercial use. By using the site you accept these terms, the <a href="/disclaimer/">disclaimer</a> and the <a href="/privacy-policy/">privacy policy</a>. The site is provided as it is, without warranty of any kind, and may change or be withdrawn at any time.</p>
+  </section>
+  <section aria-labelledby="copyright">
+    <h2 id="copyright">Copyright</h2>
+    <p>The text, the calculators and the design of the site are © {SITE.author}. You may quote short passages with a link to the page they came from. You may not copy pages, republish the calculators or scrape the site to build another. The number meanings of the Pythagorean tradition are not owned by anyone; the words on these pages are.</p>
+  </section>
+  <section aria-labelledby="liability">
+    <h2 id="liability">No reliance and no liability</h2>
+    <p>The site explains a tradition and does not give advice. To the fullest extent the law allows, the publisher is not liable for any loss arising from use of the site or reliance on its content. Nothing in these terms limits liability that cannot be limited by law.</p>
+  </section>
+  <section aria-labelledby="links">
+    <h2 id="links">Links and advertising</h2>
+    <p>Links to other sites are provided for reference; the publisher does not control or endorse them. Advertising is served by third-party networks under the <a href="/advertising-disclosure/">advertising disclosure</a>.</p>
+  </section>
+  <section aria-labelledby="law">
+    <h2 id="law">Governing law</h2>
+    <p>These terms are governed by the laws of India. Questions about them go to <a href={`mailto:${SITE.email}`}>{SITE.email}</a>.</p>
+  </section>
+</Page>

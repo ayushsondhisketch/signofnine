@@ -1,0 +1,34 @@
+---
+import Article from '../../layouts/Article.astro';
+import InShort from '../../components/InShort.astro';
+import Related from '../../components/Related.astro';
+import birthdays from '../../data/birthdays.json';
+import { composeBirthday, ord } from '../../lib/compose.mjs';
+import { wordCount, readMinutes } from '../../lib/content.mjs';
+import { reduce, root, birthdayWork } from '../../lib/numerology.mjs';
+import digits from '../../data/digits.json';
+
+export function getStaticPaths() {
+  return birthdays.map((b) => ({ params: { d: String(b.day) }, props: { item: b } }));
+}
+const { item } = Astro.props;
+const { data, html, headings, birthday } = composeBirthday(item);
+const d = item.day;
+const crumbs = [{ label: 'Birthday number', href: '/birthday-number/' }, { label: `Born on the ${ord(d)}`, href: `/birthday-number/${d}/` }];
+const same = birthdays.filter((b) => b.day !== d && reduce(b.day) === birthday).map((b) => ({ n: b.day, href: `/birthday-number/${b.day}/`, line: `Born on the ${ord(b.day)}: the same birthday number` }));
+const related = [
+  { n: birthday, href: `/numbers/${birthday}/`, line: `${digits[String(birthday)].line}; the number itself` },
+  { n: `LP ${birthday}`, href: `/life-path/${birthday}/`, line: `Life path ${birthday}: the same number as a whole life` },
+  ...same.slice(0, 2),
+  ...[d - 1, d + 1].filter((x) => x >= 1 && x <= 31).map((x) => ({ n: x, href: `/birthday-number/${x}/`, line: `Born on the ${ord(x)}: ${birthdays.find((b) => b.day === x)?.tile.toLowerCase()}` })),
+];
+const inShort = [['Birthday number', `${birthday}${d > 9 ? ` (${birthdayWork(d)})` : ''}`], ['The gift', item.inShort.gift], ['Watch for', item.inShort.watch], ['Best response', item.inShort.response]];
+const words = wordCount(html) + 120;
+const allHeadings = [...headings, { depth: 2, slug: 'related', text: 'Related numbers' }, ...(data.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+---
+<Article title={item.title} description={item.description} h1={item.h1} lead={item.lead} crumbs={crumbs} emblem={String(d)} eyebrow="Birthday number"
+  published={item.published} updated={item.updated} readMinutes={readMinutes(words)} faq={data.faq} headings={allHeadings} ogImage={`/og/birthday-${d}.png`} current="numbers">
+  <InShort slot="top" items={inShort} />
+  <Fragment set:html={html} />
+  <Fragment slot="after"><div class="prose" style="margin-top:36px"><Related items={related} /></div></Fragment>
+</Article>

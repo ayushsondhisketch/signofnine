@@ -1,0 +1,24 @@
+{
+  "name": "signofnine",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "node scripts/images.mjs && astro build && node scripts/sitemaps.mjs && pagefind --site dist --output-subdir _pagefind && node scripts/qa.mjs",
+    "preview": "astro preview",
+    "qa": "node scripts/qa.mjs",
+    "images": "node scripts/images.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
+  },
+  "dependencies": {
+    "astro": "^5.0.0",
+    "opentype.js": "^1.3.4",
+    "pagefind": "^1.3.0",
+    "sharp": "^0.34.0",
+    "node-html-parser": "^7.0.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

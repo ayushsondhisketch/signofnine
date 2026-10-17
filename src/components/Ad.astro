@@ -1,0 +1,5 @@
+---
+// A reserved space for an advertisement: fixed height so nothing shifts, no border and no label until an ad renders.
+const { kind = 'strip' } = Astro.props;
+---
+<div class={`ad ad--${kind}`} data-ad={kind} aria-hidden="true"></div>

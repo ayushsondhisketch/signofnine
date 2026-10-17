@@ -1,0 +1,96 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+
+const lp = (await getCollection('lifepath')).sort((a, b) => a.data.number - b.data.number);
+const names = Object.fromEntries(lp.map((e) => [e.data.number, e.data.name]));
+const crumbs = [{ label: 'Compatibility', href: '/compatibility/' }, { label: 'Calculator', href: '/compatibility/calculator/' }];
+const faq = [
+  { q: 'Does a demanding rating mean we should not be together?', a: 'No. The tradition rates pairs by how easily two temperaments fit, not by whether a relationship works. Plenty of long marriages are between numbers the tradition calls demanding; the pair page says where the friction usually is, which is more useful than the label.' },
+  { q: 'Why does the calculator use life path numbers and not names?', a: 'Because the life path is the number numerologists read as temperament, and temperament is what compatibility is about. Name numbers (expression, soul urge, personality) describe how you present and what you want, and the pair pages mention them where they matter.' },
+  { q: 'What if one of us has a master number?', a: 'The tradition reads 11, 22 and 33 as their base numbers 2, 4 and 6 for compatibility, with a note that the master-number partner tends to feel things more strongly. The result shows both the master and the base.' },
+];
+const headings = [{ depth: 2, slug: 'calc', text: 'Two dates of birth' }, { depth: 2, slug: 'how', text: 'How the rating is worked out' }, { depth: 2, slug: 'faq', text: 'Questions people ask' }];
+---
+<Article title="Numerology Compatibility Calculator by Birth Date" description="Enter two dates of birth to get both life path numbers, the tradition's compatibility rating and a link to the full reading of the pair." h1="Compatibility calculator: two dates of birth, both numbers, one reading" lead="Enter both dates of birth. The calculator works out each life path, rates the pair as the tradition does, and sends you to the page that explains why." crumbs={crumbs} eyebrow="Calculator" published="2026-10-17" updated="2026-10-17" readMinutes={3} faq={faq} headings={headings} ogImage="/og/calc-compat.png" current="compat" lifepathWidget={false}>
+  <section aria-labelledby="calc">
+    <div class="form-block">
+      <h2 id="calc">Two dates of birth</h2>
+      <form id="cp-form" novalidate style="display:flex;flex-direction:column;gap:16px">
+        <div>
+          <p style="font-weight:600;margin-bottom:8px">You</p>
+          <div class="fields">
+            <div class="f"><label for="ad">Day</label><input id="ad" type="text" inputmode="numeric" placeholder="DD" /></div>
+            <div class="f"><label for="am">Month</label><input id="am" type="text" inputmode="numeric" placeholder="MM" /></div>
+            <div class="f"><label for="ay">Year</label><input id="ay" type="text" inputmode="numeric" placeholder="YYYY" /></div>
+          </div>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:8px">Your partner</p>
+          <div class="fields">
+            <div class="f"><label for="bd">Day</label><input id="bd" type="text" inputmode="numeric" placeholder="DD" /></div>
+            <div class="f"><label for="bm">Month</label><input id="bm" type="text" inputmode="numeric" placeholder="MM" /></div>
+            <div class="f"><label for="by">Year</label><input id="by" type="text" inputmode="numeric" placeholder="YYYY" /></div>
+          </div>
+        </div>
+        <div><button class="btn" type="submit">Compare our numbers</button></div>
+      </form>
+      <p class="form-note">Nothing you type leaves your browser.</p>
+      <p class="form-note hidden" id="cp-error">Enter two real dates.</p>
+    </div>
+  </section>
+  <section id="cp-result" class="hidden" aria-live="polite">
+    <div class="result">
+      <div style="display:flex;gap:16px;align-items:center">
+        <div class="ring ring--md" id="ring-a" aria-hidden="true">1</div>
+        <div class="ring ring--md" id="ring-b" aria-hidden="true">2</div>
+      </div>
+      <div class="result__text">
+        <div class="eyebrow" id="cp-label">Workable</div>
+        <h2 id="cp-headline">Life path 1 and life path 2</h2>
+        <p id="cp-line"></p>
+        <p><a id="cp-link" href="/compatibility/1/#with-2">Read the full reading of this pair →</a></p>
+      </div>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="label">Your life path</span><span class="chain" id="cp-wa"></span></div>
+      <div class="step"><span class="label">Your partner's life path</span><span class="chain" id="cp-wb"></span></div>
+    </div>
+    <p class="meta" id="cp-note"></p>
+  </section>
+  <section aria-labelledby="how">
+    <h2 id="how">How the rating is worked out</h2>
+    <p>Each date is reduced to its life path by the site's method (day, month and year reduced separately, then added). The pair is then looked up in the tradition's table of temperaments. Numbers that share a rhythm (3 and 5, 2 and 6, 4 and 8) rate as natural matches. Numbers that pull against each other (1 and 8, 4 and 5, 6 and 7) rate as demanding, and the rest as workable. Master numbers are read on their base.</p>
+    <p>The table is published in full on the <a href="/compatibility/">compatibility guide</a>, so nothing here is hidden.</p>
+  </section>
+</Article>
+<script define:vars={{ names }}>window.__LP_NAMES = names;</script>
+<script>
+  import { lifePath, compatibility } from '../../lib/numerology.mjs';
+  const $ = (id) => document.getElementById(id);
+  const form = $('cp-form');
+  function parseDate(s) { const m = String(s || '').match(/^(\d{1,2})-(\d{1,2})-(\d{4})$/); return m ? [Number(m[1]), Number(m[2]), Number(m[3])] : null; }
+  function run(a, b) {
+    const ra = lifePath(...a), rb = lifePath(...b);
+    $('cp-error').classList.toggle('hidden', !!(ra && rb));
+    if (!ra || !rb) { $('cp-result').classList.add('hidden'); return; }
+    const names = window.__LP_NAMES || {};
+    const c = compatibility(ra.result, rb.result);
+    $('ring-a').textContent = String(ra.result); $('ring-b').textContent = String(rb.result);
+    $('cp-label').textContent = c.label;
+    $('cp-headline').textContent = `Life path ${ra.result} and life path ${rb.result}`;
+    $('cp-line').textContent = `${names[ra.result] || ''} with ${(names[rb.result] || '').toLowerCase()}. The tradition rates this pair as ${c.label.toLowerCase()}${c.baseA !== ra.result || c.baseB !== rb.result ? `, reading the master number on its base (${c.baseA} and ${c.baseB})` : ''}.`;
+    $('cp-link').setAttribute('href', `/compatibility/${ra.result}/#with-${rb.result}`);
+    $('cp-wa').textContent = ra.sumWork; $('cp-wb').textContent = rb.sumWork;
+    $('cp-note').textContent = 'A rating is a starting point for the reading, not a verdict on the relationship. The pair page says where the fit is easy and where it takes work.';
+    $('cp-result').classList.remove('hidden');
+    $('cp-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    run([+$('ad').value, +$('am').value, +$('ay').value], [+$('bd').value, +$('bm').value, +$('by').value]);
+  });
+  const q = new URLSearchParams(location.search);
+  const a = parseDate(q.get('a'));
+  if (a) { $('ad').value = a[0]; $('am').value = a[1]; $('ay').value = a[2]; $('bd').focus(); }
+</script>

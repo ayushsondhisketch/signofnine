@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import digits from '../../data/digits.json';
+
+const lp = (await getCollection('lifepath')).sort((a, b) => a.data.number - b.data.number);
+const names = Object.fromEntries(lp.map((e) => [e.data.number, { name: e.data.name, tile: e.data.tile }]));
+const crumbs = [{ label: 'Life path', href: '/life-path/' }, { label: 'Calculator', href: '/life-path/calculator/' }];
+const faq = [
+  { q: 'Why do other calculators give me a different life path number?', a: 'Almost always because they add every digit of the date in one row (method 2) instead of reducing the day, month and year first (method 1). The two agree for most dates and differ when a master number appears in one and not the other. This calculator shows both, so you can see which the other site used.' },
+  { q: 'Is a master number better than a single digit?', a: 'No. The tradition reads 11, 22 and 33 as their base numbers 2, 4 and 6 with more asked of them, not as a higher rank. A master life path is rarer and, in the tradition, harder to live up to.' },
+  { q: 'Does the time or place of birth matter?', a: 'No. The life path uses only the calendar date on your birth certificate. Time zones and birth times belong to astrology, not numerology.' },
+  { q: 'Can my life path number change?', a: 'No. It is fixed by your date of birth. The number that changes each year is your personal year, which this page also shows once you enter your date.' },
+];
+const headings = [{ depth: 2, slug: 'calc', text: 'Your date of birth' }, { depth: 2, slug: 'how', text: 'How the life path number is calculated' }, { depth: 2, slug: 'all', text: 'All life path numbers' }, { depth: 2, slug: 'faq', text: 'Questions people ask' }];
+---
+<Article title="Life Path Number Calculator (Shows the Working)" description="Enter your date of birth and get your life path number with the working shown, both methods, your birthday number and your personal year." h1="Life path number calculator" lead="Enter your date of birth. You get your number, the full working, and a note when the two common methods disagree, which they do for about one birthday in nine." crumbs={crumbs} eyebrow="Calculator" published="2026-10-17" updated="2026-10-17" readMinutes={4} faq={faq} headings={headings} ogImage="/og/calc-lifepath.png" current="lifepath" lifepathWidget={false}>
+  <section aria-labelledby="calc">
+    <div class="form-block">
+      <h2 id="calc">Your date of birth</h2>
+      <form id="lp-form" class="fields" novalidate>
+        <div class="f"><label for="d">Day</label><input id="d" name="d" type="text" inputmode="numeric" placeholder="DD" autocomplete="bday-day" /></div>
+        <div class="f"><label for="m">Month</label><input id="m" name="m" type="text" inputmode="numeric" placeholder="MM" autocomplete="bday-month" /></div>
+        <div class="f"><label for="y">Year</label><input id="y" name="y" type="text" inputmode="numeric" placeholder="YYYY" autocomplete="bday-year" /></div>
+        <div class="f--wide"><button class="btn" type="submit">Calculate my life path</button></div>
+      </form>
+      <p class="form-note">Nothing you type leaves your browser. No account, no email.</p>
+      <p class="form-note hidden" id="lp-error">Enter a real date: a day from 1 to 31, a month from 1 to 12 and a four-digit year.</p>
+    </div>
+  </section>
+
+  <section id="lp-result" class="hidden" aria-live="polite">
+    <div class="result">
+      <div class="ring ring--md" id="lp-ring" aria-hidden="true">7</div>
+      <div class="result__text">
+        <div class="eyebrow">Your life path number</div>
+        <h2 id="lp-headline">7 · The seeker</h2>
+        <p id="lp-line"></p>
+        <p><a id="lp-link" href="/life-path/7/">Read the full life path guide →</a></p>
+      </div>
+    </div>
+    <h3 style="font-size:28px;margin-top:8px">How it was worked out</h3>
+    <div class="steps">
+      <div class="step"><span class="label">Day</span><span class="chain" id="w-day"></span></div>
+      <div class="step"><span class="label">Month</span><span class="chain" id="w-month"></span></div>
+      <div class="step"><span class="label">Year</span><span class="chain" id="w-year"></span></div>
+      <div class="step"><span class="label">Add them up (method 1)</span><span class="chain" id="w-sum"></span></div>
+      <div class="step"><span class="label">Every digit at once (method 2)</span><span class="chain" id="w-m2"></span></div>
+    </div>
+    <p class="meta" id="lp-note"></p>
+    <h3 style="font-size:28px;margin-top:8px">Also from this date</h3>
+    <div class="grid grid--small">
+      <a class="small-card" id="bd-card" href="/birthday-number/"><span class="small-card__num" id="bd-num"></span><span class="small-card__line" id="bd-line">Your birthday number</span></a>
+      <a class="small-card" id="py-card" href="/personal-year/"><span class="small-card__num" id="py-num"></span><span class="small-card__line" id="py-line">Your personal year for 2027</span></a>
+      <a class="small-card" id="cp-card" href="/compatibility/"><span class="small-card__num">♥</span><span class="small-card__line" id="cp-line">Compatibility with a partner</span></a>
+    </div>
+  </section>
+
+  <section aria-labelledby="how">
+    <h2 id="how">How the life path number is calculated</h2>
+    <p>Reduce the day, the month and the year each to a single digit or a master number (11, 22, 33). Add the three results and reduce again. That is method 1, the one most numerologists publish and the one this site uses. Method 2 adds every digit of the date in one row; it gives the same answer most of the time, and when it does not, the difference is always a master number.</p>
+    <dl class="defs">
+      <div><dt>Day</dt><dd>14 → 1 + 4 = 5. A day of 11, 22 or 29 (2 + 9 = 11) stays a master number.</dd></div>
+      <div><dt>Month</dt><dd>7 stays 7. November (11) stays 11.</dd></div>
+      <div><dt>Year</dt><dd>1992 → 1 + 9 + 9 + 2 = 21 → 3.</dd></div>
+      <div><dt>Add and reduce</dt><dd>5 + 7 + 3 = 15 → 6.</dd></div>
+      </dl>
+    <p>The worked example above is the default date in the calculator, so you can check the arithmetic against the table. The article on <a href="/articles/how-to-calculate-your-life-path-number/">how to calculate your life path number</a> works six more dates by hand. The <a href="/editorial-approach/">editorial approach</a> page sets out every rule the site uses, once, so that the same date gives the same number on every page.</p>
+  </section>
+
+  <section aria-labelledby="all">
+    <h2 id="all">All life path numbers</h2>
+    <div class="grid grid--small">
+      {lp.map((e) => <a class="small-card" href={`/life-path/${e.data.number}/`}><span class="small-card__num">{e.data.number}</span><span class="small-card__line">{e.data.name}: {e.data.tile}</span></a>)}
+    </div>
+  </section>
+</Article>
+
+<script define:vars={{ names: Object.fromEntries(Object.entries(names).map(([k, v]) => [k, v.name])), lines: Object.fromEntries(Object.entries(digits).map(([k, v]) => [k, v.line])) }}>
+  window.__LP_NAMES = names; window.__LP_LINES = lines;
+</script>
+<script>
+  import { lifePath, birthdayNumber, personalYear } from '../../lib/numerology.mjs';
+  const $ = (id) => document.getElementById(id);
+  const form = $('lp-form');
+  function run(d, m, y, push = true) {
+    const r = lifePath(d, m, y);
+    $('lp-error').classList.toggle('hidden', !!r);
+    if (!r) { $('lp-result').classList.add('hidden'); return; }
+    const names = window.__LP_NAMES || {}, lines = window.__LP_LINES || {};
+    const n = r.result;
+    $('lp-ring').textContent = String(n);
+    $('lp-headline').textContent = `${n} · ${names[n] || ''}`;
+    $('lp-line').textContent = lines[n] || '';
+    $('lp-link').setAttribute('href', `/life-path/${n}/`);
+    $('w-day').textContent = r.dayWork; $('w-month').textContent = r.monthWork; $('w-year').textContent = r.yearWork; $('w-sum').textContent = r.sumWork;
+    $('w-m2').textContent = `${String(d) + String(m) + String(y)}`.split('').join(' + ') + ` = ${r.method2.total}` + r.method2.steps.map((s) => ` → ${s}`).join('');
+    $('lp-note').textContent = r.disagree
+      ? `The two methods disagree for your date: method 1 gives ${r.method1.result} and method 2 gives ${r.method2.result}. This site uses method 1, which keeps master numbers (11, 22, 33) where they appear; the other result is shown so you can see where another calculator got its answer.`
+      : 'Both methods give the same number for your date, so there is no ambiguity. Master numbers 11, 22 and 33 are kept, not reduced.';
+    const bd = birthdayNumber(d);
+    $('bd-num').textContent = String(bd); $('bd-card').setAttribute('href', `/birthday-number/${d}/`); const ord = (n) => n + (['th','st','nd','rd'][((n % 100) - 20) % 10] || ['th','st','nd','rd'][n % 100] || 'th');
+    $('bd-line').textContent = `Birthday number ${bd}: born on the ${ord(d)}`;
+    const py = personalYear(d, m, 2027);
+    $('py-num').textContent = String(py.result); $('py-card').setAttribute('href', `/personal-year/${py.result}/`); $('py-line').textContent = `Personal year ${py.result} in 2027 (${py.work})`;
+    $('cp-card').setAttribute('href', `/compatibility/calculator/?a=${d}-${m}-${y}`); $('cp-line').textContent = `Life path ${n} with a partner`;
+    $('lp-result').classList.remove('hidden');
+    if (push) history.replaceState(null, '', `?d=${d}&m=${m}&y=${y}`);
+    $('lp-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    run(parseInt(form.d.value, 10), parseInt(form.m.value, 10), parseInt(form.y.value, 10));
+  });
+  const q = new URLSearchParams(location.search);
+  if (q.get('d') && q.get('m') && q.get('y')) {
+    form.d.value = q.get('d'); form.m.value = q.get('m'); form.y.value = q.get('y');
+    run(parseInt(q.get('d'), 10), parseInt(q.get('m'), 10), parseInt(q.get('y'), 10), false);
+  }
+</script>

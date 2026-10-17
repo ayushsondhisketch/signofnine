@@ -1,0 +1,16 @@
+name: IndexNow after deploy
+# Manual until launch day. After the first submission, switch the trigger to push on main so every deploy pings IndexNow.
+on:
+  workflow_dispatch:
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Wait for Cloudflare Pages to publish
+        run: sleep 180
+      - name: Submit sitemap URLs to IndexNow
+        run: node scripts/indexnow.mjs

@@ -1,0 +1,20 @@
+# Sign of Nine
+
+> Numerology and angel numbers explained in plain English, with the arithmetic shown and the tradition named. Pythagorean system throughout; readings are presented as readings, never as predictions.
+
+Written and maintained by Ayush Sondhi. Method: https://signofnine.com/editorial-approach/
+
+## Sections
+
+- Angel numbers, with a page per number and per clock time: https://signofnine.com/angel-numbers/
+- Number meanings 0 to 9, 11, 22, 33: https://signofnine.com/numbers/
+- Life path numbers and calculator: https://signofnine.com/life-path/
+- Compatibility by life path: https://signofnine.com/compatibility/
+- Personal year calculator and meanings: https://signofnine.com/personal-year/
+- Articles on how numerology works: https://signofnine.com/articles/
+
+## Rules every page follows
+
+- A number is reduced by adding its digits until one digit remains; 11, 22 and 33 are kept.
+- Every angel-number page explains the frequency illusion before any reading.
+- Health, money and legal topics are described as readings and point to a professional.

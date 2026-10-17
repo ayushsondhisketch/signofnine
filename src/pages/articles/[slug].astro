@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+import InShort from '../../components/InShort.astro';
+import { wordCount, readMinutes } from '../../lib/content.mjs';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  return articles.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+const d = entry.data;
+const all = (await getCollection('articles')).filter((a) => a.data.slug !== d.slug).sort((a, b) => (a.data.published < b.data.published ? 1 : -1)).slice(0, 5);
+const crumbs = [{ label: 'Articles', href: '/articles/' }, { label: d.h1, href: `/articles/${d.slug}/` }];
+const words = wordCount(entry.body) + 100;
+const allHeadings = [...headings, { depth: 2, slug: 'more', text: 'Related articles' }, ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+---
+<Article title={d.title} description={d.description} h1={d.h1} lead={d.lead} crumbs={crumbs} eyebrow={d.category} numerals={true} published={d.published} updated={d.updated} readMinutes={readMinutes(words)} faq={d.faq} headings={allHeadings} ogImage={`/og/article-${d.slug}.png`} current="articles">
+  <InShort slot="top" lines={d.inShort} />
+  <Content />
+  <Fragment slot="after">
+    <div class="prose" style="margin-top:36px">
+      <section aria-labelledby="more">
+        <h2 id="more">Related articles</h2>
+        <div class="grid grid--small" style="--tile-min:200px">
+          {all.map((a) => <a class="small-card" href={`/articles/${a.data.slug}/`}><span class={`small-card__num${a.data.badge.length > 3 ? ' small-card__num--long' : ''}`}>{a.data.badge}</span><span class="small-card__line" style="font-weight:600;font-size:16px">{a.data.h1}</span></a>)}
+        </div>
+      </section>
+    </div>
+  </Fragment>
+</Article>

@@ -1,0 +1,77 @@
+---
+// Any number or clock time, worked out in the browser. This page is noindex: it is a tool, not a page about a number.
+import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { publishedNumberSlugs } from '../lib/content.mjs';
+import digits from '../data/digits.json';
+const slugs = await publishedNumberSlugs();
+const meanings = Object.fromEntries(Object.entries(digits).map(([k, v]) => [k, { line: v.line, name: v.name, meaning: v.meaning, lesson: v.lesson }]));
+---
+<Base title="Look up any number" description="Type any number or clock time and get its digits, its sum, its core number and the tradition's reading, worked out on the spot." noindex={true}>
+  <Band title="Look up any number" lead="The arithmetic and the reading for any number or clock time, worked out in your browser." eyebrow="Lookup" system={false} />
+  <div class="layout"><div class="wrap">
+    <article class="panel">
+      <div class="prose">
+        <section>
+          <form class="js-lookup field" action="/lookup/" method="get" style="max-width:480px">
+            <label class="visually-hidden" for="lk-q">Angel number or clock time</label>
+            <input id="lk-q" name="q" type="text" inputmode="numeric" placeholder="e.g. 1047 or 10:47" />
+            <button type="submit">Look up</button>
+          </form>
+        </section>
+        <div id="lk-out" class="prose"></div>
+      </div>
+    </article>
+    <Sidebar />
+  </div></div>
+</Base>
+<script define:vars={{ slugs, meanings }}>window.__LK = { slugs: new Set(slugs), meanings };</script>
+<script>
+  import { digitsOf, working, core, root, mastersInside, forms, parseTime } from '../lib/numerology.mjs';
+  const { slugs, meanings } = window.__LK;
+  const out = document.getElementById('lk-out');
+  const q = (new URLSearchParams(location.search).get('q') || '').trim();
+  const input = document.getElementById('lk-q');
+  if (input) input.value = q;
+  const esc = (s) => String(s).replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+  function render() {
+    if (!q) { out.innerHTML = '<section><h2>How it works</h2><p>Type any number or a clock time. You get the digits, their sum, the core number and what the tradition reads into each part. Numbers with a page of their own open that page instead.</p></section>'; return; }
+    const time = parseTime(q);
+    const ds = time ? time.digits : digitsOf(q);
+    if (!ds.length) { out.innerHTML = `<section><h2>Nothing to work out</h2><p>"${esc(q)}" has no digits in it. Try a number such as 1047 or a time such as 10:47.</p></section>`; return; }
+    const str = ds.join('');
+    const label = time ? time.label : str;
+    const w = working(str);
+    const c = core(str);
+    const r = root(str);
+    const f = forms(str);
+    const masters = mastersInside(str).filter(() => str.length > 2);
+    const counts = {};
+    for (const d of ds) counts[d] = (counts[d] || 0) + 1;
+    const parts = Object.entries(counts).map(([d, n]) => `<li>${d} appears ${n === 1 ? 'once' : n === 2 ? 'twice' : n + ' times'} and brings ${esc(meanings[d].line.charAt(0).toLowerCase() + meanings[d].line.slice(1))}. <a href="/numbers/${d}/">The number ${d}</a>.</li>`).join('');
+    const links = [];
+    if (slugs.has(str)) links.push(`<a href="/angel-numbers/${str}/">The full page for ${str}</a>`);
+    if (f.clock && slugs.has(`times/${f.clock.replace(':', '-')}`)) links.push(`<a href="/angel-numbers/times/${f.clock.replace(':', '-')}/">${f.clock} on the clock</a>`);
+    if (f.triple && slugs.has(f.triple)) links.push(`<a href="/angel-numbers/${f.triple}/">${f.triple}, the three-digit form</a>`);
+    if (f.sibling && slugs.has(f.sibling)) links.push(`<a href="/angel-numbers/${f.sibling}/">${f.sibling}, the four-digit form</a>`);
+    const rep = `${r}${r}${r}`;
+    if (slugs.has(rep) && rep !== str) links.push(`<a href="/angel-numbers/${rep}/">${rep}, the repeated form of its core number</a>`);
+    out.innerHTML = `
+      <section><h2>${esc(label)} adds up to ${c}</h2>
+        <p>${ds.length > 1 ? `${esc(w)}.` : `${str} is a single digit, so there is nothing to reduce.`} ${c !== r ? `${c} is a master number, so the tradition keeps it; reduced further it is ${r}.` : ''} The core number is <a href="/numbers/${c}/">${c}</a>: ${esc(meanings[c].line.toLowerCase())}.</p>
+        ${masters.length ? `<p>The sequence also holds ${masters.join(' and ')}, ${masters.length > 1 ? 'master numbers' : 'a master number'}: ${esc(meanings[String(masters[0])].line.toLowerCase())}.</p>` : ''}
+      </section>
+      <section><h2>What each digit brings</h2><ul>${parts}</ul></section>
+      <section><h2>The reading, in the tradition</h2>
+        <p>${esc(meanings[c].meaning)}</p>
+        <p>The lesson the tradition attaches to ${c}: ${esc(meanings[c].lesson)}</p>
+        ${time ? `<p>As a clock time, ${esc(time.label)} ${time.h < 12 ? 'comes round twice a day on a 12-hour clock' : 'comes round once a day'}; before reading it as a sign, notice whether you look at the clock at the same time out of habit.</p>` : ''}
+      </section>
+      <section><h2>Why you keep seeing it</h2>
+        <p>Once ${esc(label)} has your attention, your brain flags every later sighting and skips the thousands of other numbers you passed. Psychologists call this the frequency illusion, and it explains most of the feeling that a number is following you. The reading above is what the tradition adds, offered as a reading and not a prediction.</p>
+      </section>
+      ${links.length ? `<section><h2>Pages worth reading next</h2><ul>${links.map((l) => `<li>${l}</li>`).join('')}</ul></section>` : ''}`;
+  }
+  render();
+</script>

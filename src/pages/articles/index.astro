@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Band from '../../components/Band.astro';
+import Sidebar from '../../components/Sidebar.astro';
+import { fmtDate, wordCount, readMinutes, breadcrumbSchema } from '../../lib/content.mjs';
+
+const articles = (await getCollection('articles')).sort((a, b) => (a.data.published < b.data.published ? 1 : -1));
+const crumbs = [{ label: 'Articles', href: '/articles/' }];
+---
+<Base title="Numerology Articles and Guides" description="Longer reads on how numerology works: master numbers, the two systems compared, why repeating numbers get noticed, and what 2027 holds." current="articles" ogImage="/og/hub-articles.png" schema={[breadcrumbSchema(crumbs)]}>
+  <Band crumbs={crumbs} eyebrow="Articles" title="Articles: how numerology works, explained once" lead="The longer reads behind the number pages: where the system comes from, how the calculations work, and what the evidence says about seeing numbers everywhere." numerals={true} />
+  <div class="layout">
+    <div class="wrap">
+      <div style="flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:24px">
+        <div class="grid grid--articles">
+          {articles.map((a) => (
+            <article class="card">
+              <div class={`badge${a.data.badge.length > 3 ? ' badge--long' : ''}`} aria-hidden="true">{a.data.badge}</div>
+              <span class="eyebrow eyebrow--muted">{a.data.category}</span>
+              <h3><a href={`/articles/${a.data.slug}/`}>{a.data.h1}</a></h3>
+              <p>{a.data.excerpt}</p>
+              <span class="meta">{fmtDate(a.data.published)} · {readMinutes(wordCount(a.body))} min read</span>
+            </article>
+          ))}
+        </div>
+      </div>
+      <Sidebar />
+    </div>
+  </div>
+</Base>

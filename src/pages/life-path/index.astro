@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import Article from '../../layouts/Article.astro';
+
+const lp = (await getCollection('lifepath')).sort((a, b) => a.data.number - b.data.number);
+const crumbs = [{ label: 'Life path', href: '/life-path/' }];
+const faq = [
+  { q: 'What is a life path number?', a: 'The life path number is the single digit (or master number 11, 22 or 33) that your full date of birth reduces to. Numerologists read it as the main theme of a life: the kind of person you are built to be and the lessons that keep coming round. It is the first number anyone learns in numerology.' },
+  { q: 'How do I find my life path number?', a: 'Reduce your day, month and year of birth to single digits (keeping 11, 22 and 33), add the three results and reduce again. 14 July 1992 is 5 + 7 + 3 = 15 → 6. The calculator on this site does it and shows every step.' },
+  { q: 'Which life path number is the rarest?', a: 'Life path 33 is the rarest by a long way, because the three reduced parts of a date have to add to exactly 33. Life path 22 is next, then 11. Among the single digits the spread is fairly even.' },
+  { q: 'Which life path numbers are compatible?', a: 'The tradition pairs numbers by temperament: 1 with 3 and 5, 2 with 4 and 6, 3 with 5 and 9, 4 with 6 and 8, 7 with 5 and 7. The compatibility pages give every pair with the reasoning, and the calculator works out two dates at once.' },
+];
+const headings = [{ depth: 2, slug: 'what', text: 'What a life path number is' }, { depth: 2, slug: 'find', text: 'Find yours' }, { depth: 2, slug: 'all', text: 'The twelve life path numbers' }, { depth: 2, slug: 'faq', text: 'Questions people ask' }];
+---
+<Article title="Life Path Numbers 1 to 33: Meanings and Calculator" description="What a life path number is, how to work yours out from your date of birth, and what each number from 1 to 9 and the master numbers means." h1="Life path numbers: the meaning of each, and how to find yours" lead="Your life path number is your date of birth reduced to one digit. Numerologists read it as the main theme of a life. Work yours out below, then read the page for your number." crumbs={crumbs} eyebrow="Life path" published="2026-10-17" updated="2026-10-17" readMinutes={4} faq={faq} headings={headings} ogImage="/og/hub-lifepath.png" current="lifepath" lifepathWidget={false}>
+  <section aria-labelledby="what">
+    <h2 id="what">What a life path number is</h2>
+    <p>Of the five core numbers in Pythagorean numerology, the life path is the one everybody starts with. It comes from the full date of birth, which is why it cannot change. The tradition reads it as the pattern a life keeps returning to: the strengths you were born with, the situations that test them, and the kind of work and partner that fit.</p>
+    <p>The system was set out in its modern form by L. Dow Balliett and her student Juno Jordan in the early twentieth century, drawing on the number meanings attributed to Pythagoras. That is the version almost every book and website uses today, and the one this site uses, so a date gives the same number here as it would anywhere else that keeps the master numbers.</p>
+  </section>
+  <section aria-labelledby="find">
+    <div class="form-block">
+      <h2 id="find">Find yours</h2>
+      <p>Enter your date of birth and the calculator shows your number with every step of the working. The article on <a href="/articles/how-to-calculate-your-life-path-number/">how to calculate your life path number</a> works six dates by hand and explains why calculators disagree.</p>
+      <form class="fields" action="/life-path/calculator/" method="get">
+        <div class="f"><label for="h-d">Day</label><input id="h-d" name="d" type="text" inputmode="numeric" placeholder="DD" /></div>
+        <div class="f"><label for="h-m">Month</label><input id="h-m" name="m" type="text" inputmode="numeric" placeholder="MM" /></div>
+        <div class="f"><label for="h-y">Year</label><input id="h-y" name="y" type="text" inputmode="numeric" placeholder="YYYY" /></div>
+        <div class="f--wide"><button class="btn" type="submit">Calculate my life path</button></div>
+      </form>
+      <p class="form-note">Master numbers 11, 22 and 33 are kept, not reduced.</p>
+    </div>
+  </section>
+  <section aria-labelledby="all">
+    <h2 id="all">The twelve life path numbers</h2>
+    <p>Nine single digits and three master numbers. Each page covers the number's character, its strengths and blind spots, love, work, money, famous examples and the questions people ask about it.</p>
+    <div class="grid" style="--tile-min:200px">
+      {lp.map((e) => <a class="tile" href={`/life-path/${e.data.number}/`}><span class="eyebrow">{e.data.name}</span><span class="tile__num">{e.data.number}</span><span class="tile__line">{e.data.tile}</span><span class="tile__more">Read the guide →</span></a>)}
+    </div>
+  </section>
+</Article>

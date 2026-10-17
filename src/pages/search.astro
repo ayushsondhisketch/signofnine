@@ -1,0 +1,48 @@
+---
+import Base from '../layouts/Base.astro';
+import Band from '../components/Band.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { publishedNumberSlugs } from '../lib/content.mjs';
+import { LIFE_PATHS } from '../lib/numerology.mjs';
+const slugs = await publishedNumberSlugs();
+const lifePaths = LIFE_PATHS;
+---
+<Base title="Search" description="Search every page on Sign of Nine." noindex={true}>
+  <Band title="Search the site" lead="Every angel number, life path, calculator and article." eyebrow="Search" system={false} />
+  <div class="layout"><div class="wrap">
+    <article class="panel">
+      <div id="direct" class="hidden"></div>
+      <div id="search"></div>
+      <noscript><p>Search needs JavaScript. Try the <a href="/angel-numbers/">angel numbers list</a> or the <a href="/numbers/">number meanings</a> instead.</p></noscript>
+    </article>
+    <Sidebar />
+  </div></div>
+  <link rel="stylesheet" href="/_pagefind/pagefind-ui.css" />
+  <script is:inline src="/_pagefind/pagefind-ui.js"></script>
+  <script define:vars={{ slugs, lifePaths }}>
+    // A query that names a page goes straight to it, above the full-text results, so "555" never ranks 5555 first.
+    const known = new Set(slugs);
+    function directHit(raw) {
+      const q = raw.trim().toLowerCase();
+      let m;
+      if ((m = q.match(/^(\d{1,2}):(\d{2})$/))) { const slug = `times/${Number(m[1])}-${m[2]}`; return known.has(slug) ? { href: `/angel-numbers/${slug}/`, label: `${raw.trim()} on the clock` } : { href: `/lookup/?q=${encodeURIComponent(raw.trim())}`, label: `Work out ${raw.trim()} in the lookup` }; }
+      if ((m = q.match(/^(?:angel number )?(\d{3,6})(?: angel number)?(?: meaning)?$/))) { const d = m[1]; return known.has(d) ? { href: `/angel-numbers/${d}/`, label: `${d} angel number meaning` } : { href: `/lookup/?q=${d}`, label: `Work out ${d} in the lookup` }; }
+      if ((m = q.match(/^life path (?:number )?(\d{1,2})$/)) && lifePaths.includes(Number(m[1]))) return { href: `/life-path/${Number(m[1])}/`, label: `Life path ${Number(m[1])}` };
+      if ((m = q.match(/^(?:life path )?(\d{1,2}) compatib\w*$/)) || (m = q.match(/^compatib\w* (?:life path )?(\d{1,2})$/))) { const n = Number(m[1]); if (lifePaths.includes(n)) return { href: `/compatibility/${n}/`, label: `Life path ${n} compatibility` }; }
+      if ((m = q.match(/^personal year (\d{1,2})$/))) { const n = Number(m[1]); if ((n >= 1 && n <= 9) || n === 11 || n === 22) return { href: `/personal-year/${n}/`, label: `Personal year ${n}` }; }
+      if ((m = q.match(/^(?:born on the |birthday (?:number )?)(\d{1,2})(?:st|nd|rd|th)?$/))) { const n = Number(m[1]); if (n >= 1 && n <= 31) return { href: `/birthday-number/${n}/`, label: `Born on the ${n}${n === 1 || n === 21 || n === 31 ? 'st' : n === 2 || n === 22 ? 'nd' : n === 3 || n === 23 ? 'rd' : 'th'}` }; }
+      if ((m = q.match(/^(?:number |numerology |the number )(\d{1,2})$/))) { const n = Number(m[1]); if ((n >= 0 && n <= 9) || [11, 22, 33].includes(n)) return { href: `/numbers/${n}/`, label: `The number ${n}` }; }
+      return null;
+    }
+    window.addEventListener('DOMContentLoaded', () => {
+      const q = new URLSearchParams(location.search).get('q');
+      if (q) {
+        const hit = directHit(q);
+        if (hit) { const box = document.getElementById('direct'); box.innerHTML = `<p class="meta" style="margin-bottom:8px">Looking for one page?</p><a class="small-card" href="${hit.href}"><span class="small-card__num">→</span><span class="small-card__line" style="font-weight:600">${hit.label}</span></a>`; box.classList.remove('hidden'); }
+      }
+      if (!window.PagefindUI) return;
+      const ui = new PagefindUI({ element: '#search', showSubResults: true, showImages: false, resetStyles: false, ranking: { termSimilarity: 20, pageLength: 0.1, termSaturation: 2 } });
+      if (q) ui.triggerSearch(q);
+    });
+  </script>
+</Base>
