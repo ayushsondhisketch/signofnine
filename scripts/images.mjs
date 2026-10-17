@@ -61,7 +61,10 @@ function wrap(str, font, size, maxWidth, maxLines = 3) {
 const STARS = [[8, 22, .55], [19, 72, .35], [31, 16, .75, true], [44, 60, .3], [57, 24, .5], [66, 84, .35], [74, 12, .45], [83, 46, .65, true], [92, 78, .4], [50, 92, .3], [12, 90, .3], [38, 40, .25]];
 const starField = (w, h) => STARS.map(([x, y, o, g]) => `<circle cx="${(x / 100) * w}" cy="${(y / 100) * h}" r="${g ? 2.2 : 1.8}" fill="${g ? C.gold : C.paper}" opacity="${o}"/>`).join('');
 const star = (x, y, s, fill = C.gold) => `<path transform="translate(${x},${y}) scale(${s / 24})" d="M12 1.5 14.6 9.4 22.5 12 14.6 14.6 12 22.5 9.4 14.6 1.5 12 9.4 9.4Z" fill="${fill}"/>`;
-const brand = (x, y, size = 30) => star(x, y - size * 0.8, size) + text(SITE.name, 'display', size * 1.15, x + size * 1.3, y, { fill: C.paper });
+// The brand lockup is the real logo file (white + gold), placed by its top-left corner at a given height.
+const LOGO = readFileSync(join(root, 'public/brand/logo-dark.svg'), 'utf8').replace(/^[\s\S]*?<svg[^>]*>/, '').replace(/<\/svg>\s*$/, '');
+const LOGO_W = 591.75, LOGO_H = 148;
+const brand = (x, y, h = 48) => `<g transform="translate(${x},${y}) scale(${h / LOGO_H})">${LOGO}</g>`;
 
 /** OG: night ground, star field, ring with the emblem on the left, title and line on the right. */
 function og({ emblem, title, line, eyebrow }) {
@@ -78,7 +81,7 @@ function og({ emblem, title, line, eyebrow }) {
   ${emblem ? `<circle cx="${cx}" cy="${cy}" r="${ringR}" fill="none" stroke="${C.gold}" stroke-width="4"/>${num}` : ''}
   ${eyebrow ? text(eyebrow.toUpperCase(), 'sansBold', 20, tx, titleY - size - 10, { fill: C.gold }) : ''}
   ${titleSvg}${sub}
-  ${brand(80, 580, 28)}
+  ${brand(80, 548, 48)}
   ${text(SITE.url.replace('https://', ''), 'sans', 22, 1120, 580, { fill: C.muted, anchor: 'end' })}
   </svg>`;
 }
@@ -97,7 +100,7 @@ function pin({ emblem, title, line, eyebrow }) {
   ${eyebrow ? text(eyebrow.toUpperCase(), 'sansBold', 26, 500, titleY - size - 10, { fill: C.gold, anchor: 'middle' }) : ''}
   ${titleSvg}${sub}
   <rect x="440" y="1340" width="120" height="3" fill="${C.gold}"/>
-  ${star(470, 1372, 24)}${text(SITE.name, 'display', 40, 510, 1402, { fill: C.paper })}
+  ${brand(500 - (LOGO_W * 60 / LOGO_H) / 2, 1360, 60)}
   ${text(SITE.url.replace('https://', ''), 'sans', 24, 500, 1450, { fill: C.muted, anchor: 'middle' })}
   </svg>`;
 }
@@ -150,4 +153,6 @@ await sharp(Buffer.from(og({ emblem: null, title: 'Numerology, explained simply'
 const fav = readFileSync(join(root, 'public/favicon.svg'));
 await sharp(fav).resize(180, 180).png().toFile(join(root, 'public/apple-touch-icon.png'));
 await sharp(fav).resize(512, 512).png().toFile(join(root, 'public/icon-512.png'));
+await sharp(fav).resize(192, 192).png().toFile(join(root, 'public/android-chrome-192x192.png'));
+await sharp(fav).resize(512, 512).png().toFile(join(root, 'public/android-chrome-512x512.png'));
 console.log(`Rendered ${n} page images (OG and pin) plus the default and icons.`);

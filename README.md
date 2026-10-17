@@ -13,6 +13,7 @@ Numerology, angel numbers and life path meanings, explained in plain English wit
 
 ## Where things live
 
+- `public/brand/` holds the logo files (horizontal, stacked, wordmark and monogram, each in a light and a dark colourway, SVG masters plus PNG copies). The header uses `logo-light.svg`, the footer and the generated OG and pin images use `logo-dark.svg`. The favicon set at the site root (`favicon.svg`, `favicon.ico`, `site.webmanifest`) comes from the same kit; `apple-touch-icon.png`, `icon-512.png` and the `android-chrome-*.png` files are rendered from `favicon.svg` at build time.
 - `src/content/` is the editorial content, one Markdown file per page, validated by `src/content.config.ts` (titles and H1s 60 characters or under so an H1 holds two lines beside the ring, descriptions 140 or under).
 - `src/data/fourdigit.json`, `times.json` and `birthdays.json` hold the computed pages, assembled by `src/lib/compose.mjs`. `digits.json` holds the nine digit meanings every page draws on.
 - `src/lib/numerology.mjs` is the one arithmetic engine, shared by the build and the browser calculators.

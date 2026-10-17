@@ -1,5 +1,4 @@
 ---
-import Star from './Star.astro';
 import { SITE } from '../site.mjs';
 const year = new Date().getFullYear();
 const explore = [
@@ -31,7 +30,7 @@ const site = [
 <footer class="footer">
   <div class="wrap">
     <div class="col">
-      <a class="brand" href="/"><Star size={26} /><span class="brand__word">{SITE.name}</span></a>
+      <a class="brand" href="/" aria-label={`${SITE.name} home`}><img src="/brand/logo-dark.svg" alt="" width="192" height="48" /></a>
       <p>Clear numerology meanings, angel numbers and calculators, written in plain English, with the working shown and the tradition named.</p>
     </div>
     <div class="col"><h2>Explore</h2><span class="rule"></span>{explore.map(([t, h]) => <a href={h}>{t}</a>)}</div>

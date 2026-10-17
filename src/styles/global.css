@@ -75,8 +75,9 @@ button, input { font-family: inherit; }
 .topbar__tag { display: flex; align-items: center; gap: 10px; }
 .topbar__links { display: flex; gap: var(--space-4); }
 .site-header { background: var(--paper); border-bottom: 1px solid var(--line); }
-.site-header .wrap { padding-top: 18px; padding-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap; }
+.site-header .wrap { padding-top: 14px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: var(--space-5); flex-wrap: wrap; }
 .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.brand img { display: block; height: 56px; width: auto; }
 .brand__word { font-family: var(--font-display); font-weight: 600; font-size: 34px; line-height: 1; }
 .nav { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; font-size: 16px; font-weight: 600; }
 .nav a { color: var(--ink); text-decoration: none; padding: 10px 0; border-bottom: 2px solid transparent; }
@@ -293,6 +294,7 @@ button, input { font-family: inherit; }
 .footer .col a:hover { color: var(--on-night); text-decoration: underline; text-decoration-color: var(--gold); }
 .footer p { font-size: 17px; line-height: 1.6; color: var(--on-night-muted); max-width: 30em; }
 .footer .brand { color: var(--on-night); margin-bottom: 12px; }
+.footer .brand img { height: 48px; }
 .footer .brand__word { font-size: 30px; }
 .legal { border-top: 1px solid rgba(255, 255, 255, 0.18); }
 .legal .wrap { display: flex; justify-content: space-between; gap: var(--space-3); flex-wrap: wrap; padding: 18px var(--space-5); font-size: 15px; color: var(--on-night-muted); }
@@ -312,6 +314,7 @@ button, input { font-family: inherit; }
   .topbar { display: none; }
   .site-header .wrap { padding-top: 12px; padding-bottom: 12px; gap: var(--space-2); }
   .brand__word { font-size: 28px; }
+  .brand img { height: 44px; }
   .nav { display: none; width: 100%; flex-direction: column; align-items: flex-start; gap: 0; padding-top: 8px; }
   .nav.is-open { display: flex; }
   .nav a { width: 100%; padding: 12px 0; border-bottom: 1px solid var(--line); }
