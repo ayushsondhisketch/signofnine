@@ -6,8 +6,8 @@ Pinterest is a search engine for people who save things, and angel numbers and 2
 
 Edit these lines when Ayush says a step is done. The Health task reports the open ones once in the Sunday digest, not every week.
 
-- Business account: not confirmed
-- Website claimed: no
+- Business account: created 2026-10-18, type Publisher or media (per Ayush)
+- Website claimed: yes, 2026-10-18 (per Ayush; method not stated, check it in the account)
 - Boards created: no
 - Feeds: not connected
 
@@ -54,4 +54,4 @@ From 1 November to 31 January, at least one pin in three comes from the 2027 mat
 
 ## What this cannot see
 
-The agent has no access to Pinterest analytics. Saves and outbound clicks are visible only inside Ayush's account. What the agent can read is referral traffic from pinterest.com (Search Console does not show it; the analytics tool does once Ayush installs one) and whether pins from the domain appear at https://www.pinterest.com/source/signofnine.com/. If the pins do not show there two weeks after the feeds are connected, ask Ayush to open Settings, Auto-publish, and tell us what the feed status says.
+The agent has no access to Pinterest analytics. Saves and outbound clicks are visible only inside Ayush's account. What the agent can read is referral traffic from pinterest.com (Search Console does not show it; the analytics tool does once Ayush installs one) and whether pins from the domain appear at https://www.pinterest.com/source/signofnine.com/. The daily live check also requests each feed and one picture per feed as Pinterestbot, so a Cloudflare bot rule that blocks Pinterest raises an alert within a day. If the pins do not show there two weeks after the feeds are connected, ask Ayush to open Settings, Auto-publish, and tell us what the feed status says.

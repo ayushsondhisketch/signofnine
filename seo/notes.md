@@ -22,6 +22,9 @@ Not available yet: the Sheet "Sign of Nine Search Console" does not exist. Until
 
 ## Log
 
+- 2026-10-18 The daily live check now requests every feed and one picture per feed as Pinterestbot too (`seo/watch.config.json`, `scripts/watch/live.mjs`), so a Cloudflare bot rule that blocks Pinterest raises an alert within a day.
+- 2026-10-18 Ayush created the Pinterest business account (Publisher or media) and claimed the website. The built-in browser was signed out of Pinterest, so creating the five boards and connecting the five feeds waits for his sign-in and a yes to the exact list.
+- 2026-10-18 Mail correction: Ayush's DNS records show mail on Namecheap Private Email, so the earlier advice to use Cloudflare Email Routing for `hello@` (and for a Pinterest alias) was wrong, because it replaces the MX records. `seo/SETUP.md` sections 2 and 3 now say to create the mailbox in Private Email.
 - 2026-10-18 www redirect is live: Ayush added the proxied `A` record and the "Redirect from WWW to root" rule. The live check, run from GitHub, confirms `www` answers 301 to the same path on the main address and keeps the query string (the check now tests a deep URL with a query string). `seo/SETUP.md` section 3 ticked.
 - 2026-10-18 www redirect steps checked against Cloudflare's Pages and Rules docs: a proxied placeholder `A` record for `www` plus the "Redirect from WWW to root" rule; the Pages project needs no change. `seo/SETUP.md` section 3 now says so. Not done yet: www still does not resolve.
 - 2026-10-18 Pinterest account rule read on Pinterest's help pages: one email address per account, linked business accounts discontinued. `seo/SETUP.md` section 2 now says Sign of Nine needs its own login address.

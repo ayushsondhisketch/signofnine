@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Daily check of the live site: every URL in the sitemap answers 200 with one H1, a title, a canonical and no noindex; robots.txt and the
 // sitemap are intact; the AI and search crawlers are not blocked (each is compared with a browser request, so a blocked runner is not mistaken
-// for a blocked bot); the Pinterest feeds and their pictures load; the IndexNow key file answers; unknown URLs return 404.
+// for a blocked bot); the Pinterest feeds and their pictures load, for a browser and for Pinterestbot; the IndexNow key file answers; unknown URLs return 404.
 //
 //   node scripts/watch/live.mjs                       check https://signofnine.com and write the monitor issue (needs GH_TOKEN, else prints it)
 //   node scripts/watch/live.mjs --base http://localhost:4321 --dry-run     check a local preview of dist/ (the tests that need real hosts are skipped)
@@ -125,14 +125,23 @@ async function runChecks() {
     if (!f.body.startsWith('<?xml') || !f.body.includes('</rss>')) rec('feeds', 'fail', `/pins/${b}.xml is not complete RSS`);
     const cc = f.headers.get('cache-control') || '';
     if (/max-age=(\d{5,})/.test(cc)) rec('feeds', 'warn', `/pins/${b}.xml is cached for ${cc.match(/max-age=(\d+)/)[1]} s (feeds should refresh within hours)`);
+    // Pinterest reads the feed and the pictures as Pinterestbot: a Cloudflare bot rule that blocks it would stop every pin without any other sign
+    const pf = await get(`${BASE}/pins/${b}.xml`, { ua: L.botAgents.Pinterestbot });
+    if (!pf.ok || pf.status !== 200 || !pf.body.includes('</rss>')) rec('feeds', 'fail', `/pins/${b}.xml answers Pinterestbot with ${pf.ok ? pf.status : pf.error}. Check Cloudflare Security: Bots and WAF rules (Pinterest cannot read the feed)`);
+    let pinterestPicture = false;
     for (const m of f.body.matchAll(/<enclosure url="([^"]+)"/g)) {
       items++;
+      if (!pinterestPicture) {
+        pinterestPicture = true;
+        const pi = await get(toBase(m[1]), { method: 'HEAD', ua: L.botAgents.Pinterestbot });
+        if (!pi.ok || pi.status !== 200) rec('feeds', 'fail', `${m[1]} answers Pinterestbot with ${pi.ok ? pi.status : pi.error}`);
+      }
       const img = await get(toBase(m[1]), { method: 'HEAD' });
       const size = Number(img.headers.get('content-length') || 0);
       if (!img.ok || img.status !== 200 || !/image\/png/.test(img.headers.get('content-type') || '') || (size && size < 10000)) rec('feeds', 'fail', `${m[1]} ${img.ok ? img.status : img.error}`);
     }
   }
-  pass('feeds', `${L.feedBoards.length} feeds load as RSS; ${items} pictures answer`);
+  pass('feeds', `${L.feedBoards.length} feeds load as RSS, also for Pinterestbot; ${items} pictures answer`);
 
   if (!LOCAL) {
     // host rules
