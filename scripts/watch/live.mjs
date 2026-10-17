@@ -139,9 +139,12 @@ async function runChecks() {
     const http = await get(`http://${new URL(SITE.url).host}/`);
     if (http.ok && !([301, 308].includes(http.status) && /^https:\/\//.test(http.headers.get('location') || ''))) rec('https-redirect', 'fail', `http:// returns ${http.status}, not a redirect to https`);
     pass('https-redirect', 'http redirects to https');
-    const www = await get(`https://www.${new URL(SITE.url).host}/`);
-    if (!www.ok) pass('www', `www host not set up (${www.error}); add it as a custom domain in Cloudflare Pages`);
-    else if ([301, 308].includes(www.status) && (www.headers.get('location') || '').startsWith(SITE.url)) pass('www', 'www redirects to the apex');
+    // a deep URL with a query string: the redirect must keep both, so a link to www lands on the same page of the main address
+    const www = await get(`https://www.${new URL(SITE.url).host}/angel-numbers/444/?check=1`);
+    const wwwTo = www.ok ? (www.headers.get('location') || '') : '';
+    if (!www.ok) pass('www', `www host not set up (${www.error}); see seo/SETUP.md, section 3`);
+    else if ([301, 308].includes(www.status) && wwwTo === `${SITE.url}/angel-numbers/444/?check=1`) pass('www', 'www redirects to the same path on the main address and keeps the query string');
+    else if ([301, 308].includes(www.status) && wwwTo.startsWith(SITE.url)) rec('www', 'warn', `www redirects to ${wwwTo}, not to the same path and query string on ${SITE.url}`);
     else rec('www', 'warn', `www returns ${www.status} instead of redirecting to ${SITE.url}`);
     const tr = await get(`${SITE.url}/angel-numbers/444`);
     if (tr.ok && tr.status === 200) rec('trailing-slash', 'warn', '/angel-numbers/444 answers 200 without redirecting to the trailing-slash URL');
