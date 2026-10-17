@@ -41,7 +41,7 @@ const allHeadings = [...headings, { depth: 2, slug: 'pairs', text: `Life path ${
       </section>
       {partners.map((p) => (
         <section aria-labelledby={`with-${p.k}`} id={`with-${p.k}`}>
-          <h3 style="font-size:26px">Life path {n} and life path {p.k}: {p.c.label.toLowerCase()}</h3>
+          <h3>Life path {n} and life path {p.k}: {p.c.label.toLowerCase()}</h3>
           <Fragment set:html={p.text} />
           <p class="meta"><a href={`/compatibility/${p.k}/#with-${n}`}>Read the same pair from the {p.k} side</a> · <a href={`/life-path/${p.k}/`}>Life path {p.k}</a></p>
         </section>
