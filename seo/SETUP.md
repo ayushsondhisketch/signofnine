@@ -25,7 +25,7 @@ The workflow runs every day by itself after that. Search data stays in the priva
 
 Unlocks: the pin feeds. Angel-number and 2027 searches are strong on Pinterest, and a pin keeps sending visitors for months. `seo/pinterest.md` has the board names, descriptions and feed addresses to paste.
 
-- [ ] Create a Pinterest business account (free) or convert the existing one.
+- [ ] Create a Pinterest business account (free) or convert the existing one. Pinterest allows one account per email address and no longer supports linked business accounts, so Sign of Nine needs its own address if the usual one already has an account. An alias such as `pins@signofnine.com` works well: create it in Email Routing the same way as `hello@`, so it forwards to the inbox. If Pinterest refuses the alias, use a new Gmail address.
 - [ ] Claim the website: Settings, Claimed accounts, Website, enter `signofnine.com`. Pick either way:
   - the DNS way: Pinterest shows a TXT record; add it in Cloudflare, DNS, Records (no code change needed), then click Verify;
   - the HTML tag way: Pinterest shows `<meta name="p:domain_verify" content="...">`. Send the content value to the agent in chat; it goes into `src/site.mjs` (`pinterestVerify`) and is live two minutes after the push.
