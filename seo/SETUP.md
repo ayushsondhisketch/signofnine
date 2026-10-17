@@ -65,10 +65,10 @@ Unlocks: Bing indexing (which also feeds Copilot, DuckDuckGo and the sources Cha
 | Pins (fills the Pinterest queue) | Monday, Thursday 11:12 | nothing unless the queue stalls |
 | Health check and weekly digest | Sunday 12:27 | the digest, three numbers on top |
 | Monthly review | 2nd of each month 12:41 | at most five lines of decisions |
-| Live-site check (as Googlebot, Bingbot, GPTBot and others) | daily | pinned issue "Monitor: live site"; an alert issue emails you on failure |
-| Search Console export | daily | pinned issue "Monitor: search" and the private Sheet |
-| Speed test (Lighthouse, ten page types) | Saturday night | pinned issue "Monitor: performance" |
-| Weekly audit (clean build, strict QA, links, pin queue) | Saturday night | pinned issue "Monitor: weekly audit" |
+| Live-site check (as Googlebot, Bingbot, GPTBot and others) | daily 09:47 | pinned issue "Monitor: live site"; an alert issue emails you on failure |
+| Search Console export | daily 11:11 | pinned issue "Monitor: search" and the private Sheet |
+| Speed test (Lighthouse, ten page types) | Sunday 03:53 | pinned issue "Monitor: performance" |
+| Weekly audit (clean build, strict QA, links, pin queue) | Sunday 02:37 | pinned issue "Monitor: weekly audit" |
 | IndexNow (Bing, Yandex and others) | after each push that changes a page | nothing |
 
 GitHub emails you when an `alert` issue opens (Watch the repository, Custom, Issues). Alerts close themselves when the check passes again.
