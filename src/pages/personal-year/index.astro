@@ -44,6 +44,7 @@ const nameMap = Object.fromEntries(years.map((e) => [e.data.number, e.data.name]
   </section>
   <section aria-labelledby="all">
     <h2 id="all">The personal years, 1 to 9</h2>
+    <p>The cycle runs from a 1 year of beginnings to a 9 year of endings and starts again. Each page describes the year's theme, who has it in 2027, and how the tradition says to use it.</p>
     <div class="grid" style="--tile-min:200px">
       {years.map((e) => <a class="tile" href={`/personal-year/${e.data.number}/`}><span class="eyebrow">{e.data.name}</span><span class="tile__num">{e.data.number}</span><span class="tile__line">{e.data.tile}</span><span class="tile__more">Read the year →</span></a>)}
     </div>

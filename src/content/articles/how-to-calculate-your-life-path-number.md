@@ -10,7 +10,7 @@ category: "Core numbers"
 badge: "+"
 excerpt: "The arithmetic behind the life path number, done by hand on six dates, with the second method beside it so you can see why calculators disagree."
 inShort:
-  - "Reduce your day of birth, your month and your year each to a single digit, keeping 11, 22 and 33. Add the three results and reduce again. That is your life path."
+  - "Reduce your day, month and year of birth each to a single digit, keeping 11, 22 and 33. Add the three results and reduce again."
   - "A second method adds every digit of the date in one row. It agrees for most dates and differs for some, which is why calculators disagree."
   - "Master numbers are kept at every stage in the first method and only at the end in the second, which is where the two methods part."
   - "This site uses the first method and shows both, so you can see which one any other source used."

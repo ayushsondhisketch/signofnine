@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import Article from '../../layouts/Article.astro';
+import Related from '../../components/Related.astro';
 
 const lp = (await getCollection('lifepath')).sort((a, b) => a.data.number - b.data.number);
 const names = Object.fromEntries(lp.map((e) => [e.data.number, e.data.name]));
@@ -10,7 +11,7 @@ const faq = [
   { q: 'Why does the calculator use life path numbers and not names?', a: 'Because the life path is the number numerologists read as temperament, and temperament is what compatibility is about. Name numbers (expression, soul urge, personality) describe how you present and what you want, and the pair pages mention them where they matter.' },
   { q: 'What if one of us has a master number?', a: 'The tradition reads 11, 22 and 33 as their base numbers 2, 4 and 6 for compatibility, with a note that the master-number partner tends to feel things more strongly. The result shows both the master and the base.' },
 ];
-const headings = [{ depth: 2, slug: 'calc', text: 'Two dates of birth' }, { depth: 2, slug: 'how', text: 'How the rating is worked out' }, { depth: 2, slug: 'faq', text: 'Questions people ask' }];
+const headings = [{ depth: 2, slug: 'calc', text: 'Two dates of birth' }, { depth: 2, slug: 'how', text: 'How the rating is worked out' }, { depth: 2, slug: 'pairs', text: 'Compatibility by life path' }, { depth: 2, slug: 'faq', text: 'Questions people ask' }];
 ---
 <Article title="Numerology Compatibility Calculator by Birth Date" description="Enter two dates of birth to get both life path numbers, the tradition's compatibility rating and a link to the full reading of the pair." h1="Compatibility calculator: two birth dates, one reading" lead="Enter both dates of birth. The calculator works out each life path, rates the pair as the tradition does, and sends you to the page that explains why." crumbs={crumbs} eyebrow="Calculator" published="2026-10-17" updated="2026-10-17" readMinutes={3} faq={faq} headings={headings} ogImage="/og/calc-compat.png" current="compat" lifepathWidget={false}>
   <section aria-labelledby="calc">
@@ -63,6 +64,7 @@ const headings = [{ depth: 2, slug: 'calc', text: 'Two dates of birth' }, { dept
     <p>Each date is reduced to its life path by the site's method (day, month and year reduced separately, then added). The pair is then looked up in the tradition's table of temperaments. Numbers that share a rhythm (3 and 5, 2 and 6, 4 and 8) rate as natural matches. Numbers that pull against each other (1 and 8, 4 and 5, 6 and 7) rate as demanding, and the rest as workable. Master numbers are read on their base.</p>
     <p>The table is published in full on the <a href="/compatibility/">compatibility guide</a>, so nothing here is hidden.</p>
   </section>
+  <Related id="pairs" title="Compatibility by life path" intro="Every pair the calculator can return has a page of its own, grouped by the first number." items={[1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22, 33].map((n) => ({ n, href: `/compatibility/${n}/`, line: `Life path ${n} with every other number` }))} />
 </Article>
 <script define:vars={{ names }}>window.__LP_NAMES = names;</script>
 <script>

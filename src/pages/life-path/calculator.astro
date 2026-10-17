@@ -70,6 +70,7 @@ const headings = [{ depth: 2, slug: 'calc', text: 'Your date of birth' }, { dept
 
   <section aria-labelledby="all">
     <h2 id="all">All life path numbers</h2>
+    <p>Twelve results are possible: 1 to 9 and the three master numbers. Each has a page with the full reading, the famous examples and the dates that produce it.</p>
     <div class="grid grid--small">
       {lp.map((e) => <a class="small-card" href={`/life-path/${e.data.number}/`}><span class="small-card__num">{e.data.number}</span><span class="small-card__line">{e.data.name}: {e.data.tile}</span></a>)}
     </div>

@@ -51,7 +51,7 @@ The second finding is confirmation bias, the habit of noticing what fits a belie
 
 The experience of seeing 444 on receipts, clocks, number plates and phone batteries all in one week is real. It has a name: the frequency illusion, coined by the linguist Arnold Zwicky in 2005 and also called the Baader-Meinhof phenomenon. A thing becomes salient, attention locks on to it, and from then on every sighting is counted and the thousands of other numbers passed in the same day are not. Clock times make it stronger, because 4:44 comes round twice a day and most people check their phones at the same points in a routine.
 
-Those sightings are not increasing. The noticing is. The article on <a href="/articles/why-you-keep-seeing-repeating-numbers/">why you keep seeing repeating numbers</a> goes through this in detail, and every angel number page on this site gives the ordinary explanation before the traditional one.
+Those sightings are not increasing. The noticing is. The article on <a href="/articles/why-you-keep-seeing-repeating-numbers/">why you keep seeing repeating numbers</a> goes through this in detail, and every <a href="/angel-numbers/">angel number page</a> on this site gives the ordinary explanation before the traditional one.
 
 ## Where numerology actually comes from
 

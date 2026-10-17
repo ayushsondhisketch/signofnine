@@ -5,6 +5,7 @@ import Article from '../layouts/Article.astro';
 import InShort from '../components/InShort.astro';
 import birthdays from '../data/birthdays.json';
 import { wordCount, readMinutes } from '../lib/content.mjs';
+import Related from '../components/Related.astro';
 import { ord } from '../lib/compose.mjs';
 import { PYTHAGOREAN } from '../lib/numerology.mjs';
 import digits from '../data/digits.json';
@@ -24,7 +25,7 @@ const isName = slug !== 'birthday-number';
 const inShort = [['What it is', d.inShort.meaning], ['Where it comes from', d.inShort.from], ['Best response', d.inShort.response]];
 const words = wordCount(entry.body) + 200;
 const calcHeading = isName ? `${label} calculator` : 'Birthday number calculator';
-const allHeadings = [{ depth: 2, slug: 'calc', text: calcHeading }, ...headings, ...(slug === 'birthday-number' ? [{ depth: 2, slug: 'days', text: 'Every birthday number, 1 to 31' }] : [{ depth: 2, slug: 'chart', text: 'The Pythagorean letter chart' }]), ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+const allHeadings = [{ depth: 2, slug: 'calc', text: calcHeading }, ...headings, ...(slug === 'birthday-number' ? [{ depth: 2, slug: 'days', text: 'Every birthday number, 1 to 31' }] : [{ depth: 2, slug: 'chart', text: 'The Pythagorean letter chart' }]), { depth: 2, slug: 'more', text: 'The other core numbers' }, ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
 const chart = Object.entries({ 1: 'A J S', 2: 'B K T', 3: 'C L U', 4: 'D M V', 5: 'E N W', 6: 'F O X', 7: 'G P Y', 8: 'H Q Z', 9: 'I R' });
 const lines = Object.fromEntries(Object.entries(digits).map(([k, v]) => [k, v.line]));
 ---
@@ -76,6 +77,12 @@ const lines = Object.fromEntries(Object.entries(digits).map(([k, v]) => [k, v.li
           <div class="letters">{chart.map(([n, ls]) => <div><div class="n">{n}</div><div class="l">{ls}</div></div>)}</div>
         </section>
       )}
+      <Related id="more" title="The other core numbers" intro="The five core numbers are worked out from different parts of the name and the date, and read together." items={[
+        ...[['expression-number', 'E', 'Expression number: every letter of the birth name'], ['soul-urge-number', 'U', 'Soul urge number: the vowels'], ['personality-number', 'P', 'Personality number: the consonants'], ['birthday-number', 'B', 'Birthday number: the day of the month']].filter(([s]) => s !== slug).map(([s, n, line]) => ({ n, href: `/${s}/`, line })),
+        { n: 'LP', href: '/life-path/calculator/', line: 'Life path calculator: the whole date of birth' },
+        { n: '11', href: '/articles/master-numbers/', line: 'Master numbers 11, 22 and 33, and why they are kept' },
+        { n: '1-9', href: '/numbers/', line: 'What each number means' },
+      ]} />
     </div>
   </Fragment>
 </Article>

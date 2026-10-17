@@ -1,7 +1,9 @@
 name: IndexNow after deploy
-# Manual until launch day. After the first submission, switch the trigger to push on main so every deploy pings IndexNow.
+# Runs on every push to main (after Cloudflare Pages has had time to publish) and on demand.
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
 jobs:
   submit:
     runs-on: ubuntu-latest

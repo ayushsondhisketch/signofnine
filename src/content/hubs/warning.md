@@ -34,7 +34,7 @@ The angel-number tradition, from Doreen Virtue's books onward, reads every repea
 
 The most feared number is the one with the kindest reading. Six is the number of home, care and responsibility, and 666 is read as a sign that attention has tipped too far toward one thing, usually money or worry, and needs to come back. Its core number is 9 (6 + 6 + 6 = 18 → 9), the number of completion, which the tradition reads as an imbalance you already know how to end.
 
-The fear comes from Revelation 13:18, which calls 666 the number of the beast. Most scholars read the verse as gematria for the emperor Nero, a coded reference written for first-century readers, and some early manuscripts give 616. It is a fact about a text, not about the number on a receipt. The <a href="/angel-numbers/666/">666 page</a> gives both the verse and the reading in full.
+The fear comes from Revelation 13:18, which calls 666 the number of the beast. Most scholars read the verse as gematria for the emperor Nero, a coded reference written for first-century readers, and some early manuscripts give 616. It is a fact about a text, not about the number on a receipt, and the <a href="/articles/why-you-keep-seeing-repeating-numbers/">frequency illusion</a> explains the receipt. The <a href="/angel-numbers/666/">666 page</a> gives both the verse and the reading in full.
 
 ## 444: protection, except in one language family
 

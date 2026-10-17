@@ -6,7 +6,7 @@ import { working, core, root, digitsOf, mastersInside, forms, parseTime, reduce,
 
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const slug = (s) => String(s).toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
-function hash(s) { let h = 0; for (const ch of String(s)) h = (h * 31 + ch.charCodeAt(0)) >>> 0; return h; }
+function hash(s) { let h = 2166136261; for (const ch of String(s)) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619) >>> 0; } h ^= h >>> 16; h = Math.imul(h, 0x45d9f3b) >>> 0; h ^= h >>> 16; return h >>> 0; }
 const pick = (arr, seed, salt = 0) => arr[(hash(seed) + salt) % arr.length];
 const lower = (s) => s.charAt(0).toLowerCase() + s.slice(1);
 
@@ -44,22 +44,32 @@ const DO_BANK = [
   (n) => `Read the core number. ${n} reduces to a single digit, and that digit's page says what the tradition expects of you in plainer terms.`,
 ];
 
-function composeDigits(n) {
+// `asTime` phrases the parts differently, so a clock time and its number do not share the paragraph word for word.
+function composeDigits(n, asTime = false) {
   const ds = digitsOf(n);
   const counts = {};
   for (const d of ds) counts[d] = (counts[d] || 0) + 1;
+  // The phrasing of each part varies with the digits and their order, so mirror numbers (1221 and 1122) and a number and its clock form never share the sentence.
+  const variant = ds.reduce((a, d, i) => a + Number(d) * (i + 1), 0) % 3;
+  const phrase = asTime
+    ? [(d, t, l) => `The ${d}, appearing ${t}, stands for ${l}`, (d, t, l) => `A ${d}, seen ${t}, is read as ${l}`, (d, t, l) => `${d} is there ${t}, and the tradition reads it as ${l}`][variant]
+    : [(d, t, l) => `${d} appears ${t} and brings ${l}`, (d, t, l) => `The ${d}, seen ${t}, carries ${l}`, (d, t, l) => `A ${d} occurs ${t}, and the tradition reads it as ${l}`][variant];
   const parts = Object.entries(counts).map(([d, c]) => {
     const info = digits[d];
     const times = c === 1 ? 'once' : c === 2 ? 'twice' : c === 3 ? 'three times' : c === 4 ? 'four times' : `${c} times`;
-    return `${d} appears ${times} and brings ${lower(info.line)}`;
+    return phrase(d, times, lower(info.line));
   });
   const c = core(n);
   const w = working(n);
   const masters = mastersInside(n).filter((m) => String(n).length > 2);
-  let s = `${pick(COMPOSE_OPEN, n)(n)} ${parts.join('. ')}.`;
+  let s = asTime
+    ? `On the clock the digits read the same way as the number. ${parts.join('. ')}.`
+    : `${pick(COMPOSE_OPEN, n)(n)} ${parts.join('. ')}.`;
   if (parts.length > 3) s += '</p><p>';
   else s += ' ';
-  s += `Added together, ${w}, so the core of ${n} is ${c}: ${lower(digits[String(c)].line)}.`;
+  s += asTime
+    ? `The digits add up, ${w}, which makes ${c} the core of the time: ${lower(digits[String(c)].line)}.`
+    : `Added together, ${w}, so the core of ${n} is ${c}: ${lower(digits[String(c)].line)}.`;
   if (masters.length) s += ` The sequence also holds ${masters.join(' and ')}, ${masters.length > 1 ? 'master numbers' : 'a master number'} the tradition reads as ${lower(digits[String(masters[0])].keywords.slice(0, 2).join(' and '))}.`;
   return s;
 }
@@ -106,15 +116,15 @@ export function composeTime(item) {
   const digitsStr = t.digits.join('');
   const sp = item.specifics;
   const sections = [];
-  sections.push(section('meaning', `What ${n} means`, sp.meaning + p(composeDigits(digitsStr))));
+  sections.push(section('meaning', `What ${n} means`, sp.meaning + p(composeDigits(digitsStr, true))));
   const twice = t.h === 0
     ? ` ${n} is a 24-hour display, so it comes round once a day, at midnight; on a 12-hour clock the same moment reads 12:00, which also comes round at noon.`
     : t.h <= 12
       ? ` ${n} happens twice a day on a 12-hour clock, once in the morning and once at night, so a routine explains more sightings than people expect.`
       : ` ${n} is a 24-hour time, so it comes round once a day, usually in the evening when people check their phones most.`;
-  sections.push(section('seeing', `Why you keep seeing ${n}`, p(pick(HONEST, n)(n, twice)) + p(pick(TRADITION_OPEN, n, 1)(n) + ' ' + sp.seeing)));
+  sections.push(section('seeing', `Why you keep seeing ${n}`, p(pick(HONEST, 'time ' + n)(n, twice)) + p(pick(TRADITION_OPEN, 'time ' + n, 1)(n) + ' ' + sp.seeing)));
   if (sp.clock) sections.push(section('waking', item.wakingHeading || `Waking up at ${n}`, sp.clock));
-  const doItems = [pick(DO_BANK, n, 1), pick(DO_BANK, n, 3), pick(DO_BANK, n, 5)].filter((v, i, a) => a.indexOf(v) === i).map((fn) => `<li>${fn(n)}</li>`).join('');
+  const doItems = [pick(DO_BANK, 'time ' + n, 1), pick(DO_BANK, 'time ' + n, 3), pick(DO_BANK, 'time ' + n, 5)].filter((v, i, a) => a.indexOf(v) === i).map((fn) => `<li>${fn(n)}</li>`).join('');
   sections.push(section('do', `What to do when you see ${n}`, (sp.do ? (sp.do.startsWith('<') ? sp.do : p(sp.do)) : '') + `<ul>${doItems}</ul>`));
   if (sp.love) sections.push(section('love', `${n} in love`, sp.love));
   if (sp.work) sections.push(section('money', `${n} for work and money`, sp.work));
@@ -131,12 +141,26 @@ export function composeBirthday(item) {
   const w = birthdayWork(d);
   const sections = [];
   const arith = d > 9 ? `Born on the ${ord(d)}, your birthday number is ${b}: ${w}. ` : `Born on the ${ord(d)}, your birthday number is simply ${d}. `;
-  sections.push(section('meaning', `What birthday number ${d} means`, p(arith + `The tradition reads the birthday number as a specific talent you were born with, narrower than the life path and easier to spot in daily life. For ${d} that talent is ${lower(digits[String(b)].line)}.`) + sp.meaning));
+  const line = lower(digits[String(b)].line);
+  const gift = [
+    `The tradition reads the birthday number as a specific talent you were born with, narrower than the life path and easier to spot in daily life. For ${d} that talent is ${line}.`,
+    `Numerologists treat the birthday number as a single gift rather than a whole character: narrower than the life path, and usually the first thing other people notice. On the ${ord(d)} it is ${line}.`,
+    `Where the life path describes a whole life, the birthday number names one talent the tradition says you arrived with. For the ${ord(d)} that is ${line}.`,
+    `The birthday number is the narrowest of the core numbers: one knack, read from the day alone, that tends to show early. The ${ord(d)}'s is ${line}.`,
+  ][d % 4];
+  sections.push(section('meaning', `What birthday number ${d} means`, p(arith + gift) + sp.meaning));
   sections.push(section('strengths', `Strengths of a ${d} birthday`, sp.strengths));
   sections.push(section('watch', `What a ${d} birthday has to watch`, sp.watch));
   if (sp.love) sections.push(section('love', `Born on the ${ord(d)} in love`, sp.love));
   if (sp.work) sections.push(section('work', `Born on the ${ord(d)} at work`, sp.work));
-  sections.push(section('lifepath', `Your birthday number and your life path`, p(`The birthday number is one of five core numbers and the only one that uses the day alone. Your life path uses the whole date, and the two can pull in different directions: a 1 birthday on a 2 life path is someone who wants to lead and is built to partner. <a href="/life-path/calculator/">Work out your life path</a> and read both together, and see the <a href="/birthday-number/">birthday number guide</a> for the method. The <a href="/life-path/${b === 11 || b === 22 ? b : root(d)}/">life path ${b} page</a> describes the same number as a whole life rather than a single gift.`)));
+  const lpHref = `/life-path/${b === 11 || b === 22 ? b : root(d)}/`;
+  const beside = [
+    `The birthday number is one of five core numbers and the only one that uses the day alone. Your life path uses the whole date, and the two can pull in different directions: a 1 birthday on a 2 life path is someone who wants to lead and is built to partner. <a href="/life-path/calculator/">Work out your life path</a> and read both together, and see the <a href="/birthday-number/">birthday number guide</a> for the method. The <a href="${lpHref}">life path ${b} page</a> describes the same number as a whole life rather than a single gift.`,
+    `Of the five core numbers, only the birthday number comes from the day alone. The life path takes the whole date, and the two often disagree in a useful way: a ${b} birthday on a different life path is a ${b} gift inside another temperament. The <a href="/life-path/calculator/">life path calculator</a> gives the second number, the <a href="/birthday-number/">birthday number guide</a> gives the method, and the <a href="${lpHref}">life path ${b} page</a> shows what the same number means across a whole life.`,
+    `Read the birthday number beside the life path, never instead of it. The day gives one talent. The full date gives the pattern the talent sits in, and a ${b} gift can belong to any pattern. <a href="/life-path/calculator/">Work out the life path</a>, check the <a href="/birthday-number/">method on the guide page</a>, and compare this reading with the <a href="${lpHref}">life path ${b} page</a>, which treats the same number as a whole life.`,
+    `The life path and the birthday number are worked out differently and read differently: the whole date against the day, a lifetime against a knack. They agree on some people and disagree on many, which is the point of reading both. The <a href="/life-path/calculator/">calculator</a> gives the life path, the <a href="/birthday-number/">guide</a> explains the birthday method, and the <a href="${lpHref}">life path ${b} page</a> describes the number ${b} at full scale.`,
+  ][Math.floor(d / 4) % 4];
+  sections.push(section('lifepath', `Your birthday number and your life path`, p(beside)));
   const { html, headings } = assemble(sections);
   return { data: { ...item, number: String(d), faq: item.faq || [] }, html, headings, birthday: b };
 }

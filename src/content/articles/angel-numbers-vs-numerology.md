@@ -11,7 +11,7 @@ badge: "vs"
 excerpt: "One is a century-old system of calculation from dates and names. The other is a practice from 2005 that borrows the digit meanings and applies them to numbers you happen to see."
 inShort:
   - "Numerology calculates numbers from your birth date and name and reads them as a description of you. Angel numbers are numbers you happen to see, read as messages."
-  - "Numerology in its modern form dates from the early 1900s. Angel numbers date from Doreen Virtue's books of 2005 and 2008 and barely existed as a term before them."
+  - "Modern numerology dates from the early 1900s. Angel numbers date from Doreen Virtue's books of 2005 and 2008 and barely existed before them."
   - "Angel numbers borrow the digit meanings from numerology, which is why 444 is read through the 4 and 555 through the 5."
   - "Neither has evidence behind it. Numerology at least gives the same answer every time. Angel numbers depend on which number caught your eye."
 faq:

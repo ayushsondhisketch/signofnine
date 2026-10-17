@@ -233,7 +233,8 @@ for (const p of pages) {
   if (p.body) {
     for (const sec of p.body.querySelectorAll('section')) {
       const h = sec.querySelector('h2'); if (!h) continue;
-      const first = sec.querySelector('p, li');
+      if (sec.querySelector('form') || /\b(result|form-block)\b/.test(sec.getAttribute('class') || '') || sec.querySelector('.form-block, .result')) continue; // calculators: controls and live results, not prose
+      const first = sec.querySelector('p, li, dd');
       if (!first || words(text(first)).length < 6) (STRICT ? H : S)(`h2 "${text(h)}" not followed by an answering sentence`);
     }
   }

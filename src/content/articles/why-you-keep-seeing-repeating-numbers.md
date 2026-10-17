@@ -12,8 +12,8 @@ excerpt: "You saw 444 on a receipt, then on the clock, then on a number plate. T
 inShort:
   - "Repeating numbers seem to appear more often because you have started noticing them. The effect has a name, the frequency illusion, and it is strong."
   - "Clock times are the biggest source: 4:44 comes round twice a day, and most people check their phone at the same points in a routine."
-  - "The tradition reads a repeated number as a prompt to pay attention to whatever was already on your mind, and that reading is useful whether or not you believe the number carries it."
-  - "Log the sightings for two weeks. Either they stop once you stop looking, which answers the question, or the pattern tells you what you are preoccupied with."
+  - "The tradition reads a repeated number as a prompt to notice what was already on your mind, which is useful whether or not you believe in it."
+  - "Log the sightings for two weeks. Either they stop once you stop looking, or the pattern shows what you are preoccupied with."
 faq:
   - q: "Is it normal to see the same number everywhere?"
     a: "Yes, and common. Most people have had a period of seeing one number, a word or a car model everywhere after it first caught their attention. Psychologists call it the frequency illusion and it is a feature of how attention works, not a sign of anything unusual."

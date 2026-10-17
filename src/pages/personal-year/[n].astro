@@ -21,6 +21,8 @@ const related = [
   ...(prev ? [{ n: prev.data.number, href: `/personal-year/${prev.data.number}/`, line: `The year before: ${prev.data.name.toLowerCase()}` }] : []),
   ...(next ? [{ n: next.data.number, href: `/personal-year/${next.data.number}/`, line: `The year after: ${next.data.name.toLowerCase()}` }] : []),
   { n, href: `/numbers/${n}/`, line: `The number ${n} on its own` },
+  ...([1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 22].includes(n) ? [{ n: `LP ${n}`, href: `/life-path/${n}/`, line: `Life path ${n}: the same number as a whole life` }, { n: `${n} +`, href: `/compatibility/${n}/`, line: `Life path ${n} compatibility` }] : []),
+  ...(n >= 1 && n <= 9 ? [{ n: `${n}${n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th'}`, href: `/birthday-number/${n}/`, line: `Born on the ${n}${n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th'}: the birthday number ${n}` }] : []),
 ];
 const inShort = [['Meaning', d.inShort.meaning], ['Theme of the year', d.inShort.theme], ['How it is worked out', `Reduced day + reduced month + 2 (for 2027), reduced again. <a href="/personal-year/">The calculator</a> does it, and the <a href="/articles/2027-numerology-universal-year-11/">2027 article</a> explains the universal year.`], ['Best response', d.inShort.response]];
 const words = wordCount(entry.body) + 120;

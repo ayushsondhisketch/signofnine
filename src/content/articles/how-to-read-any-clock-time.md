@@ -10,9 +10,9 @@ category: "Angel numbers"
 badge: "10:47"
 excerpt: "There is no page for 10:47, and you saw 10:47. Here is how to read any clock time the way the tradition would, and why the time you keep seeing is usually about your routine."
 inShort:
-  - "Add the digits of the time and reduce to a single digit. That core number carries the reading: 10:47 is 1 + 0 + 4 + 7 = 12 → 3, so the tradition reads it through the 3."
+  - "Add the digits of the time and reduce to one digit. That core number carries the reading: 10:47 is 1 + 0 + 4 + 7 = 12 → 3, read through the 3."
   - "Then look at the parts: the hour as one number, the minutes as another, and any pattern, repeated, mirrored or in sequence."
-  - "The lookup tool on this site does this for any time or number in a second, with the digit meanings beside it."
+  - "The lookup tool does this for any time or number, with the digit meanings beside it."
   - "Before reading anything into a recurring time, check whether it is simply when you look at the clock. Most recurring times are habits."
 faq:
   - q: "What does it mean when you see the same time every day?"

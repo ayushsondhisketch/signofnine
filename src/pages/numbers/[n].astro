@@ -29,6 +29,7 @@ for (const j of [idx - 1, idx + 1]) if (order[j] !== undefined) related.push({ n
 if (n >= 1 && n <= 9 || n === 11 || n === 22) related.push({ n: `PY ${n}`, href: `/personal-year/${n}/`, line: `Personal year ${n}: the same number as a year` });
 if (n >= 1 && n <= 9) related.push({ n: `${n}${n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th'}`, href: `/birthday-number/${n}/`, line: `Born on the ${n}${n === 1 ? 'st' : n === 2 ? 'nd' : n === 3 ? 'rd' : 'th'}: the birthday number ${n}` });
 if (LIFE_PATHS.includes(n)) related.push({ n: `${n} +`, href: `/compatibility/${n}/`, line: `Life path ${n} compatibility` });
+if (n === 0) related.push({ n: '00:00', href: '/angel-numbers/times/0-00/', line: 'Midnight on the clock, the reset' }, { n: '1010', href: '/angel-numbers/1010/', line: 'A beginning with the 0 beside it' }, { n: '2020', href: '/angel-numbers/2020/', line: 'Partnership with the 0 beside it' }, { n: '10:47', href: '/articles/how-to-read-any-clock-time/', line: 'How to read any clock time, zeros included' });
 const inShort = [['Meaning', d.inShort.meaning], ['Keywords', d.inShort.keywords], ['Tarot and planet', d.inShort.tarot], ['Best response', d.inShort.response]];
 const words = wordCount(entry.body) + 120;
 const allHeadings = [...headings, ...(related.length ? [{ depth: 2, slug: 'related', text: 'Related numbers' }] : []), ...(d.faq.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];

@@ -3,14 +3,26 @@
 import Base from './Base.astro';
 import Band from '../components/Band.astro';
 import Sidebar from '../components/Sidebar.astro';
+import Related from '../components/Related.astro';
 import { breadcrumbSchema } from '../lib/content.mjs';
-const { title, description, h1, lead = '', crumbs = [], eyebrow = '', noindex = false, updated = '', extraSchema = [], ogImage = '/og/default.png', sidebar = true } = Astro.props;
+const { title, description, h1, lead = '', crumbs = [], eyebrow = '', noindex = false, updated = '', extraSchema = [], ogImage = '/og/default.png', sidebar = true, explore = true } = Astro.props;
+const start = [
+  { n: '111', href: '/angel-numbers/111/', line: 'Angel number 111: a beginning' },
+  { n: '444', href: '/angel-numbers/444/', line: 'Angel number 444: protection and stability' },
+  { n: '1111', href: '/angel-numbers/1111/', line: 'Angel number 1111: the wake-up call' },
+  { n: '11:11', href: '/angel-numbers/times/11-11/', line: '11:11 on the clock' },
+  { n: 'LP', href: '/life-path/calculator/', line: 'Work out your life path number' },
+  { n: '1-9', href: '/numbers/', line: 'What each number means' },
+  { n: '+', href: '/compatibility/', line: 'Compatibility by life path' },
+  { n: '2027', href: '/personal-year/', line: 'Your personal year for 2027' },
+  { n: '?', href: '/angel-numbers/what-are-angel-numbers/', line: 'What angel numbers are and where they come from' },
+];
 ---
 <Base title={title} description={description} noindex={noindex} schema={[breadcrumbSchema(crumbs), ...extraSchema]} ogImage={ogImage}>
   <Band crumbs={crumbs} eyebrow={eyebrow} title={h1 || title} lead={lead} updated={updated} system={false} />
   <div class="layout">
     <div class="wrap">
-      <article class="panel" data-pagefind-body><div class="prose"><slot /></div></article>
+      <article class="panel" data-pagefind-body><div class="prose"><slot /></div>{explore && !noindex && <div class="prose" style="margin-top:36px"><Related id="start" title="Start here" intro="The pages most people come to the site for, and the calculators behind them." items={start} /></div>}</article>
       {sidebar && <Sidebar />}
     </div>
   </div>

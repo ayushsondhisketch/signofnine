@@ -34,6 +34,7 @@ const grid = LIFE_PATHS.filter((k) => k <= 9);
   </section>
   <section aria-labelledby="pages">
     <h2 id="pages">Compatibility by life path</h2>
+    <p>One page per life path, each reading that number against every other, with the natural, workable and demanding pairs explained rather than scored.</p>
     <div class="grid" style="--tile-min:200px">
       {LIFE_PATHS.map((k) => <a class="tile" href={`/compatibility/${k}/`}><span class="eyebrow">{nameOf(k)}</span><span class="tile__num">{k}</span><span class="tile__line">Life path {k} with every other number</span><span class="tile__more">Read the pairs →</span></a>)}
     </div>

@@ -14,7 +14,7 @@ inShort:
   - "Pythagorean uses the full name on your birth certificate. Chaldean uses the name you actually go by."
   - "Chaldean also reads the two-digit total before reducing it, so 35 and 44 mean different things."
   - "Neither is ancient in its modern form: Pythagorean was assembled in America around 1900, Chaldean was popularized by Cheiro in the 1920s."
-  - "This site uses the Pythagorean system for every calculation, so the same name gives the same number on every page."
+  - "This site uses the Pythagorean system throughout, so a name gives the same number on every page."
 faq:
   - q: "Which is more accurate, Pythagorean or Chaldean numerology?"
     a: "Neither has evidence behind it, so accuracy is not the right test. Consistency is. The Pythagorean system is the one used by nearly every English-language book, calculator and site, so it is the one most people are comparing against. Chaldean practitioners argue their system is older and more precise, but the two produce different numbers and there is no experiment that decides between them."
