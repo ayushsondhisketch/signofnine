@@ -22,6 +22,7 @@ Not available yet: the Sheet "Sign of Nine Search Console" does not exist. Until
 
 ## Log
 
+- 2026-10-18 www redirect is live: Ayush added the proxied `A` record and the "Redirect from WWW to root" rule. The live check, run from GitHub, confirms `www` answers 301 to the same path on the main address and keeps the query string (the check now tests a deep URL with a query string). `seo/SETUP.md` section 3 ticked.
 - 2026-10-18 www redirect steps checked against Cloudflare's Pages and Rules docs: a proxied placeholder `A` record for `www` plus the "Redirect from WWW to root" rule; the Pages project needs no change. `seo/SETUP.md` section 3 now says so. Not done yet: www still does not resolve.
 - 2026-10-18 Pinterest account rule read on Pinterest's help pages: one email address per account, linked business accounts discontinued. `seo/SETUP.md` section 2 now says Sign of Nine needs its own login address.
 - 2026-10-18 Cloudflare "Bot Preference Sync" was switched on (Ayush's screenshot). The live robots.txt was still identical to `public/robots.txt`, checked from outside. Advised off: it writes Cloudflare's own allow and block choices above our file. The daily live check now fails when any robots.txt group says `Disallow: /` for `*`, Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot or PerplexityBot, and warns when the live file differs from the repo file.
