@@ -5,6 +5,7 @@
 //
 //   node scripts/watch/live.mjs                       check https://signofnine.com and write the monitor issue (needs GH_TOKEN, else prints it)
 //   node scripts/watch/live.mjs --base http://localhost:4321 --dry-run     check a local preview of dist/ (the tests that need real hosts are skipped)
+import { readFileSync } from 'node:fs';
 import { SITE } from '../../src/site.mjs';
 import { config, get, pool, val, has, sleep, setStatus, raise, clear, stamp } from './lib.mjs';
 
@@ -33,7 +34,12 @@ async function runChecks() {
       const rules = mine.flatMap((g) => g.rules);
       return rules.some(([k, v]) => k === 'disallow' && v === '/') && !rules.some(([k, v]) => k === 'allow' && v === '/');
     };
-    for (const ua of ['*', 'googlebot', 'bingbot', 'GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'PerplexityBot']) if (blocked(ua)) rec('robots', 'fail', `robots.txt blocks ${ua} (Disallow: /). If Cloudflare added it, turn off "Block AI bots" and the managed robots.txt`);
+    for (const ua of ['*', 'googlebot', 'bingbot', 'GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'PerplexityBot']) if (blocked(ua)) rec('robots', 'fail', `robots.txt blocks ${ua} (Disallow: /). If Cloudflare added it, turn off "Block AI bots", "Bot Preference Sync" and the managed robots.txt`);
+    // Cloudflare can write into robots.txt without a commit (Bot Preference Sync, the older managed robots.txt). The repo file is the policy.
+    // A group that names a crawler we want in and says Disallow: / fails even when a later Allow: / ties with it: parsers differ on which group they read.
+    for (const ua of ['*', 'googlebot', 'bingbot', 'GPTBot', 'OAI-SearchBot', 'ClaudeBot', 'PerplexityBot']) if (groups.some((g) => g.uas.includes(ua.toLowerCase()) && g.rules.some(([k, v]) => k === 'disallow' && v === '/'))) rec('robots', 'fail', `a robots.txt group for ${ua} says Disallow: / (not in public/robots.txt). Turn off "Bot Preference Sync" and "Block AI bots" in Cloudflare (seo/SETUP.md, section 3)`);
+    const norm = (s) => s.replace(/\r\n/g, '\n').trim();
+    if (norm(robots.body) !== norm(readFileSync(new URL('../../public/robots.txt', import.meta.url), 'utf8'))) rec('robots', 'warn', 'the live robots.txt differs from public/robots.txt (is Cloudflare Bot Preference Sync writing into it?)');
     if (!robots.body.includes(`Sitemap: ${SITE.url}/sitemap-index.xml`)) rec('robots', 'fail', 'robots.txt has no Sitemap line for sitemap-index.xml');
     if (/content-signal/i.test(robots.body)) rec('robots', 'warn', 'robots.txt carries a Content-Signal line (Cloudflare managed robots.txt?)');
     pass('robots', 'robots.txt open to all crawlers, Sitemap line present');

@@ -114,7 +114,7 @@ Kill rule: a page with no impressions at day 90 (2027-01-15), or under 10 impres
 
 ## 11. Assistants and AI answers
 
-- Keep `public/llms.txt` current when sections are added. Keep the In short box, the 40 to 60 word answer under each H2 and the FAQ accurate. Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot stay allowed in robots.txt; the live monitor fails if Cloudflare starts blocking them.
+- Keep `public/llms.txt` current when sections are added. Keep the In short box, the 40 to 60 word answer under each H2 and the FAQ accurate. Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot stay allowed in robots.txt; the live monitor fails if Cloudflare starts blocking them and warns when the live file differs from `public/robots.txt`.
 - Monthly: for the tracked queries in `seo/keywords.md`, note whether signofnine.com shows in WebSearch results. This is a rough signal only.
 
 ## 12. Links and authority
@@ -155,7 +155,7 @@ Purpose: the one place where the monitors, the Sheet, the checkpoints and the Go
 | Alert (key) | What it means | What to do |
 |---|---|---|
 | `live:pages` | A sitemap URL does not return 200, has no or two H1s, no title or canonical, or has noindex | Open the URL with WebFetch. A 404 or 5xx right after a push is a failed deploy: check the Cloudflare build (a QA failure stops it), fix and push. Never remove a URL from the sitemap to silence the alert |
-| `live:robots` | robots.txt blocks Googlebot, Bingbot or an assistant crawler, or lost its Sitemap line | `public/robots.txt` is the source. If the live file differs from the repo, Cloudflare's managed robots.txt or AI-bot blocking is on: report to Ayush (SETUP section 3) |
+| `live:robots` | robots.txt blocks Googlebot, Bingbot or an assistant crawler (a group that says `Disallow: /` counts even when a later `Allow: /` ties with it), or lost its Sitemap line. A WARN, not an alert, means the live file differs from the repo file | `public/robots.txt` is the source. If the live file differs from the repo, Cloudflare's Bot Preference Sync (the successor of the managed robots.txt) or AI-bot blocking is on: report to Ayush (SETUP section 3). Never copy Cloudflare's lines into the repo file |
 | `live:bots` | A named crawler gets a different answer from a browser (403, 429, a challenge page) | Cloudflare bot settings. Report to Ayush with the crawler name; this is the usual way the site would silently disappear from assistants |
 | `live:sitemap` | The index or a child sitemap is missing, empty, below 150 URLs or lists a noindex page | Fix `scripts/sitemaps.mjs` or the page that went noindex; rebuild |
 | `live:feeds` | A Pinterest feed or one of its pictures does not load | `node scripts/pins.mjs --check` locally; a picture that fails to render is added to `scripts/pins-skip.txt` |
