@@ -18,14 +18,14 @@ import { accessToken, api, ENDPOINTS } from './google.mjs';
 
 const S = config.search;
 const T = S.tabs;
-const TITLE = 'Monitor: Search Console export';
+const TITLE = 'Monitor: search';
 const addDays = (iso, n) => new Date(Date.parse(`${iso}T00:00:00Z`) + n * 86400000).toISOString().slice(0, 10);
 const pathOf = (u) => new URL(u).pathname;
 const r2 = (n) => Math.round(n * 100) / 100;
 const r4 = (n) => Math.round(n * 10000) / 10000;
 
 if (!process.env.GSC_SERVICE_ACCOUNT_JSON || !process.env.GSC_SHEET_ID) {
-  const msg = 'Not set up yet. The workflow needs two repository secrets, GSC_SERVICE_ACCOUNT_JSON and GSC_SHEET_ID. The steps are in seo/SETUP.md, section "Search Console".';
+  const msg = 'Not set up yet. The workflow needs two repository secrets, GSC_SERVICE_ACCOUNT_JSON and GSC_SHEET_ID. The steps are in seo/SETUP.md, section 1.';
   console.log(msg);
   setStatus(TITLE, `${msg}\n\nLast run: ${stamp()}.`);
   process.exit(0);
