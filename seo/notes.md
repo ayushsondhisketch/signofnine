@@ -22,6 +22,7 @@ Not available yet: the Sheet "Sign of Nine Search Console" does not exist. Until
 
 ## Log
 
+- 2026-10-18 www redirect steps checked against Cloudflare's Pages and Rules docs: a proxied placeholder `A` record for `www` plus the "Redirect from WWW to root" rule; the Pages project needs no change. `seo/SETUP.md` section 3 now says so. Not done yet: www still does not resolve.
 - 2026-10-18 Pinterest account rule read on Pinterest's help pages: one email address per account, linked business accounts discontinued. `seo/SETUP.md` section 2 now says Sign of Nine needs its own login address.
 - 2026-10-18 Cloudflare "Bot Preference Sync" was switched on (Ayush's screenshot). The live robots.txt was still identical to `public/robots.txt`, checked from outside. Advised off: it writes Cloudflare's own allow and block choices above our file. The daily live check now fails when any robots.txt group says `Disallow: /` for `*`, Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot or PerplexityBot, and warns when the live file differs from the repo file.
 - 2026-10-18 Scheduled tasks created (India time): new pages Mon, Wed, Fri 08:47; refresh Tue, Thu 09:38 (does nothing before 2026-11-03); Pinterest pins Mon, Thu 11:12; weekly health Sun 12:27; monthly review on the 2nd, 12:41. Edits to existing pages wait until 2026-10-23 (the September 2026 spam update ended 2026-10-08, plus the 14-day guard), so the first queue row that can run is S-1111 on 2026-10-23, and the first modifier page (M-333-twin-flame) is eligible on 2026-10-26.
