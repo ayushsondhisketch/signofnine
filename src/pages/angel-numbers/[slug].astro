@@ -46,6 +46,10 @@ const crumbs = isNumber
   : [{ label: 'Angel numbers', href: '/angel-numbers/' }, { label: crumbLabel(data.h1), href: `/angel-numbers/${data.slug}/` }];
 
 const related = [];
+if (kind === 'angel') {
+  // the parent page links to its own modifier pages (for example 333 twin flame), so each new one has an inbound link from the start
+  for (const m of (await getCollection('modifiers')).filter((m) => m.data.parent === data.number)) related.push({ n: `${m.data.parent} ${m.data.modifier.replace(/-/g, ' ')}`, href: `/angel-numbers/${m.data.parent}/${m.data.modifier}/`, line: m.data.tile });
+}
 if (isNumber) {
   for (const p of data.pairs || []) if (published.has(p.n)) related.push({ n: p.n, href: `/angel-numbers/${p.n}/`, line: p.line });
   if (f.clock) { const slug = f.clock.replace(':', '-'); if (timeSlugs.has(slug)) related.push({ n: f.clock, href: `/angel-numbers/times/${slug}/`, line: 'The same number on the clock' }); }

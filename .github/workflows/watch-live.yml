@@ -1,0 +1,27 @@
+name: Watch live site
+# Daily check of https://signofnine.com as Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot see it:
+# status codes, robots.txt, sitemap, canonicals, noindex, redirects, security headers, response time, pin feeds.
+# The latest result is the pinned issue "Monitor: live site". A failure opens an issue labeled "alert".
+on:
+  schedule:
+    - cron: '17 4 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: watch-live
+  cancel-in-progress: false
+jobs:
+  live:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the live site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/watch/live.mjs

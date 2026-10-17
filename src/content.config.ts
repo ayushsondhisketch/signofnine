@@ -25,6 +25,21 @@ const angel = defineCollection({
   }),
 });
 
+// The six readings big enough to need their own address (queue rows M-*; CLAUDE.md rule 3). Everything else is a section on the number's page.
+// Adding to this list is a decision for Ayush, not something a scheduled task does to get a page through.
+const MODIFIER_PAGES = ['333/twin-flame', '555/twin-flame', '222/twin-flame', '444/love', '777/love', '1111/love'];
+const modifiers = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/modifiers' }),
+  schema: z.object({
+    ...base,
+    parent: z.string(),
+    modifier: z.string().regex(/^[a-z]+(-[a-z]+)*$/),
+    inShort: z.object({ meaning: z.string(), core: z.string().optional(), contains: z.string().optional(), response: z.string() }),
+    pairs: z.array(z.object({ n: z.string(), line: z.string() })).default([]),
+    tile: z.string(),
+  }).refine((d) => MODIFIER_PAGES.includes(`${d.parent}/${d.modifier}`), { message: `a modifier page must be one of ${MODIFIER_PAGES.join(', ')}` }),
+});
+
 const hubs = defineCollection({
   loader: glob({ pattern: '*.md', base: './src/content/hubs' }),
   schema: z.object({
@@ -64,4 +79,4 @@ const articles = defineCollection({
   schema: z.object({ ...base, slug: z.string(), category: z.string(), badge: z.string(), excerpt: z.string(), inShort: z.array(z.string()).min(2).max(5) }),
 });
 
-export const collections = { angel, hubs, numbers, lifepath, guides, compat, years, articles };
+export const collections = { angel, modifiers, hubs, numbers, lifepath, guides, compat, years, articles };

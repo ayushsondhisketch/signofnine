@@ -11,6 +11,8 @@ export const SITE = {
   locale: 'en_US',
   launched: '2026-10-17',
   indexNowKey: '7c3f4e9a2b8d4f1e9a6c0b5d8e2f7a13',
+  // The code Pinterest gives when the website is claimed ("Add HTML tag"); written into a p:domain_verify meta tag when set.
+  pinterestVerify: '',
   legalLine: 'For reflection and entertainment. Not a substitute for professional advice.',
   system: 'Pythagorean system',
   ads: false,

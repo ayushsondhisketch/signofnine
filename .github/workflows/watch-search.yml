@@ -1,0 +1,30 @@
+name: Watch search
+# Daily export of Search Console (clicks, impressions, positions, queries, index status of every sitemap URL)
+# into a private Google Sheet. It needs two repository secrets, GSC_SERVICE_ACCOUNT_JSON and GSC_SHEET_ID
+# (steps in seo/SETUP.md). Without them it only writes "Not set up yet" to the pinned issue "Monitor: search".
+# Search data never goes into this public repo: the issue holds counts, the Sheet holds the numbers.
+on:
+  schedule:
+    - cron: '41 5 * * *'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: watch-search
+  cancel-in-progress: false
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+      GSC_SHEET_ID: ${{ secrets.GSC_SHEET_ID }}
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Export Search Console to the Sheet
+        run: node scripts/gsc/export.mjs

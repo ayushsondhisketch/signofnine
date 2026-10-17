@@ -1,0 +1,3 @@
+# Pin ids that must never be made, one per line (comments start with #).
+# The Pins task adds an id here when a pin reads badly in the picture or its page is being reworked.
+# Ids look like angel-numbers-444-meaning, or <page-slug>-q-<6 hex> for a question pin (see node scripts/pins.mjs --audit).

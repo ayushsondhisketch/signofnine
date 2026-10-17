@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/images.mjs && astro build && node scripts/sitemaps.mjs && pagefind --site dist --output-subdir _pagefind && node scripts/qa.mjs",
+    "build": "node scripts/images.mjs && node scripts/pins.mjs --render && astro build && node scripts/sitemaps.mjs && pagefind --site dist --output-subdir _pagefind && node scripts/qa.mjs && node scripts/pins.mjs --check",
     "preview": "astro preview",
     "qa": "node scripts/qa.mjs",
     "images": "node scripts/images.mjs",
+    "pins": "node scripts/pins.mjs",
     "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {

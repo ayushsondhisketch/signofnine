@@ -1,0 +1,33 @@
+name: Watch performance
+# Weekly Lighthouse run (mobile emulation, slow 4G) on ten key page types, the median of three runs each.
+# The latest result is the pinned issue "Monitor: performance". A page under the alert thresholds opens an alert.
+on:
+  schedule:
+    - cron: '23 22 * * 6'
+  workflow_dispatch:
+permissions:
+  contents: read
+  issues: write
+concurrency:
+  group: watch-performance
+  cancel-in-progress: false
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Lighthouse (not a dependency of the site)
+        run: npm i --no-save --no-audit --no-fund lighthouse@13.5.0 chrome-launcher@1.2.2
+      - name: Find Chrome
+        run: |
+          CH="$(command -v google-chrome || command -v google-chrome-stable || command -v chromium || command -v chromium-browser || true)"
+          echo "Chrome: ${CH:-not found}"
+          echo "CHROME_PATH=$CH" >> "$GITHUB_ENV"
+      - name: Run Lighthouse on the live site
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: node scripts/watch/lighthouse.mjs

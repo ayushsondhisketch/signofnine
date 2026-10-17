@@ -252,7 +252,7 @@ for (const p of pages) {
   // H2 answers: first paragraph 40 to 60 words is the target
   if (p.body) for (const sec of p.body.querySelectorAll('section')) { const h = sec.querySelector('h2'); const first = sec.querySelector(':scope > p'); if (h && first) { const n = words(text(first)).length; if (n < 25 || n > 90) S(`h2 "${text(h)}" answered in ${n} words (target 40 to 60)`), bump('h2-answer-length'); } }
   // every angel-number number page carries the honest paragraph and the arithmetic
-  if (/^\/angel-numbers\/(\d+|times\/[0-9-]+)\/$/.test(p.url)) {
+  if (/^\/angel-numbers\/(\d+|times\/[0-9-]+|\d+\/[a-z-]+)\/$/.test(p.url)) {
     if (!/frequency illusion/i.test(p.bodyText)) H('angel number page without the frequency-illusion paragraph');
     if (!/→|= \d/.test(text(p.article))) H('angel number page without the arithmetic line');
   }

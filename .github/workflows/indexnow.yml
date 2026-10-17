@@ -1,12 +1,26 @@
 name: IndexNow after deploy
-# Runs on every push to main (after Cloudflare Pages has had time to publish) and on demand.
+# Runs after a push to main that changes the site (Cloudflare Pages needs about two minutes to publish) and on demand.
+# It submits only the pages whose lastmod in the live sitemap is recent, so notes, docs and workflow commits submit nothing.
+# Manual run: Actions > IndexNow after deploy > Run workflow. Tick "all" to submit every URL.
 on:
   workflow_dispatch:
+    inputs:
+      all:
+        description: 'Submit every URL in the sitemap, not only recent changes'
+        type: boolean
+        default: false
   push:
     branches: [main]
+    paths-ignore:
+      - 'seo/**'
+      - '*.md'
+      - '.github/**'
+      - 'scripts/watch/**'
+      - 'scripts/gsc/**'
 jobs:
   submit:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -14,5 +28,5 @@ jobs:
           node-version: 22
       - name: Wait for Cloudflare Pages to publish
         run: sleep 180
-      - name: Submit sitemap URLs to IndexNow
-        run: node scripts/indexnow.mjs
+      - name: Submit changed URLs to IndexNow
+        run: node scripts/indexnow.mjs ${{ inputs.all && '--all' || '' }}

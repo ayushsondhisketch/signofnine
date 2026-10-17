@@ -13,7 +13,7 @@
 /og/*
   Cache-Control: public, max-age=604800
 
-/pins/*
+/pins/*.png
   Cache-Control: public, max-age=604800
 
 /_astro/*

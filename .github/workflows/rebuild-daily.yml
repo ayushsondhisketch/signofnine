@@ -1,0 +1,20 @@
+name: Daily rebuild
+# Pinterest pins are released by date: a pin whose date has come appears in its board feed at the next build.
+# This asks Cloudflare Pages for one build a day (just after 00:00 UTC) so pins go out on schedule even on days with no push.
+# It needs a Cloudflare Pages deploy hook stored as the repository secret CF_DEPLOY_HOOK (steps in seo/SETUP.md).
+# Without the secret it does nothing, and the feeds still refresh on every push.
+on:
+  schedule:
+    - cron: '12 0 * * *'
+  workflow_dispatch:
+jobs:
+  hook:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Trigger the Cloudflare Pages deploy hook
+        env:
+          HOOK: ${{ secrets.CF_DEPLOY_HOOK }}
+        run: |
+          if [ -z "$HOOK" ]; then echo "CF_DEPLOY_HOOK is not set; nothing to do."; exit 0; fi
+          curl -fsS -X POST "$HOOK" > /dev/null && echo "Deploy hook called."

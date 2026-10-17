@@ -34,6 +34,7 @@ const slugs = await publishedNumberSlugs();
   <link rel="canonical" href={canonicalUrl} />
   <meta name="robots" content={noindex ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'} />
   <meta name="author" content={SITE.author} />
+  {SITE.pinterestVerify && <meta name="p:domain_verify" content={SITE.pinterestVerify} />}
   <meta property="og:site_name" content={SITE.name} />
   <meta property="og:type" content={type} />
   <meta property="og:title" content={title || SITE.name} />

@@ -1,0 +1,48 @@
+{
+  "site": "https://signofnine.com",
+  "repo": "ayushsondhisketch/signofnine",
+  "live": {
+    "expectedMinUrls": 150,
+    "sampleForBots": 8,
+    "maxTtfbMs": 1500,
+    "botAgents": {
+      "Googlebot": "Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)",
+      "Bingbot": "Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)",
+      "GPTBot": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; GPTBot/1.2; +https://openai.com/gptbot",
+      "OAI-SearchBot": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; OAI-SearchBot/1.0; +https://openai.com/searchbot",
+      "ClaudeBot": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; ClaudeBot/1.0; +claudebot@anthropic.com)",
+      "PerplexityBot": "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)"
+    },
+    "browserAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36",
+    "feedBoards": ["angel-numbers", "love-twin-flame", "life-path", "numerology-2027", "numerology"]
+  },
+  "performance": {
+    "pages": [
+      "/",
+      "/angel-numbers/444/",
+      "/angel-numbers/1111/",
+      "/angel-numbers/1010/",
+      "/angel-numbers/times/11-11/",
+      "/life-path/7/",
+      "/life-path/calculator/",
+      "/personal-year/7/",
+      "/birthday-number/7/",
+      "/articles/is-numerology-real/"
+    ],
+    "runs": 3,
+    "warnBelow": { "performance": 90, "accessibility": 95, "best-practices": 95, "seo": 100 },
+    "alertBelow": { "performance": 80, "accessibility": 90, "best-practices": 90, "seo": 95 },
+    "warnAbove": { "lcpMs": 2500, "cls": 0.1, "tbtMs": 200 },
+    "alertAbove": { "lcpMs": 4000, "cls": 0.25, "tbtMs": 600 }
+  },
+  "search": {
+    "windowDays": 28,
+    "dailyDays": 180,
+    "queryRows": 5000,
+    "inspectPerRun": 400,
+    "tabs": { "daily": "Daily", "pages": "Performance", "queries": "Queries", "index": "Index", "summary": "Summary" }
+  },
+  "audit": {
+    "externalLinkTimeoutMs": 15000
+  }
+}

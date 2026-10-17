@@ -1,0 +1,65 @@
+---
+// A modifier page: one of the six angel-number readings that is big enough to need its own address (see src/content.config.ts),
+// for example /angel-numbers/333/twin-flame/. The number's own page keeps a short section that links here.
+import { getCollection, render } from 'astro:content';
+import Article from '../../../layouts/Article.astro';
+import InShort from '../../../components/InShort.astro';
+import Related from '../../../components/Related.astro';
+import { wordCount, readMinutes, allAngelNumbers } from '../../../lib/content.mjs';
+import { working, core, forms, mastersInside } from '../../../lib/numerology.mjs';
+import digits from '../../../data/digits.json';
+
+export async function getStaticPaths() {
+  const mods = await getCollection('modifiers');
+  return mods.map((entry) => ({ params: { slug: entry.data.parent, mod: entry.data.modifier }, props: { entry } }));
+}
+
+const LABELS = { 'twin-flame': 'Twin flame', love: 'Love', money: 'Money', warning: 'Warning' };
+const HUBS = { 'twin-flame': '/angel-numbers/twin-flame/', love: '/angel-numbers/love/' };
+const { entry } = Astro.props;
+const data = entry.data;
+const n = data.parent;
+const label = LABELS[data.modifier] || data.modifier.replace(/-/g, ' ');
+const { Content, headings } = await render(entry);
+
+const all = await allAngelNumbers();
+const parent = all.find((a) => a.n === n);
+const f = forms(n);
+const c = core(n);
+const w = working(n);
+const crumbs = [{ label: 'Angel numbers', href: '/angel-numbers/' }, { label: n, href: `/angel-numbers/${n}/` }, { label, href: `/angel-numbers/${n}/${data.modifier}/` }];
+
+const mods = await getCollection('modifiers');
+const related = [];
+if (parent) related.push({ n, href: parent.href, line: `${parent.line}; the full guide to ${n}` });
+for (const m of mods) {
+  if (m.id === entry.id) continue;
+  if (m.data.parent === n) related.push({ n: `${n} ${m.data.modifier.replace(/-/g, ' ')}`, href: `/angel-numbers/${n}/${m.data.modifier}/`, line: m.data.tile });
+}
+for (const m of mods) {
+  if (m.id !== entry.id && m.data.modifier === data.modifier && m.data.parent !== n) related.push({ n: `${m.data.parent} ${data.modifier.replace(/-/g, ' ')}`, href: `/angel-numbers/${m.data.parent}/${data.modifier}/`, line: m.data.tile });
+}
+if (HUBS[data.modifier]) related.push({ n: label, href: HUBS[data.modifier], line: `Every angel number read for ${label.toLowerCase()}` });
+for (const p of data.pairs || []) if (all.some((a) => a.n === p.n)) related.push({ n: p.n, href: `/angel-numbers/${p.n}/`, line: p.line });
+related.push({ n: c, href: `/numbers/${c}/`, line: `${digits[String(c)].line}; the core number` });
+
+const inside = mastersInside(n);
+const inShort = [['Meaning', data.inShort.meaning], ['Core number', data.inShort.core || `${n} reduces to ${c} (${w})${c !== Number(n) ? `, ${digits[String(c)].line.toLowerCase()}` : ''}`]];
+if (data.inShort.contains) inShort.push(['Also contains', data.inShort.contains]);
+else if (inside.length && String(n).length > 2) inShort.push(['Also contains', `${inside.join(' and ')}, ${inside.length > 1 ? 'master numbers' : 'a master number'} linked to ${digits[String(inside[0])].keywords[0]}`]);
+inShort.push(['Best response', data.inShort.response]);
+
+const words = wordCount(entry.body) + 160;
+const allHeadings = [...headings, { depth: 2, slug: 'related', text: 'Related numbers' }, ...(data.faq?.length ? [{ depth: 2, slug: 'faq', text: 'Questions people ask' }] : [])];
+---
+<Article
+  title={data.title} description={data.description} h1={data.h1} lead={data.lead} crumbs={crumbs} emblem={n} eyebrow={`Angel number ${label.toLowerCase()}`}
+  published={data.published} updated={data.updated} readMinutes={readMinutes(words)} faq={data.faq} headings={allHeadings} ogImage={`/og/angel-${n}-${data.modifier}.png`} current="angel">
+  <InShort slot="top" items={inShort} />
+  <Content />
+  <Fragment slot="after">
+    <div class="prose" style="margin-top:36px">
+      <Related items={related} />
+    </div>
+  </Fragment>
+</Article>
