@@ -23,6 +23,8 @@ The workflow runs every day by itself after that. Search data stays in the priva
 
 Done 2026-10-18: Ayush saved the two secrets and the agent ran the first export at 01:02 UTC. Export OK: property `sc-domain:signofnine.com`, 159 pages inspected, 3 indexed. The Sheet's title starts with a space, so search for it with `title contains`. Ayush was asked to delete the key file; that cannot be checked from here.
 
+Worth ten seconds, once: Search Console, Settings, Search generative AI should read "Include my site's links and content in Search generative AI features". That is the default; the point is that it stays on. The Generative AI performance report (impressions in AI Overviews and AI Mode) is a separate report in Search Console once the site has any.
+
 ## 2. Pinterest (about 20 minutes)
 
 Unlocks: the pin feeds. Angel-number and 2027 searches are strong on Pinterest, and a pin keeps sending visitors for months. `seo/pinterest.md` has the board names, descriptions and feed addresses to paste.
@@ -45,7 +47,7 @@ Still open and optional: the Pinterest account still has a generated username in
 
 ## 4. Bing Webmaster Tools (about 5 minutes)
 
-Unlocks: Bing indexing (which also feeds Copilot, DuckDuckGo and the sources ChatGPT search leans on) and Bing's own clicks and queries.
+Unlocks: Bing indexing (which also feeds Copilot, DuckDuckGo and the sources ChatGPT search leans on), Bing's own clicks and queries, and Bing's AI Performance report: how often Copilot and Bing's AI summaries cite the site, which pages, and the queries behind them.
 
 - [ ] https://www.bing.com/webmasters, sign in, Add a site, "Import from Google Search Console", pick signofnine.com. The sitemap comes with it. IndexNow is already running on every content push.
 

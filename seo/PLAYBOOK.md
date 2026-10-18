@@ -114,8 +114,20 @@ Kill rule: a page with no impressions at day 90 (2027-01-15), or under 10 impres
 
 ## 11. Assistants and AI answers
 
-- Keep `public/llms.txt` current when sections are added. Keep the In short box, the 40 to 60 word answer under each H2 and the FAQ accurate. Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot stay allowed in robots.txt; the live monitor fails if Cloudflare starts blocking them and warns when the live file differs from `public/robots.txt`.
-- Monthly: for the tracked queries in `seo/keywords.md`, note whether signofnine.com shows in WebSearch results. This is a rough signal only.
+Read on 2026-10-18 from the platforms' own pages. Re-read each quarter, and before changing anything in this section.
+
+- Google. A page can be linked in AI Overviews and AI Mode when it is indexed and eligible for a snippet; Google lists no further technical requirement. It calls llms.txt, special markup, chunking and rewriting for AI unnecessary, treats "GEO" as ordinary SEO, and names mass-produced pages, a separate page for every query variation and inauthentic mentions as spam. The site is included by default (Search Console, Settings, Search generative AI). The Generative AI performance report (impressions in AI Overviews and AI Mode by page, country, device and day) has been available to all sites since 2026-08-31; the Search Analytics API documents no AI type, so its numbers come from an export.
+- OpenAI. OAI-SearchBot decides whether a page can appear in ChatGPT search; GPTBot is for training. ChatGPT adds `utm_source=chatgpt.com` to the links it sends, and OpenAI says it can also find pages through third-party search providers.
+- Anthropic. ClaudeBot is for training, Claude-SearchBot builds the search index and Claude-User fetches a page when a person asks about it. All three follow robots.txt.
+- Microsoft. Copilot draws on Bing's index. Bing Webmaster Tools has an AI Performance report (public preview since February 2026) with citations, cited pages and the grounding queries behind them. It needs the Bing import (SETUP section 4), which is why that step matters more than any markup.
+
+What follows from it:
+
+1. Stay eligible. Every crawler above stays allowed (robots.txt, and Cloudflare's "Block AI bots" and Bot Preference Sync stay off); the daily live check requests the site as each of them. Pages are indexed in Google and in Bing (IndexNow on every push, the Bing import once). The robots meta keeps `max-snippet:-1`; never add `nosnippet`, `noai` or a preview limit.
+2. Be the source, not the summary. A page is worth citing when it carries what an assistant cannot produce from general knowledge: the working shown, both methods when they disagree, a named book with its year, a named verse, a table across all numbers, the honest paragraph. This is the gap line of section 2. There is no separate copy written for assistants.
+3. Make the answer easy to lift. The In short box, the 40 to 60 word answer under each H2 and the FAQ stay accurate and self-contained: a sentence quoted on its own still names the number and the tradition. Dates are real: `updated` moves only when the text moves.
+4. No tricks. No pages written for an assistant, no query-variation pages beyond the modifier allow-list, no comments, forum posts or swaps to create mentions (CLAUDE.md rule 10). Mentions come from pages worth linking to and from Pinterest. `public/llms.txt` stays current because it costs nothing; nothing is expected from it.
+5. Measure monthly (section 13, item 3): Search Console's Generative AI report and Bing's AI Performance report when they are available, referrals from chatgpt.com and the other assistants once Web Analytics is on, and the tracked-query check in `seo/keywords.md` as a rough signal. Write "not available" where there is no number.
 
 ## 12. Links and authority
 
@@ -125,7 +137,7 @@ The page-two ceiling is an authority problem, and pages do not fix it. Tasks nev
 
 1. Google updates since last month and the 28-day comparison.
 2. Tracked-query table: our visibility (rough), top three domains, SERP features, new entrants. Compare with last month. Update `seo/competitors.md` and `seo/keywords.md`.
-3. Search Console: clicks, impressions, position per folder; the three warning signals; the checkpoint table; the kill-rule list.
+3. Search Console: clicks, impressions, position per folder; the three warning signals; the checkpoint table; the kill-rule list. AI visibility: the Generative AI performance report (Search Console; impressions in AI Overviews and AI Mode by page) and, once the Bing import is done, Bing's AI Performance report (citations, cited pages, grounding queries). The export script reads neither, so ask Ayush once for an export or a screenshot of each; if he does not send them, write "not available" and move on.
 4. Gaps: queries with impressions and no matching page; People Also Ask questions new this month; competitor pages that appeared with a format we lack. Put at most eight rows in Proposed, each with the gap line.
 5. Queue: keep at least 12 rows under Next; apply the demand gate; list the rows that need Ayush to run a KWFinder check (the question for him is: volume US and UK for these exact queries).
 6. Pinterest: pins released, board counts, top pins if Pinterest analytics is available (Ayush may paste a screenshot).
