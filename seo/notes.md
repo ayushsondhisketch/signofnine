@@ -22,6 +22,7 @@ Not available yet: the Sheet "Sign of Nine Search Console" does not exist. Until
 
 ## Log
 
+- 2026-10-18 The daily rebuild is live: the repository secret `CF_DEPLOY_HOOK` is set. Tested by running the "Daily rebuild" workflow by hand at 00:39 UTC; the feeds' `lastBuildDate` moved from 00:06 to 00:40 UTC, so Cloudflare built the site from the hook. From now one build a day (00:12 UTC) releases the pins that are due. `seo/SETUP.md` section 3 ticked.
 - 2026-10-18 The first five pins (one per board) appeared within minutes of saving the feeds. Checked one: Pinterest built it from the feed item with our picture, the feed title, a clean description and the page link plus `?utm_source=Pinterest&utm_medium=organic`.
 - 2026-10-18 Pinterest is connected. After Ayush signed in to the built-in browser and said yes to the exact list, the agent created the five public boards with their descriptions and saved the five feeds in Settings, Bulk create Pins, Auto-publish, each to the board of the same name; the settings page lists all five after a reload. The profile shows signofnine.com as a verified domain. Pinterest says new items become pins within 24 hours, so each board should show its first pin by 2026-10-19. Open: the daily rebuild (`CF_DEPLOY_HOOK`) is still not set, so pins reach Pinterest only when something is pushed.
 - 2026-10-18 Feed items are now dated 00:00 UTC on their release day (was 06:00), so no item is ever dated after the build that lists it. Build and strict QA pass.

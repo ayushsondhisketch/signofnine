@@ -32,7 +32,7 @@ The names and descriptions live in `src/lib/pinboards.mjs`. Change them there fi
 - Two styles. Ring: the number in a gold ring with the page's headline and first sentence. Question: a question the page answers, with the first sentence of the answer.
 - Every word on a pin is already on the page it links to. A pin never promises more than the page gives. The pin link is the page URL, or an anchor to the question it answers.
 - The picture is 1000 x 1500, drawn at build time into `public/pins/<id>.png` (not committed). A pin lints for length, no em dashes, no exclamation marks and no words from the QA blocklist.
-- Release date. A pin shows in its board feed from its date in `src/data/pins.json` (UTC) for seven days. Feeds only change when the site is built: any push does it, and the daily rebuild does it when Ayush has set the `CF_DEPLOY_HOOK` secret (SETUP.md).
+- Release date. A pin shows in its board feed from its date in `src/data/pins.json` (UTC) for seven days. Feeds only change when the site is built: any push does it, and the daily rebuild does it at 00:12 UTC (the `CF_DEPLOY_HOOK` secret is set and tested, SETUP.md section 3).
 
 ## Pace
 

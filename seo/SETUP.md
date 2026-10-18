@@ -39,7 +39,7 @@ Still open and optional: the Pinterest account still has a generated username in
 - [ ] Keep robots.txt in the repository. In Cloudflare's "Manage AI bot access" section turn "Enable Bot Preference Sync" off (it writes Cloudflare's own allow and block choices above our file and cannot express per-crawler rules), make sure "Block AI bots" is off, and turn off "Managed robots.txt" if it still shows. The site's own robots.txt already allows Googlebot, Bingbot, GPTBot, OAI-SearchBot, ClaudeBot and PerplexityBot. The daily live check compares the live file with the repository file: it fails when a group blocks one of them and warns on any other difference, so a wrong setting shows up within a day.
 - [ ] Email for `hello@signofnine.com`. Mail for signofnine.com runs on Namecheap Private Email (the `mx1` and `mx2.privateemail.com` records, SPF and DKIM sit in Cloudflare DNS). Create the mailbox or alias `hello` in Private Email, then send a test message to it from another account. Do not turn on Cloudflare Email Routing: it replaces the MX records and mail to the domain stops arriving. The contact page and the policy pages publish this address; mail to it must arrive.
 - [ ] Web Analytics (free, no cookies, no consent banner): the Pages project, Metrics, Web Analytics, Enable. Unlocks visits by country, by page and by referrer (Pinterest, Bing, ChatGPT, Perplexity), and real-user speed. The agent cannot read it without a token (see 5).
-- [ ] Recommended, for the daily rebuild: the Pages project, Settings, Builds, Deploy hooks, Add deploy hook (name `daily`, branch `main`). Copy the URL into a GitHub repository secret named `CF_DEPLOY_HOOK`. Unlocks: Pinterest pins go out on their date even on days with no push. Without it the feeds change only when something is pushed, so pins reach Pinterest in batches of a few days instead of two a day.
+- [x] The daily rebuild: the Pages project, Settings, Builds, Deploy hooks, Add deploy hook (name `daily`, branch `main`), its URL stored as the GitHub repository secret `CF_DEPLOY_HOOK`. Done 2026-10-18 and tested the same day: running the "Daily rebuild" workflow by hand made Cloudflare build the site about a minute later. Unlocks: Pinterest pins go out on their date even on days with no push (the workflow calls the hook at 00:12 UTC, 05:42 India time). Without it the feeds would change only when something is pushed, so pins would reach Pinterest in batches of a few days instead of two a day.
 
 ## 4. Bing Webmaster Tools (about 5 minutes)
 
@@ -67,6 +67,7 @@ Unlocks: Bing indexing (which also feeds Copilot, DuckDuckGo and the sources Cha
 | Search Console export | daily 11:11 | pinned issue "Monitor: search" and the private Sheet |
 | Speed test (Lighthouse, ten page types) | Sunday 03:53 | pinned issue "Monitor: performance" |
 | Weekly audit (clean build, strict QA, links, pin queue) | Sunday 02:37 | pinned issue "Monitor: weekly audit" |
+| Daily rebuild (asks Cloudflare for one build, so the pins that are due are released) | daily 05:42 | nothing |
 | IndexNow (Bing, Yandex and others) | after each push that changes a page | nothing |
 
 GitHub emails you when an `alert` issue opens (Watch the repository, Custom, Issues). Alerts close themselves when the check passes again.
