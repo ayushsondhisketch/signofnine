@@ -4,9 +4,9 @@ One dated line per action, newest at the top of each section. The weekly health 
 
 ## Three numbers (weekly, from the Search Console Sheet)
 
-First export 2026-10-18 (data through 2026-10-16; the site launched 2026-10-17, so there is no search traffic yet). The weekly task rewrites these three lines every Sunday.
+Week of 2026-10-18 (Sheet export 06:04 UTC, data through 2026-10-16; 93 of 159 pages indexed; the site launched 2026-10-17, so there is no search traffic yet). The weekly task rewrites these three lines every Sunday.
 
-1. Computed-folder index share: 0% (0 of 67 computed pages indexed)
+1. Computed-folder index share: 41.79% (28 of 67 computed pages indexed; times 2 of 14, birthday 13 of 31)
 2. Pages with an impression in 28 days: 0% (0 of 159 pages)
 3. Sitewide position drift: no data yet
 
@@ -21,6 +21,8 @@ First export 2026-10-18 (data through 2026-10-16; the site launched 2026-10-17, 
 - September 2026 spam update: ended 2026-10-08, before the site launched on 2026-10-17. There is no "before" period, so the 28-day comparison does not apply; mark it checked as "not applicable" on 2026-11-05. The 14-day guard on edits to existing pages ran to 2026-10-22.
 
 ## Log
+
+- 2026-10-18 Weekly health: monitors live, audit, performance and search all PASS and fresh; no open alerts; five scheduled tasks enabled with future runs; Google status shows only the resolved September 2026 spam update (guard to 2026-10-22). Day-7 checkpoint (2026-10-24) not yet due. The live-site WebFetch spot check was refused (no provenance for signofnine.com), so the daily live monitor stands as the check. Nothing shipped this week besides launch.
 
 - 2026-10-18 Ayush delegated every SEO decision to Claude (CLAUDE.md now says so). Decisions: the modifier pages stay in the queue (separate intent and volume in each row, 1,500 words or more, one per run, the overlap gate, and each written for its own number); computed bands open only on the rules in section 5. `seo/PLAYBOOK.md` section 11 is rewritten from the platforms' own pages read today (Google's AI guide and Search Console help, OpenAI's publisher FAQ, Anthropic's crawler page, Bing's AI Performance report): being cited is ordinary SEO plus open crawlers plus Bing indexing, with no separate copy for assistants. The daily live check now also requests the site as ChatGPT-User, Claude-SearchBot, Claude-User and Perplexity-User and fails on a robots.txt group that blocks any of them.
 - 2026-10-18 `seo/PLAYBOOK.md` section 2 step 7 now asks for `node scripts/qa.mjs --verbose` on the page: a new page ends with no warnings of its own and an upgrade does not raise its page's count. Strict QA fails only the mechanical rules; the sentence-length and answer-length checks stay warnings, and the launch pages carry 890 of them (the refresh task works through them from 2026-11-03). Editorial share is 57% (91 of 159 indexable pages), well above the 40% floor.
