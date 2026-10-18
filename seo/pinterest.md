@@ -9,7 +9,7 @@ Edit these lines when Ayush says a step is done. The Health task reports the ope
 - Business account: created 2026-10-18, type Publisher or media, account name SignOfNine (profile https://www.pinterest.com/0fua8mrili7cmgbhvf51a7mdxh2aem/)
 - Website claimed: yes, 2026-10-18 (the profile shows signofnine.com as a verified domain link)
 - Boards created: yes, 2026-10-18: five public boards with the exact names and descriptions in the table below
-- Feeds: connected 2026-10-18 (Settings, Import content, Bulk create Pins, Auto-publish): all five, each saved to the board of the same name. Pinterest adds new feed items as pins within 24 hours of the feed changing, up to 200 a day.
+- Feeds: connected 2026-10-18 (Settings, Import content, Bulk create Pins, Auto-publish): all five, each saved to the board of the same name. Pinterest adds new feed items as pins within 24 hours of the feed changing, up to 200 a day. The first five pins (one per board) appeared within minutes.
 
 The Pins task keeps the queue filled ten days ahead and the feeds publish what is due at each build. A feed that stops loading means no new pins, so a `live:feeds` alert comes before anything else (PLAYBOOK section 15).
 
@@ -54,4 +54,4 @@ From 1 November to 31 January, at least one pin in three comes from the 2027 mat
 
 ## What this cannot see
 
-The agent has no access to Pinterest analytics. Saves and outbound clicks are visible only inside Ayush's account. What the agent can read is referral traffic from pinterest.com (Search Console does not show it; the analytics tool does once Ayush installs one) and whether pins from the domain appear at https://www.pinterest.com/source/signofnine.com/. The daily live check also requests each feed and one picture per feed as Pinterestbot, so a Cloudflare bot rule that blocks Pinterest raises an alert within a day. If the pins do not show there two weeks after the feeds are connected, ask Ayush to open Settings, Auto-publish, and tell us what the feed status says.
+Pinterest adds `?utm_source=Pinterest&utm_medium=organic` to every pin link, so visits from pins carry `utm_source=Pinterest` in any analytics tool. The agent has no access to Pinterest analytics. Saves and outbound clicks are visible only inside Ayush's account. What the agent can read is referral traffic from pinterest.com (Search Console does not show it; the analytics tool does once Ayush installs one) and whether pins from the domain appear at https://www.pinterest.com/source/signofnine.com/. The daily live check also requests each feed and one picture per feed as Pinterestbot, so a Cloudflare bot rule that blocks Pinterest raises an alert within a day. If the pins do not show there two weeks after the feeds are connected, ask Ayush to open Settings, Auto-publish, and tell us what the feed status says.

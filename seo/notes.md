@@ -22,6 +22,7 @@ Not available yet: the Sheet "Sign of Nine Search Console" does not exist. Until
 
 ## Log
 
+- 2026-10-18 The first five pins (one per board) appeared within minutes of saving the feeds. Checked one: Pinterest built it from the feed item with our picture, the feed title, a clean description and the page link plus `?utm_source=Pinterest&utm_medium=organic`.
 - 2026-10-18 Pinterest is connected. After Ayush signed in to the built-in browser and said yes to the exact list, the agent created the five public boards with their descriptions and saved the five feeds in Settings, Bulk create Pins, Auto-publish, each to the board of the same name; the settings page lists all five after a reload. The profile shows signofnine.com as a verified domain. Pinterest says new items become pins within 24 hours, so each board should show its first pin by 2026-10-19. Open: the daily rebuild (`CF_DEPLOY_HOOK`) is still not set, so pins reach Pinterest only when something is pushed.
 - 2026-10-18 Feed items are now dated 00:00 UTC on their release day (was 06:00), so no item is ever dated after the build that lists it. Build and strict QA pass.
 - 2026-10-18 Pins: queued 8 more (queue runs to 2026-10-28; 25 queued, 5 released, one on every board). Pictures looked at, build and pin check pass. Pushed after 00:00 UTC so the life-path and numerology feeds list their first pin before Ayush connects them.
