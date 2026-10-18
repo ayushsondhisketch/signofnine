@@ -6,12 +6,12 @@ Pinterest is a search engine for people who save things, and angel numbers and 2
 
 Edit these lines when Ayush says a step is done. The Health task reports the open ones once in the Sunday digest, not every week.
 
-- Business account: created 2026-10-18, type Publisher or media (per Ayush)
-- Website claimed: yes, 2026-10-18 (per Ayush; method not stated, check it in the account)
-- Boards created: no
-- Feeds: not connected
+- Business account: created 2026-10-18, type Publisher or media, account name SignOfNine (profile https://www.pinterest.com/0fua8mrili7cmgbhvf51a7mdxh2aem/)
+- Website claimed: yes, 2026-10-18 (the profile shows signofnine.com as a verified domain link)
+- Boards created: yes, 2026-10-18: five public boards with the exact names and descriptions in the table below
+- Feeds: connected 2026-10-18 (Settings, Import content, Bulk create Pins, Auto-publish): all five, each saved to the board of the same name. Pinterest adds new feed items as pins within 24 hours of the feed changing, up to 200 a day.
 
-While Feeds says "not connected", the Pins task still keeps the queue filled (pins are cheap to make and a connected feed shows the latest seven days, never fewer than three pins). Nothing else changes.
+The Pins task keeps the queue filled ten days ahead and the feeds publish what is due at each build. A feed that stops loading means no new pins, so a `live:feeds` alert comes before anything else (PLAYBOOK section 15).
 
 ## Boards and feeds
 
