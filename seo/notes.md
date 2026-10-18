@@ -4,11 +4,11 @@ One dated line per action, newest at the top of each section. The weekly health 
 
 ## Three numbers (weekly, from the Search Console Sheet)
 
-Not available yet: the Sheet "Sign of Nine Search Console" does not exist. Until it does, the weekly task writes "no Search Console data" here and the data-driven refresh and band gates stay closed.
+First export 2026-10-18 (data through 2026-10-16; the site launched 2026-10-17, so there is no search traffic yet). The weekly task rewrites these three lines every Sunday.
 
-1. Computed-folder index share: n/a
-2. Pages with an impression in 28 days: n/a
-3. Sitewide position drift: n/a
+1. Computed-folder index share: 0% (0 of 67 computed pages indexed)
+2. Pages with an impression in 28 days: 0% (0 of 159 pages)
+3. Sitewide position drift: no data yet
 
 ## Checkpoints
 
@@ -22,6 +22,7 @@ Not available yet: the Sheet "Sign of Nine Search Console" does not exist. Until
 
 ## Log
 
+- 2026-10-18 Search Console to Sheet is connected. Ayush saved `GSC_SERVICE_ACCOUNT_JSON` and `GSC_SHEET_ID`; the first export (run by hand, 01:02 UTC) passed: property `sc-domain:signofnine.com`, data through 2026-10-16, 159 pages inspected with 0 errors, 3 indexed (the home page, one angel-number page, one life-path page), 86 "discovered, currently not indexed", the rest unknown to Google, no impressions yet. The Sheet's title starts with a space, so a lookup must use `title contains`; `CLAUDE.md` now says so. `seo/SETUP.md` section 1 ticked.
 - 2026-10-18 Ayush says `hello@signofnine.com` now exists in Namecheap Private Email; not tested by the agent (it cannot send mail). `seo/SETUP.md` section 3 ticked. The Search Console to Sheet steps (section 1) were walked through in chat; waiting for the two secrets, then the agent runs the first export and checks the Sheet.
 - 2026-10-18 The daily rebuild is live: the repository secret `CF_DEPLOY_HOOK` is set. Tested by running the "Daily rebuild" workflow by hand at 00:39 UTC; the feeds' `lastBuildDate` moved from 00:06 to 00:40 UTC, so Cloudflare built the site from the hook. From now one build a day (00:12 UTC) releases the pins that are due. `seo/SETUP.md` section 3 ticked.
 - 2026-10-18 The first five pins (one per board) appeared within minutes of saving the feeds. Checked one: Pinterest built it from the feed item with our picture, the feed title, a clean description and the page link plus `?utm_source=Pinterest&utm_medium=organic`.

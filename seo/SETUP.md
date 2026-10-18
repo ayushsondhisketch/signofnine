@@ -8,18 +8,20 @@ Order of value: 1 (Search Console data), 2 (Pinterest), 3 (Cloudflare), 4 (Bing)
 
 Unlocks: clicks, impressions, positions, queries and the index status of every URL, every day. Without it the Refresh task, the page-two work, the kill rule, the checkpoints and the Pinterest/Google read-out are blind. This is the one step that matters most.
 
-- [ ] Google Cloud: open https://console.cloud.google.com, create a project named `signofnine-seo` (any name works).
-- [ ] In that project, APIs and services, Library: enable "Google Search Console API" and "Google Sheets API".
-- [ ] IAM and Admin, Service accounts, Create service account: name `signofnine-monitor`, skip the optional role and user steps. Open it, Keys, Add key, Create new key, JSON. A file downloads. Treat it like a password.
-- [ ] Search Console (https://search.google.com/search-console), pick the signofnine.com property, Settings, Users and permissions, Add user: paste the service account's email (it ends in `.iam.gserviceaccount.com`), permission Full.
-- [ ] Google Sheets: create a blank sheet named `Sign of Nine Search Console`. Share it with the same service account email as Editor. Copy the sheet ID from its address (the long text between `/d/` and `/edit`).
-- [ ] GitHub, repository ayushsondhisketch/signofnine, Settings, Secrets and variables, Actions, New repository secret. Two secrets:
+- [x] Google Cloud: open https://console.cloud.google.com, create a project named `signofnine-seo` (any name works).
+- [x] In that project, APIs and services, Library: enable "Google Search Console API" and "Google Sheets API".
+- [x] IAM and Admin, Service accounts, Create service account: name `signofnine-monitor`, skip the optional role and user steps. Open it, Keys, Add key, Create new key, JSON. A file downloads. Treat it like a password.
+- [x] Search Console (https://search.google.com/search-console), pick the signofnine.com property, Settings, Users and permissions, Add user: paste the service account's email (it ends in `.iam.gserviceaccount.com`), permission Full.
+- [x] Google Sheets: create a blank sheet named `Sign of Nine Search Console`. Share it with the same service account email as Editor. Copy the sheet ID from its address (the long text between `/d/` and `/edit`).
+- [x] GitHub, repository ayushsondhisketch/signofnine, Settings, Secrets and variables, Actions, New repository secret. Two secrets:
   - `GSC_SERVICE_ACCOUNT_JSON`: paste the whole content of the downloaded JSON file.
   - `GSC_SHEET_ID`: the sheet ID.
-- [ ] Delete the downloaded JSON file from the computer. Never paste it in a chat.
-- [ ] Optional check: Actions, Watch search, Run workflow. A minute later the Sheet fills (tabs Summary, Performance, Queries, Daily, Index) and the pinned issue "Monitor: search" says "Export OK".
+- [x] Delete the downloaded JSON file from the computer. Never paste it in a chat.
+- [x] Optional check: Actions, Watch search, Run workflow. A minute later the Sheet fills (tabs Summary, Performance, Queries, Daily, Index) and the pinned issue "Monitor: search" says "Export OK".
 
 The workflow runs every day by itself after that. Search data stays in the private Sheet; the public GitHub issue only gets counts.
+
+Done 2026-10-18: Ayush saved the two secrets and the agent ran the first export at 01:02 UTC. Export OK: property `sc-domain:signofnine.com`, 159 pages inspected, 3 indexed. The Sheet's title starts with a space, so search for it with `title contains`. Ayush was asked to delete the key file; that cannot be checked from here.
 
 ## 2. Pinterest (about 20 minutes)
 
