@@ -37,7 +37,7 @@ ${items.map((p) => {
 <title>${x(p.title)}</title>
 <link>${x(pinLink(p))}</link>
 <guid isPermaLink="false">signofnine-pin-${p.id}</guid>
-<pubDate>${new Date(`${p.date}T06:00:00Z`).toUTCString()}</pubDate>
+<pubDate>${new Date(`${p.date}T00:00:00Z`).toUTCString()}</pubDate>
 <description><![CDATA[<p><img src="${img}" alt="${x(p.alt)}" width="1000" height="1500"></p><p>${x(p.description)}</p>]]></description>
 <enclosure url="${img}" length="${fs.statSync(p.file).size}" type="image/png"/>
 <media:content url="${img}" medium="image" type="image/png" width="1000" height="1500"/>

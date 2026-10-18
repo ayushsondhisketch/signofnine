@@ -22,6 +22,7 @@ Not available yet: the Sheet "Sign of Nine Search Console" does not exist. Until
 
 ## Log
 
+- 2026-10-18 Feed items are now dated 00:00 UTC on their release day (was 06:00), so no item is ever dated after the build that lists it. Build and strict QA pass.
 - 2026-10-18 Pins: queued 8 more (queue runs to 2026-10-28; 25 queued, 5 released, one on every board). Pictures looked at, build and pin check pass. Pushed after 00:00 UTC so the life-path and numerology feeds list their first pin before Ayush connects them.
 - 2026-10-18 To check at the first refresh (from 2026-11-03): the lead of /articles/how-to-calculate-your-life-path-number/ calls the life path number "the most searched figure in numerology" with no source, and its pin (2026-10-26) repeats that line. Source it or soften it, then queue the pin again with `node scripts/pins.mjs --page`.
 - 2026-10-18 The daily live check now requests every feed and one picture per feed as Pinterestbot too (`seo/watch.config.json`, `scripts/watch/live.mjs`), so a Cloudflare bot rule that blocks Pinterest raises an alert within a day.
