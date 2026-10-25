@@ -4,15 +4,17 @@ One dated line per action, newest at the top of each section. The weekly health 
 
 ## Three numbers (weekly, from the Search Console Sheet)
 
-Week of 2026-10-18 (Sheet export 06:04 UTC, data through 2026-10-16; 93 of 159 pages indexed; the site launched 2026-10-17, so there is no search traffic yet). The weekly task rewrites these three lines every Sunday.
+Week of 2026-10-25 (Sheet export 06:09 UTC, data through 2026-10-23; 127 of 159 pages indexed, 79.87%). The weekly task rewrites these three lines every Sunday.
 
-1. Computed-folder index share: 41.79% (28 of 67 computed pages indexed; times 2 of 14, birthday 13 of 31)
-2. Pages with an impression in 28 days: 0% (0 of 159 pages)
-3. Sitewide position drift: no data yet
+1. Computed-folder index share: 62.69% (42 of 67 computed pages indexed; times 8 of 14, birthday 17 of 31, four-digit 17 of 22; not-indexed share per folder is under 50%, so warning signal 1 is clear)
+2. Pages with an impression in 28 days: 65.41% (104 of 159 pages)
+3. Sitewide position drift: no data yet (average position 26.36; no earlier window to compare)
 
 ## Checkpoints
 
 (The weekly task writes "YYYY-MM-DD Day N: pass or fail, one line" when it evaluates one. Dates are in `seo/PLAYBOOK.md` section 6.)
+
+- 2026-10-25 Day 7: Google part pass, Bing part not judged. Home page and all 11 angel pages are indexed on Google (Index tab, "Submitted and indexed"). Bing indexing could not be read: Bing Webmaster Tools is not set up (SETUP section 4).
 
 ## Google updates seen
 
@@ -21,6 +23,8 @@ Week of 2026-10-18 (Sheet export 06:04 UTC, data through 2026-10-16; 93 of 159 p
 - September 2026 spam update: ended 2026-10-08, before the site launched on 2026-10-17. There is no "before" period, so the 28-day comparison does not apply; mark it checked as "not applicable" on 2026-11-05. The 14-day guard on edits to existing pages ran to 2026-10-22.
 
 ## Log
+
+- 2026-10-25 Weekly health: monitors live, search, performance and audit all PASS and fresh; no open alerts; live spot-check of home, sitemap index (11 sitemaps) and angel-numbers feed (RSS, 1 item released so far) fine; no Google update rolling out (Sept spam update resolved 2026-10-08). Scheduled tasks: weekly health shows last run FAILED (access denied) at 06:57 UTC today; this session is the rerun. Shipped this week: S-1111 upgrade, pins through 2026-11-11.
 
 - 2026-10-23 S-1111 done: /angel-numbers/1111/ gained "What is the 11/11 portal?" and one FAQ (six now). Gap: the SERP (Nylon, Green Matters, People via AOL) gives no date arithmetic, no history of the date and no skeptical line; ours has the 2026 working (2+0+2+6=10→1; 11+11+1=23→5), Armistice 1918, Singles' Day 2009, and says no named source for "portal" was found. Guard: spam update ended 2026-10-08, window over 2026-10-22. Page QA warnings did not rise. Pins 2026-11-09 and 2026-11-11. Read impressions for "11/11 portal" from 2026-11-20.
 - 2026-10-18 Weekly health: monitors live, audit, performance and search all PASS and fresh; no open alerts; five scheduled tasks enabled with future runs; Google status shows only the resolved September 2026 spam update (guard to 2026-10-22). Day-7 checkpoint (2026-10-24) not yet due. The live-site WebFetch spot check was refused (no provenance for signofnine.com), so the daily live monitor stands as the check. Nothing shipped this week besides launch.
