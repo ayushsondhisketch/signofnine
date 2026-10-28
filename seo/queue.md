@@ -10,7 +10,6 @@ Gates: `date` = not before that day. `parent` = the parent page shows as indexed
 
 ## Next
 
-- [M-333-twin-flame] new | /angel-numbers/333/twin-flame/ | gate: date 2026-10-26 | volume: cluster "333 angel number meaning twin flame" 5,530 a month, 14 keywords, current top page 2,000 visits, KD 0 (Ahrefs, 17 Oct 2026) | The number page keeps a short summary section that links to the new page; the new page carries the full reading (1,500 words or more). Title carries "333 Angel Number Twin Flame Meaning". Intent model: twin flame (meeting, reunion, separation, union), time, what to do. Check URL form against the folder rules in the checklist before building.
 - [M-555-twin-flame] new | /angel-numbers/555/twin-flame/ | gate: date 2026-10-28 | volume: 5,150 a month, 15 keywords, top page 1,700 visits, KD 0 | Same intent model as 333, written for this number alone: its own tradition readings, its own named verse or book, its own pairs. Start from the template, never from another modifier page; QA fails a pair above 20 percent overlap.
 - [T-444] upgrade | /angel-numbers/444/ | gate: none | Same template gaps as T-222.
 - [M-222-twin-flame] new | /angel-numbers/222/twin-flame/ | gate: date 2026-11-02 | volume: 7,370 a month, 16 keywords, top page 3,100 visits, KD 28 | Same intent model as 333, written for this number alone: its own tradition readings, its own named verse or book, its own pairs. Start from the template, never from another modifier page; QA fails a pair above 20 percent overlap.
@@ -44,6 +43,7 @@ Ayush is asked each month to run a KWFinder check (US and UK, the exact queries)
 
 ## Done
 
+- 2026-10-28 [M-333-twin-flame] /angel-numbers/333/twin-flame/ | "333 Angel Number Twin Flame Meaning: Meeting, Separation" (about 2,100 words; parent 333 section shortened to a summary; links added from the twin-flame hub, 444 and 999). Gap: the top pages (Vogue PH, Crystals.com) give a few unsourced paragraphs; this page names the origin (Plato, Symposium; Prophet, Soul Mates and Twin Flames, 1999 edition), splits the stages and adds the skeptic paragraph.
 - 2026-10-26 [T-222] /angel-numbers/222/ | added "The numerology, origin and zodiac link of 222" (Virtue 2005, digit 2 to Moon to Cancer, attributed); Isaiah 22:22 already named in the biblical section. Gap: the SERP names no book or zodiac link.
 - 2026-10-23 [S-1111] /angel-numbers/1111/ | added "What is the 11/11 portal?" (date arithmetic, Armistice and Singles' Day context, link to /angel-numbers/times/11-11/) and FAQ "Is 11/11 a lucky day?"; two pins queued for 2026-11-09 and 2026-11-11.
 - 2026-10-17 launch: 161 pages (11 angel-number pages, 8 hubs, 8 articles, 13 number meanings, 12 life path pages, 12 compatibility pages, 11 personal year pages, 4 core number guides, 31 birthday numbers, 20 four-digit numbers, 14 clock times, calculators and fixed pages).
