@@ -43,7 +43,7 @@ This site presents the twin flame readings as what that tradition says. It is a 
 
 Separation is the stage people search for most, and the tradition reads four numbers into it. 444 is the foundation holding: the connection has a base and the time apart is building something. 777 is the inner work: the separation is doing what it should and the lessons are being learned.
 
-999 is the separation phase completing, with its lessons done. 555 is the separation ending, a change in the connection that the tradition reads as preceding a reunion. 666 is read as a call to re-center, for someone who has lost themselves either inside the connection or in a distraction from it.
+999 is the separation phase completing, with its lessons done. [555 for twin flames](/angel-numbers/555/twin-flame/) is the separation ending, a change in the connection that the tradition reads as preceding a reunion. 666 is read as a call to re-center, for someone who has lost themselves either inside the connection or in a distraction from it.
 
 ## The numbers of reunion
 

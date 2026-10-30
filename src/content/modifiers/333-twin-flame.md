@@ -82,7 +82,7 @@ If the separation follows a breakup that hurt you, a counselor is a better first
 
 Before a reunion, twin-flame writers read 333 as preparation. The growth comes first, and the reunion, if it comes, is read as the result. The advice that goes with it is to communicate openly and to let the connection move at its own speed.
 
-Writers pair 333 with other numbers here. They read 555 as change in the connection, 999 as a cycle completing and 1111 as the central twin-flame number.
+Writers pair 333 with other numbers here. They read 555 as change in the connection (see [555 twin flame meaning](/angel-numbers/555/twin-flame/)), 999 as a cycle completing and 1111 as the central twin-flame number.
 
 No source gives a date for a reunion, and the writers disagree on which number comes before it.
 
