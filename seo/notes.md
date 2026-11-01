@@ -4,11 +4,11 @@ One dated line per action, newest at the top of each section. The weekly health 
 
 ## Three numbers (weekly, from the Search Console Sheet)
 
-Week of 2026-10-25 (Sheet export 06:09 UTC, data through 2026-10-23; 127 of 159 pages indexed, 79.87%). The weekly task rewrites these three lines every Sunday.
+Week of 2026-11-01 (Sheet export 06:23 UTC, data through 2026-10-30; 127 of 161 pages indexed, 78.88%). The weekly task rewrites these three lines every Sunday.
 
 1. Computed-folder index share: 62.69% (42 of 67 computed pages indexed; times 8 of 14, birthday 17 of 31, four-digit 17 of 22; not-indexed share per folder is under 50%, so warning signal 1 is clear)
-2. Pages with an impression in 28 days: 65.41% (104 of 159 pages)
-3. Sitewide position drift: no data yet (average position 26.36; no earlier window to compare)
+2. Pages with an impression in 28 days: 65.22% (105 of 161 pages; last week 65.41%, flat)
+3. Sitewide position drift: no data yet (average position 27.46, up from 26.36 last week; the Sheet has no earlier 28-day window to compare)
 
 ## Checkpoints
 
@@ -23,6 +23,8 @@ Week of 2026-10-25 (Sheet export 06:09 UTC, data through 2026-10-23; 127 of 159 
 - September 2026 spam update: ended 2026-10-08, before the site launched on 2026-10-17. There is no "before" period, so the 28-day comparison does not apply; mark it checked as "not applicable" on 2026-11-05. The 14-day guard on edits to existing pages ran to 2026-10-22.
 
 ## Log
+
+- 2026-11-01 Weekly health: monitors live, search, performance and audit all PASS and fresh; no open alerts; five scheduled tasks enabled with future runs and no failed last run (this run is the weekly health one). Google status feed shows only the resolved September 2026 spam update (ended 2026-10-08), nothing rolling out; its 28-day check is due 2026-11-05. Live spot-check: first WebFetch attempts were refused (provenance), a retry loaded a live page (21:21, one H1); home, sitemap index and angel-numbers feed rely on the daily live monitor (161 of 161 pages 200, 5 feeds RSS). Impressions 4,650 and clicks 12 in the 28 days to 2026-10-30. No checkpoint due (Day 30 is 2026-11-16). Shipped this week: T-222 upgrade, M-333-twin-flame and M-555-twin-flame new pages, pins through 2026-11-11.
 
 - 2026-10-25 Weekly health: monitors live, search, performance and audit all PASS and fresh; no open alerts; live spot-check of home, sitemap index (11 sitemaps) and angel-numbers feed (RSS, 1 item released so far) fine; no Google update rolling out (Sept spam update resolved 2026-10-08). Scheduled tasks: weekly health shows last run FAILED (access denied) at 06:57 UTC today; this session is the rerun. Shipped this week: S-1111 upgrade, pins through 2026-11-11.
 
