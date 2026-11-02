@@ -19,7 +19,11 @@ Gates: `date` = not before that day. `parent` = the parent page shows as indexed
 - [T-111] upgrade | /angel-numbers/111/ | gate: none | Same template gaps.
 - [S-111] seasonal upgrade | /angel-numbers/111/ | gate: none | live by 2026-12-21 | Dated section "111 and 1/11".
 - [T-1111] upgrade | /angel-numbers/1111/ | gate: after S-1111 | Same template gaps (Proverbs 11:11 and Matthew 11:11 are the paired verses); this is also the 11:11 page, so check the wording against /angel-numbers/times/11-11/ for overlap.
-- [T-777] [T-888] [T-999] [T-666] [T-1212] upgrade | the five remaining angel pages, one per run | gate: none | Same template gaps.
+- [T-777] upgrade | /angel-numbers/777/ | gate: none | Same template gaps; one per run.
+- [T-888] upgrade | /angel-numbers/888/ | gate: none | Same template gaps; one per run.
+- [T-999] upgrade | /angel-numbers/999/ | gate: none | Same template gaps; one per run.
+- [T-666] upgrade | /angel-numbers/666/ | gate: none | Same template gaps; one per run.
+- [T-1212] upgrade | /angel-numbers/1212/ | gate: none | Same template gaps; one per run.
 - [S-222] seasonal upgrade | /angel-numbers/222/ | gate: none | live by 2027-01-28 | Dated section "222 and 2/22".
 
 ## Proposed (need a volume figure before they can be built)
@@ -32,8 +36,10 @@ Ayush is asked each month to run a KWFinder check (US and UK, the exact queries)
 - [N-ex-returning] new | Angel numbers for an ex coming back (hub) | Evidence: 14 People Also Ask questions on breakups and exes; 49 "which number means" questions across the clusters.
 - [N-1111-love] new | /angel-numbers/1111/love/ | Evidence: 69,290 searches a month in the cluster, 15 keywords, KD 12, but the page that ranks draws 900 visits because the Overview answers it. Build last, and only when the 1111 page shows impressions for the love phrasings (Summary tab).
 - [N-origin] new | Where angel numbers come from (Doreen Virtue, 2005, and what came before) | A link and mention candidate, not a volume play. Needs Ayush's approval as an exception to the volume floor.
-- [N-pairs] computed | Angel number pair pages (222 and 333, 111 and 1111, 333 and 444 ...) | Evidence: 448 unique keywords name two numbers, 8,380 searches a month; the top twelve pairs run from 820 down to 190. A band, so it waits for AdSense approval and for the first band to be half indexed. Needs a `composePair` in `src/lib/compose.mjs` and a route.
+- [N-pairs] computed | Angel number pair pages (222 and 333, 111 and 1111, 333 and 444 ...) | Evidence: 448 unique keywords name two numbers, 8,380 searches a month; the top twelve pairs run from 820 down to 190; Search Console (Oct 2026) already shows "1111 and 555 meaning love" (10 impressions) and "777 and 999 angel number meaning" (9) landing on single-number pages. A band, so it waits for AdSense approval and for the first band to be half indexed. Needs a `composePair` in `src/lib/compose.mjs` and a route.
 - [N-times] computed | The rest of the clock times | Needs the "11:11 meaning", "3:33 meaning" and five random time exports first (the Ahrefs files match "angel number" only).
+
+KWFinder check asked on 2026-11-02 (US and UK, exact queries): karmic debt number 16 meaning; karmic debt number calculator; house number numerology; wedding date numerology 2027; angel number ex coming back; 222 and 333 angel number together; 444 and 555 angel number together; angel numbers 12:34 time.
 
 ## Parked
 

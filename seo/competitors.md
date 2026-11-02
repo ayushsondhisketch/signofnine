@@ -28,3 +28,13 @@ Every top result has the number, a meaning, a love reading and a money reading. 
 ## Log
 
 (The monthly review adds "YYYY-MM: what changed" blocks here.)
+
+### 2026-11 (read 2026-11-02, WebSearch standard, 14 queries; not Google's order)
+
+- Head angel numbers (444, 555, 1111): Mental Floss, Crystals.com, Bustle, HowStuffWorks, AOL, Astrology.com, LoveToKnow, Xonecole; the rest is scraped copies on unrelated domains. signofnine.com not shown. 1111 has a dated item from thesunpapers.com (2026-10-28), so the 11/11 window is being targeted.
+- 222 twin flame: Crystals.com, Newsweek, Blavity, AOL, Astrotalk, Astrology.com. 444 questions: AOL, Substack posts, Reddit.
+- Personal year 2027: new entrant astromedha.in with one page per personal year in 2027; Ganeshaspeaks, Astrotalk and Astroyogi lead "numerology 2027". Gap kept: nobody shows the arithmetic for 2027 as an 11/2 universal year.
+- Life path calculator: 101planners, datenumerology.onrender.com, miniwebtool, roxyapi (none with both methods).
+- Karmic debt 16: Bustle, helenthomas.org, Astrotalk, Astromedha, yourtango, astrosight.ai. Still no detector.
+- House numbers: PropertyPistol, kundligpt, panchangbodh, a Substack; no unit-letter calculator seen. Wedding dates: The Knot, thebudgetsavvybride, new thewed.com page "Lucky wedding dates in 2027", weddings.vegas.
+- SERP features cannot be read through this search tool (no AI Overview, People Also Ask or video data), so none are recorded this month.
