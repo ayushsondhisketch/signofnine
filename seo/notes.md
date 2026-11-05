@@ -24,6 +24,10 @@ Week of 2026-11-01 (Sheet export 06:23 UTC, data through 2026-10-30; 127 of 161 
 
 ## Log
 
+- 2026-11-05 Refresh (data method, PLAYBOOK 4a; Google status clear, only the September 2026 spam update, ended 2026-10-08; Sheet window 2026-10-06 to 11-02, no earlier window so "rising" not judged; the 11-03 pages 0-00 and love left alone, edited under 14 days ago). Two pages, one FAQ entry each (about 40 words), no new section, description and lead unchanged.
+  - /angel-numbers/times/1-11/: 471 impressions, position 11.51, 0 clicks; queries "1/11" 61 at 11.07, "1 11" 25 at 16.32, "1:11" 34 at 7.56. Added FAQ "Does 1/11 mean the same as 1:11?" (clock versus date, 11 January US, 1 November UK). updated 2026-11-05. Read the effect from 2026-12-03.
+  - /angel-numbers/times/21-21/: 97 impressions, position 17.14, 0 clicks; queries "21:21" 26 at 11.42, "21 21" 9 at 31.56, "21 + 21" 4 at 7.75, "what time is 21:21" 2 at 11. Added FAQ "What time is 21:21?" (9:21 p.m., 24-hour clock only). updated 2026-11-05. Read the effect from 2026-12-03.
+  - Left alone on purpose: 5-55 (position 7.75 for "5:55", answers it), 12-34 (position 3.11 for "12:34").
 - 2026-11-03 Refresh (data method, PLAYBOOK 4a; Google status clear, only the September spam update, ended 2026-10-08; Sheet window 2026-10-04 to 10-31, no earlier window so "rising" not judged). Two pages, no new sections.
   - /angel-numbers/times/0-00/: 724 impressions, position 11.22, 1 click; queries "0,00" 119 at 8.36, "00:00" 69 at 9.41, "00:00 o clock meaning" 33, "time 00.00 means" 11. Description now names the 0:00 and 00.00 spellings; one FAQ added ("What does 00.00 or 0:00 mean?", about 30 words). updated 2026-11-03. Read the effect from 2026-12-01.
   - /angel-numbers/love/: 302 impressions, position 12.74, 3 clicks; queries "love number" 66 at 10.82, "what is the number of love" 16 at 8.81, "number of love" 12 at 9.33. Lead now answers it in one added sentence (2 and 6, 222 attributed to the tradition, about 28 words). updated 2026-11-03. Read the effect from 2026-12-01.
