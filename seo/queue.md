@@ -10,7 +10,6 @@ Gates: `date` = not before that day. `parent` = the parent page shows as indexed
 
 ## Next
 
-- [M-222-twin-flame] new | /angel-numbers/222/twin-flame/ | gate: date 2026-11-02 | volume: 7,370 a month, 16 keywords, top page 3,100 visits, KD 28 | Same intent model as 333, written for this number alone: its own tradition readings, its own named verse or book, its own pairs. Start from the template, never from another modifier page; QA fails a pair above 20 percent overlap.
 - [T-333] upgrade | /angel-numbers/333/ | gate: none | Same template gaps; shorten the twin flame section to a summary once M-333-twin-flame is live.
 - [M-444-love] new | /angel-numbers/444/love/ | gate: date 2026-11-06 | volume: 9,580 a month, 15 keywords, top page 5,100 visits, KD 34 | Same shape; intent: love, single, crush, ex, soulmate, relationship.
 - [T-555] upgrade | /angel-numbers/555/ | gate: none | Same template gaps (Psalm 55:5 and Isaiah 55:5 are the verses Google pairs with 555); shorten the twin flame section once M-555-twin-flame is live.
@@ -47,6 +46,7 @@ KWFinder check asked on 2026-11-02 (US and UK, exact queries): karmic debt numbe
 
 ## Done
 
+- 2026-11-06 [M-222-twin-flame] /angel-numbers/222/twin-flame/ | "222 Angel Number Twin Flame Meaning: Balance, Patience" (about 1,600 words; parent 222 section shortened to a summary; links added from the twin-flame hub, 555 twin flame and 444). Gap: the top pages (Crystals.com, Blavity, Joyful Dumplings) give one short twin-flame section with no stages and no skeptic note; this page splits meeting, separation, reunion and union, covers 2:22, names Virtue 2005, and checks Genesis 2:22 (ESV) as a digit coincidence rather than a source.
 - 2026-11-02 [T-444] /angel-numbers/444/ | added "The numerology, origin and zodiac link of 444" (Virtue 2005, digit 4 to Uranus to Aquarius, Rahu in Vedic readings, attributed). Gap: the SERP (Mental Floss, Crystals.com, Country Living via AOL) names no planet or zodiac link for 4 or 444; only one names Virtue.
 - 2026-10-30 [M-555-twin-flame] /angel-numbers/555/twin-flame/ | "555 Angel Number Twin Flame Meaning: Separation, Reunion" (about 1,900 words; parent 555 section shortened to a summary; links added from the twin-flame hub and 333 twin flame page). Gap: the top pages (Crystals.com, Bustle, marriage.com) give one short section with no stages and no source; this page splits separation, reunion, meeting and union, quotes Isaiah 55:5 (ESV, checked at esv.org) and says it is not about twin flames, and adds the skeptic paragraph.
 - 2026-10-28 [M-333-twin-flame] /angel-numbers/333/twin-flame/ | "333 Angel Number Twin Flame Meaning: Meeting, Separation" (about 2,100 words; parent 333 section shortened to a summary; links added from the twin-flame hub, 444 and 999). Gap: the top pages (Vogue PH, Crystals.com) give a few unsourced paragraphs; this page names the origin (Plato, Symposium; Prophet, Soul Mates and Twin Flames, 1999 edition), splits the stages and adds the skeptic paragraph.

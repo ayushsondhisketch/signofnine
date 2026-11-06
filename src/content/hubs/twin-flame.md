@@ -47,7 +47,7 @@ Separation is the stage people search for most, and the tradition reads four num
 
 ## The numbers of reunion
 
-For reunion, the tradition reads 222 and 888 as harmony returning and balance restored, 1212 as the two of you in step, taking turns to lead, and 111 as alignment or a meeting close. 333 is a growth phase that can be read either way, apart or together, and the <a href="/angel-numbers/333/twin-flame/">333 twin flame meaning</a> page takes it stage by stage. The twin-flame writers themselves say that a reunion is as much internal, a change in each person, as external, which is a reading worth keeping even by someone who holds the rest of the tradition lightly.
+For reunion, the tradition reads 222 (see the <a href="/angel-numbers/222/twin-flame/">222 twin flame meaning</a>) and 888 as harmony returning and balance restored, 1212 as the two of you in step, taking turns to lead, and 111 as alignment or a meeting close. 333 is a growth phase that can be read either way, apart or together, and the <a href="/angel-numbers/333/twin-flame/">333 twin flame meaning</a> page takes it stage by stage. The twin-flame writers themselves say that a reunion is as much internal, a change in each person, as external, which is a reading worth keeping even by someone who holds the rest of the tradition lightly.
 
 ## How to read these without being sold to
 

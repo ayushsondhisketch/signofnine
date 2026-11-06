@@ -84,7 +84,7 @@ The ordinary reason comes first. 5:55 happens twice a day, once before dawn and 
 
 5 + 5 + 5 = 15 → 6. The 15 is not one of the four karmic debt numbers (13, 14, 16 and 19), so the reading owes nothing to that tradition. The tradition reads the 5s as change and the 6 as home and responsibility.
 
-The [number 5](/numbers/5/) page gives the base meaning, and the [number 6](/numbers/6/) page gives the endpoint. 222 also reduces to 6, but by 2 + 2 + 2 = 6 directly, so the two numbers reach home by different routes. Writers read 222 as balance restored and 555 as the upheaval that comes first.
+The [number 5](/numbers/5/) page gives the base meaning, and the [number 6](/numbers/6/) page gives the endpoint. 222 also reduces to 6, but by 2 + 2 + 2 = 6 directly, so the two numbers reach home by different routes. Writers read 222 as balance restored (the [222 twin flame meaning](/angel-numbers/222/twin-flame/) page takes it stage by stage) and 555 as the upheaval that comes first.
 
 ## What to do when you see 555
 
