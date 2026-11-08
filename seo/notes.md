@@ -4,11 +4,11 @@ One dated line per action, newest at the top of each section. The weekly health 
 
 ## Three numbers (weekly, from the Search Console Sheet)
 
-Week of 2026-11-01 (Sheet export 06:23 UTC, data through 2026-10-30; 127 of 161 pages indexed, 78.88%). The weekly task rewrites these three lines every Sunday.
+Week of 2026-11-08 (Sheet export 06:29 UTC, data through 2026-11-06; 147 of 162 pages indexed, 90.74%). The weekly task rewrites these three lines every Sunday.
 
-1. Computed-folder index share: 62.69% (42 of 67 computed pages indexed; times 8 of 14, birthday 17 of 31, four-digit 17 of 22; not-indexed share per folder is under 50%, so warning signal 1 is clear)
-2. Pages with an impression in 28 days: 65.22% (105 of 161 pages; last week 65.41%, flat)
-3. Sitewide position drift: no data yet (average position 27.46, up from 26.36 last week; the Sheet has no earlier 28-day window to compare)
+1. Computed-folder index share: 86.57% (58 of 67 computed pages indexed; last week 62.69%; times 13 of 14, birthday 28 of 31, four-digit 17 of 22; not-indexed share per folder is under 50%, so warning signal 1 is clear)
+2. Pages with an impression in 28 days: 68.52% (111 of 162 pages; last week 65.22%, up; signal 2 clear)
+3. Sitewide position drift: no data (average position 27.43 against 27.46 last week; the Sheet's comparison window is still empty, so no 28-day drift can be read)
 
 ## Checkpoints
 
@@ -23,6 +23,8 @@ Week of 2026-11-01 (Sheet export 06:23 UTC, data through 2026-10-30; 127 of 161 
 - September 2026 spam update: ended 2026-10-08, before the site launched on 2026-10-17. There is no "before" period, so the 28-day comparison does not apply; mark it checked as "not applicable" on 2026-11-05. The 14-day guard on edits to existing pages ran to 2026-10-22.
 
 ## Log
+
+- 2026-11-08 Weekly health. Monitors fresh and PASS (live 05:07 UTC, search 06:29, performance 11-07, audit 11-07); no open alerts; all five scheduled tasks enabled with last runs succeeded; Status running. Shipped 11-02 to 11-08: 1 new page (/angel-numbers/222/twin-flame/), 5 upgrades or refreshes (444, 0-00, love hub, 1-11, 21-21). Day-30 checkpoint (2026-11-16) not due yet; at this read 90.74% indexed, so the 60% condition is met. Google status feed and summary could not be read this run (WebFetch permission timed out); WebSearch showed no new incident, and no existing page was edited, so nothing depended on it. Live spot check by WebFetch also failed for the same reason; search results do list live signofnine.com pages with correct titles. AdSense readiness: about, contact, privacy-policy, terms-of-use, disclaimer, editorial-approach and advertising-disclosure are all "Submitted and indexed" in the Index tab; 147 of 162 pages indexed.
 
 - 2026-11-06 New page M-222-twin-flame: /angel-numbers/222/twin-flame/ (Google status clear, September 2026 spam update ended 2026-10-08; editorial share 58%; strict QA clean, no warnings on the new page; shingle overlap with the other twin-flame pages under 20%). Parent 222 twin flame section shortened to a summary (updated 2026-11-06); inbound links from the twin-flame hub, 555 twin flame and 444. Two pins queued. Read the effect from 2026-12-04.
 - 2026-11-05 Refresh (data method, PLAYBOOK 4a; Google status clear, only the September 2026 spam update, ended 2026-10-08; Sheet window 2026-10-06 to 11-02, no earlier window so "rising" not judged; the 11-03 pages 0-00 and love left alone, edited under 14 days ago). Two pages, one FAQ entry each (about 40 words), no new section, description and lead unchanged.
