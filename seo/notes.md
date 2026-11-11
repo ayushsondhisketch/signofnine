@@ -20,9 +20,12 @@ Week of 2026-11-08 (Sheet export 06:29 UTC, data through 2026-11-06; 147 of 162 
 
 (Name, start, end, 28-day check done or not.)
 
+- November 2026 core update: started 2026-11-10 10:06 PT, rollout up to 2 weeks (ends by about 2026-11-24), still open on 2026-11-11. Guard on edits to existing pages runs until about 2026-12-08 (14 days after the end; move the date when the dashboard shows the end). 28-day check not due yet.
 - September 2026 spam update: ended 2026-10-08, before the site launched on 2026-10-17. There is no "before" period, so the 28-day comparison does not apply; mark it checked as "not applicable" on 2026-11-05. The 14-day guard on edits to existing pages ran to 2026-10-22.
 
 ## Log
+
+- 2026-11-11 New-pages run: published nothing. The November 2026 core update is rolling out, so existing pages stay untouched. Next row M-444-love needs a summary section on /angel-numbers/444/ and three inbound links on existing pages; the other eligible rows are upgrades, and M-777-love is gated to 2026-11-13. M-444-love stays at the top of Next for the next run.
 
 - 2026-11-10 Refresh (hygiene method, PLAYBOOK 4b: the Sheet's "before" window is still empty so "rising" cannot be judged, and no page has 100 impressions at position 10 or better; Google status feed not fetchable this run, WebSearch shows no core or spam update after May 2026 and the September 2026 spam update ended 2026-10-08). Two pages, no new section, same facts, split long sentences and moved answers to the first paragraph under each H2 (about +20 words on 22, about 0 on the article); updated 2026-11-10.
   - /articles/2027-numerology-universal-year-11/: 33 impressions, position 13.67, 0 clicks. H2 answer-length warnings 4 to 0, sentences over 30 words 8 to 6. Read the effect from 2026-12-08.
