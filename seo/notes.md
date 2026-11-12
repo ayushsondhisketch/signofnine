@@ -25,6 +25,8 @@ Week of 2026-11-08 (Sheet export 06:29 UTC, data through 2026-11-06; 147 of 162 
 
 ## Log
 
+- 2026-11-12 Refresh: touched nothing. The November 2026 core update (started 2026-11-10, per the Google updates section) is still inside its rollout and the 14-day guard runs to about 2026-12-08, so existing pages stay untouched. Google status feed not re-fetched this run (no fetch tool in the session).
+
 - 2026-11-11 New-pages run: published nothing. The November 2026 core update is rolling out, so existing pages stay untouched. Next row M-444-love needs a summary section on /angel-numbers/444/ and three inbound links on existing pages; the other eligible rows are upgrades, and M-777-love is gated to 2026-11-13. M-444-love stays at the top of Next for the next run.
 
 - 2026-11-10 Refresh (hygiene method, PLAYBOOK 4b: the Sheet's "before" window is still empty so "rising" cannot be judged, and no page has 100 impressions at position 10 or better; Google status feed not fetchable this run, WebSearch shows no core or spam update after May 2026 and the September 2026 spam update ended 2026-10-08). Two pages, no new section, same facts, split long sentences and moved answers to the first paragraph under each H2 (about +20 words on 22, about 0 on the article); updated 2026-11-10.
