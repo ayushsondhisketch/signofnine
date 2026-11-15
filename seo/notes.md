@@ -4,11 +4,11 @@ One dated line per action, newest at the top of each section. The weekly health 
 
 ## Three numbers (weekly, from the Search Console Sheet)
 
-Week of 2026-11-08 (Sheet export 06:29 UTC, data through 2026-11-06; 147 of 162 pages indexed, 90.74%). The weekly task rewrites these three lines every Sunday.
+Week of 2026-11-15 (Sheet export 2026-11-14 12:33 UTC, data through 2026-11-12; 53 of 162 pages indexed, 32.72%; last week's block read 147 of 162, so the indexed count fell by 94 as the November core update began on 2026-11-10). The weekly task rewrites these three lines every Sunday.
 
-1. Computed-folder index share: 86.57% (58 of 67 computed pages indexed; last week 62.69%; times 13 of 14, birthday 28 of 31, four-digit 17 of 22; not-indexed share per folder is under 50%, so warning signal 1 is clear)
-2. Pages with an impression in 28 days: 68.52% (111 of 162 pages; last week 65.22%, up; signal 2 clear)
-3. Sitewide position drift: no data (average position 27.43 against 27.46 last week; the Sheet's comparison window is still empty, so no 28-day drift can be read)
+1. Computed-folder index share: 31.34% (21 of 67 computed pages indexed; last week 86.57%; times 4 of 14, birthday 8 of 31, four-digit 9 of 22; the not-indexed share is 71%, 74% and 59%, all over 50%, so warning signal 1 trips for the first time this week; bands stop only if it is still over 50% on 2026-11-22)
+2. Pages with an impression in 28 days: 69.14% (112 of 162 pages; last week 68.52%; signal 2 clear)
+3. Sitewide position drift: no data (average position 27.45 against 27.43 last week; the Sheet's comparison window is still empty)
 
 ## Checkpoints
 
@@ -24,6 +24,8 @@ Week of 2026-11-08 (Sheet export 06:29 UTC, data through 2026-11-06; 147 of 162 
 - September 2026 spam update: ended 2026-10-08, before the site launched on 2026-10-17. There is no "before" period, so the 28-day comparison does not apply; mark it checked as "not applicable" on 2026-11-05. The 14-day guard on edits to existing pages ran to 2026-10-22.
 
 ## Log
+
+- 2026-11-15 Weekly health: monitors live, search, performance and audit all fresh and PASS; no open alerts; the five scheduled tasks are enabled with future next runs and no failed last run. Index tab: 53 of 162 indexed, 94 "Crawled - currently not indexed", 0 "Discovered"; of the 11 Day 7 angel pages, 111, 1111, 1212, 222, 333, 444, 555, 777 and 888 are now not indexed. Read as the November core update (started 2026-11-10, rollout open), not a site fault: the live monitor shows 162 of 162 pages answering 200 with one H1, matching canonical and no noindex. No page edited (update guard). The Day 30 checkpoint (2026-11-16) is judged on the 2026-11-22 run; at 32.7% indexed it is on course to fail the 60% bar and trip the under-40% action (pause editorial additions two weeks, audit unindexed pages), which is held until the update ends and the 2026-11-22 numbers are read. The live WebFetch spot-check and the Google status feed could not be read this run (fetch permission was not answered), so the update's end date is not re-confirmed. AdSense: about, contact, privacy-policy, terms-of-use, disclaimer and advertising-disclosure pages are live but all six show "Crawled - currently not indexed", so the site is not ready for the 21 to 28 November window.
 
 - 2026-11-12 Refresh: touched nothing. The November 2026 core update (started 2026-11-10, per the Google updates section) is still inside its rollout and the 14-day guard runs to about 2026-12-08, so existing pages stay untouched. Google status feed not re-fetched this run (no fetch tool in the session).
 
