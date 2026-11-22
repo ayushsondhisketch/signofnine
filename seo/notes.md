@@ -4,16 +4,17 @@ One dated line per action, newest at the top of each section. The weekly health 
 
 ## Three numbers (weekly, from the Search Console Sheet)
 
-Week of 2026-11-15 (Sheet export 2026-11-14 12:33 UTC, data through 2026-11-12; 53 of 162 pages indexed, 32.72%; last week's block read 147 of 162, so the indexed count fell by 94 as the November core update began on 2026-11-10). The weekly task rewrites these three lines every Sunday.
+Week of 2026-11-22 (Sheet export 2026-11-18 14:35 UTC, data through 2026-11-16; the export has failed with HTTP 403 since 2026-11-19, so this is 4 days old; 52 of 162 pages indexed, 32.1%; last week 53).
 
-1. Computed-folder index share: 31.34% (21 of 67 computed pages indexed; last week 86.57%; times 4 of 14, birthday 8 of 31, four-digit 9 of 22; the not-indexed share is 71%, 74% and 59%, all over 50%, so warning signal 1 trips for the first time this week; bands stop only if it is still over 50% on 2026-11-22)
-2. Pages with an impression in 28 days: 69.14% (112 of 162 pages; last week 68.52%; signal 2 clear)
-3. Sitewide position drift: no data (average position 27.45 against 27.43 last week; the Sheet's comparison window is still empty)
+1. Computed-folder index share: 29.85% (20 of 67 computed pages indexed; last week 31.34%; birthday 8 of 31, times 4 of 14, four-digit 8 of 22; not-indexed share 74%, 71%, 64%, all over 50% for the second week running, so warning signal 1 is confirmed and computed bands stay stopped; none were open before AdSense anyway)
+2. Pages with an impression in 28 days: 69.14% (112 of 162 pages; last week 69.14%; signal 2 clear)
+3. Sitewide position drift: +2.64 places worse (average position 27.78 against 25.14 in the previous window; over the 2-place line, warning signal 3 trips on the sitewide figure; the window overlaps the November core update; per-folder drift not read; one reading only, so no rule is applied yet, watch next week)
 
 ## Checkpoints
 
 (The weekly task writes "YYYY-MM-DD Day N: pass or fail, one line" when it evaluates one. Dates are in `seo/PLAYBOOK.md` section 6.)
 
+- 2026-11-22 Day 30: FAIL. 52 of 162 pages indexed (32.1%, bar 60%, fail line 40%); Bing clicks and brand searches not readable (Bing not connected, SETUP 4). The cause reads as the November core update (95 "Crawled, currently not indexed"; angel-numbers folder 2 of 20 indexed), not a site fault: live monitor 162 of 162 pages 200 with one H1 and canonical. Action applied: no new editorial pages for two weeks (to 2026-12-06), and the audit of unindexed pages waits for the update to end because the edit guard blocks changes; the audit reads them against the content rules and the shingle rule, then folds or rewrites the worst ten. Editorial share is 58%, above the 50% floor.
 - 2026-10-25 Day 7: Google part pass, Bing part not judged. Home page and all 11 angel pages are indexed on Google (Index tab, "Submitted and indexed"). Bing indexing could not be read: Bing Webmaster Tools is not set up (SETUP section 4).
 
 ## Google updates seen
@@ -24,6 +25,8 @@ Week of 2026-11-15 (Sheet export 2026-11-14 12:33 UTC, data through 2026-11-12; 
 - September 2026 spam update: ended 2026-10-08, before the site launched on 2026-10-17. There is no "before" period, so the 28-day comparison does not apply; mark it checked as "not applicable" on 2026-11-05. The 14-day guard on edits to existing pages ran to 2026-10-22.
 
 ## Log
+
+- 2026-11-22 Weekly health: monitors live (PASS 11-21), performance (PASS 11-22) and audit (PASS 11-22) fresh; monitor search FAILED and alert #5 "Search Console export failed" has been open since 2026-11-19 (HTTP 403 PERMISSION_DENIED on Summary:clear; the service account has lost write access to the Sheet; needs Ayush, SETUP section 1, share the Sheet with the signofnine-monitor service account as Editor again). The Sheet itself still opens and holds the 2026-11-18 export. Five scheduled tasks enabled, next runs in the future, last runs succeeded. Status running. Live WebFetch spot-check and the Google status feed could not be read (fetch permission unanswered); the November 2026 core update (started 2026-11-10) is not confirmed ended, so the edit guard stays on (to about 2026-12-08 or 14 days after the end). Nothing shipped 11-15 to 11-22 except pins (to 2026-11-29); new-pages and refresh runs held under the guard. AdSense not ready: about, contact, privacy-policy, terms-of-use, disclaimer and the other 7 pages of the "other" folder show 0 of 7 indexed.
 
 - 2026-11-19 Refresh: touched nothing (update window). The November 2026 core update (started 2026-11-10) is confirmed by WebSearch (SERoundtable and SEJ coverage of the update and its ranking flux); the Google status feed and summary could not be fetched this run (permission not answered), so the end date is unconfirmed. Even if it ended today, the 14-day guard runs to at least 2026-12-03, so existing pages stay untouched.
 
